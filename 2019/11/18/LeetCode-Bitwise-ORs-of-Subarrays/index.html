@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>[LeetCode] Bitwise ORs of Subarrays | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="For every (contiguous) subarray B &#x3D; [A[i], A[i+1], …, A[j]] (with i &lt;&#x3D; j), we take the bitwise OR of all the elements in B, obtaining a result A[i] | A[i+1] | … | A[j].  Return the number of possib">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[LeetCode] Bitwise ORs of Subarrays">
+<meta property="og:url" content="http://yoursite.com/2019/11/18/LeetCode-Bitwise-ORs-of-Subarrays/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="For every (contiguous) subarray B &#x3D; [A[i], A[i+1], …, A[j]] (with i &lt;&#x3D; j), we take the bitwise OR of all the elements in B, obtaining a result A[i] | A[i+1] | … | A[j].  Return the number of possib">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-11-18T13:19:00.000Z">
+<meta property="article:modified_time" content="2019-11-18T13:19:37.499Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-LeetCode-Bitwise-ORs-of-Subarrays" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/18/LeetCode-Bitwise-ORs-of-Subarrays/" class="article-date">
+  <time datetime="2019-11-18T13:19:00.000Z" itemprop="datePublished">2019-11-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [LeetCode] Bitwise ORs of Subarrays
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>For every (contiguous) subarray B = [A[i], A[i+1], …, A[j]] (with i &lt;= j), we take the bitwise OR of all the elements in B, obtaining a result A[i] | A[i+1] | … | A[j].</p>
+<p> Return the number of possible results. (Results that occur more than once are only counted once in the final answer.)</p>
+<p> Example 1:</p>
+<p> Input: [0]<br> Output: 1<br> Explanation:<br> There is only one possible result: 0.<br> Example 2:</p>
+<p> Input: [1,1,2]<br> Output: 3<br> Explanation:<br> The possible subarrays are [1], [1], [2], [1, 1], [1, 2], [1, 1, 2].<br> These yield the results 1, 1, 2, 1, 3, 3.<br> There are 3 unique values, so the answer is 3.<br> Example 3:</p>
+<p> Input: [1,2,4]<br> Output: 6<br> Explanation:<br> The possible results are 1, 2, 3, 4, 6, and 7.</p>
+<p> Note:</p>
+<p> 1 &lt;= A.length &lt;= 50000<br> 0 &lt;= A[i] &lt;= 10^9</p>
+<p> 解决方案1：<br> 暴力求解，两层For循环，第一层为数组开始的位置，第二层为子数组的所有正向求或运算操作。<br> 举例：A[n]<br> 第一层For秩为j，则只计算A[j]~A[n]的所有正向或运算操作<br> 第二层For秩为i，用于计算A[j],A[j]|A[j+1],A[j]|A[j+1]|A[j+2],A[j]|…|A[n]的结果<br> 时间复杂度：O(n^2)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 80 &#x2F; 83 test cases passed.  Status: Time Limit Exceeded</span><br><span class="line">&#x2F;&#x2F;但是暴力求解超时</span><br><span class="line">public int subarrayBitwiseORs(int[] A) &#123;</span><br><span class="line">  int size &#x3D; A.length;</span><br><span class="line">  HashSet reSet &#x3D; new HashSet();</span><br><span class="line">  int[] ends &#x3D; new int[size + 1];</span><br><span class="line">  for (int i &#x3D; 0; i &lt; size; i++) &#123;</span><br><span class="line">    ends[i] &#x3D; 0;</span><br><span class="line">    for (int j &#x3D; i; j &lt; size; j++) &#123;</span><br><span class="line">      ends[j + 1] &#x3D; ends[j] | A[j];</span><br><span class="line">      reSet.add(ends[j + 1]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return reSet.size();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 解决方案2（方案借鉴于@花花酱博客）：<br> ORs(A[i+1])的结果为ORs(A[i])中所有的元素与A[i+1]进行或操作的结果与ORs(A[i])取交集，并且加上A[i+1]自身。<br> 这个方案可以利用上一个数组的结果，进行新的数据计算，并且因为去除了重复的结果，可以加速或运算的次数。<br> 时间复杂度的计算@花花酱给出了证明。</p>
+<p> 举例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: [1,1,2]</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: </span><br><span class="line">The possible subarrays are [1], [1], [2], [1, 1], [1, 2], [1, 1, 2].</span><br><span class="line">These yield the results 1, 1, 2, 1, 3, 3.</span><br><span class="line">There are 3 unique values, so the answer is 3.</span><br></pre></td></tr></table></figure>
+<p> ORs[0] = [1] = {1}<br> ORs[1] = { ORs[0] | A[1], A[1] ,ORs[0] } = {1} | 1 , 1 = {1}<br> ORs[2] = { ORs[1] | A[2] ,A[2] ,ORs[1] } = {1} | 2 ,2 = {3,2,1}</p>
+<blockquote>
+<p>证明： dp[i] = {A[i], A[i] | A[i – 1], A[i] | A[i – 1] | A[i – 2], … , A[i] | A[i – 1] | … | A[0]}这个序列单调递增，通过把A[i]中的0变成1。A[i]最多有32个0。所以这个集合的大小 &lt;= 32。</p>
+<p> e.g. 举例：Worst Case 最坏情况 A = [8, 4, 2, 1, 0] A[i] = 2^(n-i)。</p>
+<p> A[5] = 0，dp[5] = {0, 0 | 1, 0 | 1 | 2, 0 | 1 | 2 | 4, 0 | 1 | 2 | 4 | 8} = {0, 1, 3, 7, 15}.</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 83 &#x2F; 83 test cases passed.</span><br><span class="line">&#x2F;&#x2F; Status: Accepted</span><br><span class="line">&#x2F;&#x2F; Runtime: 357 ms</span><br><span class="line"></span><br><span class="line">public int subarrayBitwiseORs2(int[] A) &#123;</span><br><span class="line">  HashSet&lt;Integer&gt; cur &#x3D; new HashSet();</span><br><span class="line">  HashSet&lt;Integer&gt; ans &#x3D; new HashSet();</span><br><span class="line">  for (int a : A) &#123;</span><br><span class="line">    HashSet nxt &#x3D; new HashSet&lt;Integer&gt;();</span><br><span class="line">    nxt.add(a);</span><br><span class="line">    for (int b : cur) &#123;</span><br><span class="line">      nxt.add(a | b);</span><br><span class="line">    &#125;</span><br><span class="line">    ans.addAll(nxt);</span><br><span class="line">    cur &#x3D; nxt;</span><br><span class="line">  &#125;</span><br><span class="line">  return  ans.size();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;224ms的方案，使用一个Set，提高了效率</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public int subarrayBitwiseORs(int[] A) &#123;</span><br><span class="line">        &#x2F;&#x2F; brute force solution</span><br><span class="line">        int size;</span><br><span class="line">        if (A &#x3D;&#x3D; null || (size &#x3D; A.length) &#x3D;&#x3D; 0) return 0;</span><br><span class="line">        if (size &#x3D;&#x3D; 1) return 1;</span><br><span class="line"></span><br><span class="line">        int sumAll &#x3D; 0;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; size; i++) &#123;</span><br><span class="line">            sumAll |&#x3D; A[i];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Set&lt;Integer&gt; set &#x3D; new HashSet&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        for (int i &#x3D; 0; i &lt; size; i++) &#123;</span><br><span class="line">            int sum &#x3D; 0;</span><br><span class="line">            for (int j &#x3D; i; j &lt; size; j++) &#123;</span><br><span class="line">                sum |&#x3D; A[j];</span><br><span class="line">                set.add(sum);</span><br><span class="line">                if (sum &#x3D;&#x3D; sumAll) &#123;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return set.size();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/18/LeetCode-Bitwise-ORs-of-Subarrays/" data-id="ck4jbji2e0004kuudbgi43g4w" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/18/LeetCode-First-Missing-Positive/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          [LeetCode] First Missing Positive
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/18/LeetCode-Add-Two-Numbers-II/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">[LeetCode] Add Two Numbers II</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/12/18/Java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/">Java-线程池</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/LintCode-%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8/">LintCode-翻转链表</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/LintCode-%E8%BF%94%E5%9B%9E%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E4%BA%A4/">LintCode-返回两个数组的交</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/LintCode-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%89%80%E6%9C%89%E8%B7%AF%E5%BE%84/">LintCode- 二叉树的所有路径</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/LIntCode-%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%B1%82%E5%92%8C/">LIntCode-二进制求和</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

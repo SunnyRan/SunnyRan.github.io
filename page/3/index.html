@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-LeetCode-Odd-Even-Linked-List" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/19/LeetCode-Odd-Even-Linked-List/" class="article-date">
+  <time datetime="2019-11-19T13:16:00.000Z" itemprop="datePublished">2019-11-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/19/LeetCode-Odd-Even-Linked-List/">[LeetCode] Odd Even Linked List</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a singly linked list, group all odd nodes together followed by the even nodes. Please note here we are talking about the node number and not the value in the nodes.</p>
+<p>You should try to do it in place. The program should run in O(1) space complexity and O(nodes) time complexity.</p>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example:"></a>Example:</h3><p>Given 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL,<br>return 1-&gt;3-&gt;5-&gt;2-&gt;4-&gt;NULL.</p>
+<h3 id="Note"><a href="#Note" class="headerlink" title="Note:"></a>Note:</h3><p>The relative order inside both the even and odd groups should remain as it was in the input.<br>The first node is considered odd, the second node even and so on …</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>这道题给了我们一个链表，让我们分开奇偶节点，所有奇节点在前，偶节点在后。我们可以使用两个链表来做，prevOdd指向奇节点，prevEven指向偶节点<br>1.让prevOdd.next指向prevEven后面的那个奇节点。<br>2.prevOdd指向他的下一个节点。<br>3.让prevEven.next指向prevOdd后面的那个偶节点<br>4.prevEven指向他的下一个节点。<br>以上循环执行。</p>
+<p>Final 奇节点prevOdd.next指向偶节点prevEven的根节点evenHead<br>参见代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public ListNode oddEvenList(ListNode head) &#123;</span><br><span class="line">        if(head &#x3D;&#x3D; null)</span><br><span class="line">            return head;</span><br><span class="line">        ListNode oddHead &#x3D; head,evenHead &#x3D;head.next;</span><br><span class="line">        ListNode prevOdd &#x3D; oddHead,prevEven &#x3D; evenHead;</span><br><span class="line"></span><br><span class="line">        while(prevOdd.next !&#x3D; null &amp;&amp; prevEven.next !&#x3D; null)&#123;</span><br><span class="line">            prevOdd.next &#x3D; prevEven.next;</span><br><span class="line">            prevOdd &#x3D; prevOdd.next;</span><br><span class="line"></span><br><span class="line">            prevEven.next &#x3D; prevOdd.next;</span><br><span class="line">            prevEven &#x3D; prevEven.next;</span><br><span class="line">        &#125;</span><br><span class="line">        prevOdd.next &#x3D; evenHead;</span><br><span class="line"></span><br><span class="line">        return oddHead;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一开始理解题目错误<br>以为是让把链表的奇数偶数排序。<br>这里给出错误理解下的正确代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public ListNode oddEvenList(ListNode head) &#123;</span><br><span class="line">    ListNode head0 &#x3D; new ListNode(0),head00 &#x3D; head0;</span><br><span class="line">    ListNode head1 &#x3D; new ListNode(0),head11 &#x3D; head1;</span><br><span class="line">    int k &#x3D; head &#x3D;&#x3D;null? 1: head.val%2;&#x2F;&#x2F; 判断第一个数奇偶</span><br><span class="line">    while (head !&#x3D;null)</span><br><span class="line">    &#123;</span><br><span class="line">        if(head.val%2 &#x3D;&#x3D; k)&#x2F;&#x2F;奇数</span><br><span class="line">        &#123;</span><br><span class="line">            head1.next &#x3D; head;</span><br><span class="line">            head1 &#x3D; head1.next;</span><br><span class="line">        &#125;</span><br><span class="line">        else &#x2F;&#x2F;偶数</span><br><span class="line">        &#123;</span><br><span class="line">            head0.next &#x3D; head;</span><br><span class="line">            head0 &#x3D; head0.next;</span><br><span class="line">        &#125;</span><br><span class="line">        head &#x3D; head.next;</span><br><span class="line">    &#125;</span><br><span class="line">    head0.next &#x3D; null; &#x2F;&#x2F;很重要的一个语句 ！！！ 去除可能出现环链  测试数据 1-&gt;2-&gt;3;</span><br><span class="line">    head1.next &#x3D; head00.next;</span><br><span class="line">    return  head11.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/19/LeetCode-Odd-Even-Linked-List/" data-id="ck4jbji2s000gkuud8ayf5bcp" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LeetCode-Score-After-Flipping-Matrix" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/19/LeetCode-Score-After-Flipping-Matrix/" class="article-date">
+  <time datetime="2019-11-19T13:16:00.000Z" itemprop="datePublished">2019-11-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/19/LeetCode-Score-After-Flipping-Matrix/">[LeetCode] Score After Flipping Matrix</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="LeetCode-Score-After-Flipping-Matrix"><a href="#LeetCode-Score-After-Flipping-Matrix" class="headerlink" title="LeetCode-Score After Flipping Matrix"></a>LeetCode-Score After Flipping Matrix</h1><p>We have a two dimensional matrix A where each value is 0 or 1.</p>
+<p>A move consists of choosing any row or column, and toggling each value in that row or column: changing all 0s to 1s, and all 1s to 0s.</p>
+<p>After making any number of moves, every row of this matrix is interpreted as a binary number, and the score of the matrix is the sum of these numbers.</p>
+<p>Return the highest possible score.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Example 1:</span><br><span class="line"></span><br><span class="line">Input: [[0,0,1,1],[1,0,1,0],[1,1,0,0]]</span><br><span class="line">Output: 39</span><br><span class="line">Explanation:</span><br><span class="line">Toggled to [[1,1,1,1],[1,0,0,1],[1,1,1,1]].</span><br><span class="line">0b1111 + 0b1001 + 0b1111 &#x3D; 15 + 9 + 15 &#x3D; 39</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Note:</span><br><span class="line"></span><br><span class="line">1 &lt;&#x3D; A.length &lt;&#x3D; 20</span><br><span class="line">1 &lt;&#x3D; A[0].length &lt;&#x3D; 20</span><br><span class="line">A[i][j] is 0 or 1.</span><br></pre></td></tr></table></figure>
+
+<p><strong>题目大意</strong><br>题目中给了一个数组A，这个数组中只包含0,1。现在需要整行或者整列的进行转换操作，把0变成1，把1变成0。目标是进行一波t操作之后，把A中的每行数字转化成二进制数，是最终得到的二进制数的和最大。</p>
+<p>解题方法<br>题目很烧脑，使用什么样的操作规则才能使得得到的最终数组二进制和最大。<br>1、根据二进制的特性，1000 一定大于 0111，所以首位数字一定要为1<br>2、第一列都为1时，那么行的变化就不能进行了，因为一单进行行的变化，每行的首位就会变成0<br>3、现在只需要对列进行操作就好，目标是保证每一列的1尽量多。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public int matrixScore(int[][] A) &#123;</span><br><span class="line">    int row &#x3D; A.length;</span><br><span class="line">    int col &#x3D; A[0].length;</span><br><span class="line">    int current &#x3D; 1&lt;&lt;(A[0].length-1);</span><br><span class="line">    int sum &#x3D;current * row;</span><br><span class="line">    int k;</span><br><span class="line">    for(int i &#x3D; 1; i&lt; col;i++)&#123;</span><br><span class="line">        k &#x3D; 0;</span><br><span class="line">        current &#x3D; current&gt;&gt;1;</span><br><span class="line">        for(int j &#x3D; 0;j&lt;row;j++)&#123;</span><br><span class="line">            if((A[j][0]^A[j][i]) &#x3D;&#x3D; 1)&#123;</span><br><span class="line">                k++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        k &#x3D; Math.max(k,row - k);</span><br><span class="line">        sum +&#x3D; current * k;</span><br><span class="line">    &#125;</span><br><span class="line">    return sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>技巧：<br>1、避免对数组进行赋值操作，该为通过首列的值与第二列、第三列、…第n列进行异或操作。<br>1）如果首列为0，则需要对后面进行转换操作，0^1 = 0 , 0^0=1<br>2）如果首列为1，则无需进行转换操作， 1^1 = 1 , 1^0 = 0;<br>2、统计每一列1的个数k，因为0和1可以相互转换，所以行数减k取其大值就是该列1的最大值 。k = Math.max(k,row - k);<br>3)根据二进制的转换数字求和。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/19/LeetCode-Score-After-Flipping-Matrix/" data-id="ck4jbji2t000hkuud1skq8g90" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LeetCode-Number-of-1-Bits" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/19/LeetCode-Number-of-1-Bits/" class="article-date">
+  <time datetime="2019-11-19T13:15:00.000Z" itemprop="datePublished">2019-11-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/19/LeetCode-Number-of-1-Bits/">[LeetCode] Number of 1 Bits</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Write a function that takes an unsigned integer and return the number of ‘1’ bits it has (also known as the Hamming weight).</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: 00000000000000000000000000001011</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: The input binary string 00000000000000000000000000001011 has a total of three &#39;1&#39; bits.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: 00000000000000000000000010000000</span><br><span class="line">Output: 1</span><br><span class="line">Explanation: The input binary string 00000000000000000000000010000000 has a total of one &#39;1&#39; bit.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: 11111111111111111111111111111101</span><br><span class="line">Output: 31</span><br><span class="line">Explanation: The input binary string 11111111111111111111111111111101 has a total of thirty one &#39;1&#39; bits.</span><br></pre></td></tr></table></figure>
+
+<p>解题思路：<br>直接使用位运算进行操作</p>
+<p>代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public int hammingWeight(int n) &#123;</span><br><span class="line">  int re &#x3D; 0;</span><br><span class="line">  &#x2F;&#x2F; 1、当移位的数是正数的时候，&gt;&gt; 和&gt;&gt;&gt;效果都是一样的；</span><br><span class="line">  &#x2F;&#x2F; 2、当移位的数是负数的时候，&gt;&gt;将二进制高位用1补上，而&gt;&gt;&gt;将二进制高位用0补上，这就导致了&gt;&gt;&gt;将负数的移位操作结果变成了正数（因为高位用0补上了）</span><br><span class="line">  for (; n !&#x3D; 0; n &gt;&gt;&gt;&#x3D; 1) &#123;</span><br><span class="line">    re +&#x3D; (n &amp; 1);</span><br><span class="line">  &#125;</span><br><span class="line">  return re;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/19/LeetCode-Number-of-1-Bits/" data-id="ck4jbji2q000ekuudgnl55ubm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LeetCode-LeetCode-Jump-Game-II" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/18/LeetCode-LeetCode-Jump-Game-II/" class="article-date">
+  <time datetime="2019-11-18T13:25:00.000Z" itemprop="datePublished">2019-11-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/18/LeetCode-LeetCode-Jump-Game-II/">[LeetCode] LeetCode-Jump Game II</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p> Given an array of non-negative integers, you are initially positioned at the first index of the array.</p>
+<p> Each element in the array represents your maximum jump length at that position.</p>
+<p> Your goal is to reach the last index in the minimum number of jumps.</p>
+<h2 id="For-example"><a href="#For-example" class="headerlink" title="For example:"></a>For example:</h2><p> Given array A = [2,3,1,1,4]</p>
+<p> The minimum number of jumps to reach the last index is 2. (Jump 1 step from index 0 to 1, then 3 steps to the last index.)</p>
+<p> Note:<br> You can assume that you can always reach the last index.</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p> 思路：<br> 这里把问题转化为广度优先搜索算法(BFS)</p>
+<blockquote>
+<p>广度优先搜索（也称宽度优先搜索，缩写BFS，以下采用广度来描述）是连通图的一种遍历策略。因为它的思想是从一个顶点V0开始，辐射状地优先遍历其周围较广的区域，故得名。</p>
+<p> 具体到这个问题。<br> 我们分别把每一个节点nums[i]的节点进行遍历，找出从nums[i]节点跳出后，能到的最远距离curFarthest。</p>
+</blockquote>
+<p> 代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public int jump(int[] nums) &#123;</span><br><span class="line">    int curFarthest &#x3D; 0,curEnd &#x3D; 0,jump&#x3D;0;</span><br><span class="line">    for(int i &#x3D; 0 ; i&lt;nums.length-1;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        curFarthest &#x3D; Math.max(curFarthest,i+nums[i]);</span><br><span class="line">        if(i&#x3D;&#x3D;curEnd)&#123;</span><br><span class="line">            jump++;</span><br><span class="line">            curEnd &#x3D; curFarthest;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return jump;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;图解</span><br><span class="line">&#x2F;&#x2F;数组上面的标识&#39;|&#39;记作curEnd</span><br><span class="line">&#x2F;&#x2F;数组下面的标识&#39;!&#39;记作curFarthest</span><br><span class="line">&#x2F;&#x2F;jump 代表跳步数</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;i &#x3D; 0,jump &#x3D; 0</span><br><span class="line"> |</span><br><span class="line">[2,3,1,1,4]</span><br><span class="line"> !    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;i &#x3D; 0,jump &#x3D; 1</span><br><span class="line"> |</span><br><span class="line">[2,3,1,1,4]</span><br><span class="line">     !</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;i &#x3D; 1,jump &#x3D; 1</span><br><span class="line">   |</span><br><span class="line">[2,3,1,1,4]</span><br><span class="line">         !</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;i &#x3D; 2,jump &#x3D; 1</span><br><span class="line">     |</span><br><span class="line">[2,3,1,1,4]</span><br><span class="line">         !</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;i &#x3D; 3,jump &#x3D; 1</span><br><span class="line">       |</span><br><span class="line">[2,3,1,1,4]</span><br><span class="line">         !</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;i &#x3D; 3,jump &#x3D; 2</span><br><span class="line">         |</span><br><span class="line">[2,3,1,1,4]</span><br><span class="line">         !</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/18/LeetCode-LeetCode-Jump-Game-II/" data-id="ck4jbji2l0009kuudcp51fm9s" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LeetCode-Missing-Number" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/18/LeetCode-Missing-Number/" class="article-date">
+  <time datetime="2019-11-18T13:25:00.000Z" itemprop="datePublished">2019-11-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/18/LeetCode-Missing-Number/">[LeetCode] Missing Number</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given an array containing n distinct numbers taken from 0, 1, 2, …, n, find the one that is missing from the array.</p>
+<p>Example 1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: [3,0,1]</span><br><span class="line">Output: 2</span><br><span class="line">Example 2</span><br><span class="line"></span><br><span class="line">Input: [9,6,4,2,3,5,7,0,1]</span><br><span class="line">Output: 8</span><br></pre></td></tr></table></figure>
+
+<p>Note:<br>Your algorithm should run in linear runtime complexity. Could you implement it using only constant extra space complexity?</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p><strong>思路1：</strong><br>因为数组是连续的，所以可以运用加法进行求和后得到SUM1 ，然后遍历数组后求和得到SUM2,缺失的数即为SUM1-SUM2。<br>时间复杂度O(n),空间复杂读O(1)。<br>缺点：如果数组过长，可能超过Integer.MAX</p>
+<p><strong>思路2</strong><br>利用排序的思想，把对应的数移动到对应的下标处。比如A[i] = K;则将A[i] 与A[k]进行交换。直到数组基本有序（因为缺失一个数）。<br>1.最后一个数无法跟下标对应，[3,0,1] =&gt; [0,1,3] 因为A[2] != 2所以缺失的数是2.<br>2.所有数都跟下标对应[2,1,0,3] =&gt; [0,1,2,3] 则缺失的数是4</p>
+<p>时间复杂度O(n),空间复杂读O(1)。<br>缺点:算法较为复杂。需要多次交换数组元素位置，费时。</p>
+<p><strong>思路3</strong><br>使用位操作Bit Manipulation来解的，用到了异或操作的特性，相似的题目有Single Number 单独的数字, Single Number II 单独的数字之二和Single Number III 单独的数字之三。那么思路是既然0到n之间少了一个数，我们将这个少了一个数的数组合0到n之间完整的数组异或一下，那么相同的数字都变为0了，剩下的就是少了的那个数字了.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;时间复杂度O(n)</span><br><span class="line">&#x2F;&#x2F;空间复杂度O(1)</span><br><span class="line">    public int missingNumber(int[] nums) &#123;</span><br><span class="line">        int k &#x3D; nums.length;</span><br><span class="line">        for(int i &#x3D; 0;i&lt; nums.length;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            k^&#x3D;nums[i]^i;</span><br><span class="line">        &#125;</span><br><span class="line">        return k;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/18/LeetCode-Missing-Number/" data-id="ck4jbji2o000ckuudehisbge1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LeetCode-Invert-a-binary-tree" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/18/LeetCode-Invert-a-binary-tree/" class="article-date">
+  <time datetime="2019-11-18T13:23:00.000Z" itemprop="datePublished">2019-11-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/18/LeetCode-Invert-a-binary-tree/">[LeetCode] Invert a binary tree</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Input:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">     4</span><br><span class="line">   &#x2F;   \</span><br><span class="line">  2     7</span><br><span class="line"> &#x2F; \   &#x2F; \</span><br><span class="line">1   3 6   9</span><br></pre></td></tr></table></figure>
+
+<p>Output:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">     4</span><br><span class="line">   &#x2F;   \</span><br><span class="line">  7     2</span><br><span class="line"> &#x2F; \   &#x2F; \</span><br><span class="line">9   6 3   1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition of TreeNode:</span><br><span class="line"> * public class TreeNode &#123;</span><br><span class="line"> *     public int val;</span><br><span class="line"> *     public TreeNode left, right;</span><br><span class="line"> *     public TreeNode(int val) &#123;</span><br><span class="line"> *         this.val &#x3D; val;</span><br><span class="line"> *         this.left &#x3D; this.right &#x3D; null;</span><br><span class="line"> *     &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param root: a TreeNode, the root of the binary tree</span><br><span class="line">     * @return: nothing</span><br><span class="line">     *&#x2F;</span><br><span class="line">       public void invertBinaryTree(TreeNode root) &#123;</span><br><span class="line">        if(root.left!&#x3D;null||root.right!&#x3D;null)&#123;</span><br><span class="line">             TreeNode empy&#x3D;root.left;</span><br><span class="line">             root.left&#x3D;root.right;</span><br><span class="line">             root.right&#x3D;empy;</span><br><span class="line">             if(root.right!&#x3D;null)&#123;</span><br><span class="line">                 invertBinaryTree(root.right);</span><br><span class="line">             &#125;</span><br><span class="line">             if(root.left!&#x3D;null)&#123;</span><br><span class="line">                 invertBinaryTree(root.left);</span><br><span class="line">             &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/18/LeetCode-Invert-a-binary-tree/" data-id="ck4jbji2k0008kuudbmxoa2r1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LeetCode-First-Missing-Positive" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/18/LeetCode-First-Missing-Positive/" class="article-date">
+  <time datetime="2019-11-18T13:22:00.000Z" itemprop="datePublished">2019-11-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/18/LeetCode-First-Missing-Positive/">[LeetCode] First Missing Positive</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>Example 1:</strong></p>
+<p> Input: [1,2,0]<br> Output: 3<br> <strong>Example 2:</strong></p>
+<p> Input: [3,4,-1,1]<br> Output: 2<br> <strong>Example 3:</strong></p>
+<p> Input: [7,8,9,11,12]<br> Output: 1<br> Note:</p>
+<p> Your algorithm should run in O(n) time and uses constant extra space.</p>
+<p> <strong>题目解析：</strong><br> 找到第一个不存在的最小正整数。</p>
+<p> 关键点： [第一个] [最小的正整数]</p>
+<p> [第一个]：因为忽略了这一层，所以采用异或遍历最大最小值找出确实的‘唯一’数的方法失效。<br> [最小的正整数]：这里面有一个规则就是不为零，若大于0的数全部存在，则返回最大值MAX+1。</p>
+<p> <strong>思路1</strong><br> 这里给出一种时间复杂的O(n) 空间复杂度O(1)的算法。<br> 由上述分析可知，确实的数一定是正数，并且原有数组中可能存在负数，或者重复值。<br> 所以整个原数组最大也只会有数组Length个连续的正整数。（正好可以按照顺序排序到原有数组秩为N-1的位置上）<br> 借鉴桶排序的思想，我们把Array[i]位置上的数X放在Array[X-1]的位置上(如果X不在数组的长度的范围内，则跳过)<br> 举例说明：<br> [3,1,4,5,2,0,-1]<br> 变化后为：<br> [1,2,3,4,5,0,-1]</p>
+<p> 遍历变化后的数组，第一个不符合Array[i] == i+1的数就是我们要找数。</p>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public static int firstMissingPositive(int[] nums) &#123;</span><br><span class="line">    int len &#x3D; nums.length,k &#x3D; 0;</span><br><span class="line">    &#x2F;&#x2F;循环交换对应秩的数组的内容</span><br><span class="line">    while(k&lt;len)&#123; </span><br><span class="line">    &#x2F;&#x2F;如果nums[k]的值满足在数组的秩序Length+1的范围内，并且没有重复元素，则进行交换</span><br><span class="line">        if(nums[k]&gt;0 &amp;&amp; nums[k]&lt;len+1 &amp;&amp; nums[k]!&#x3D;k+1 &amp;&amp; nums[k] !&#x3D; nums[nums[k]-1])&#123;</span><br><span class="line">            int x &#x3D; nums[nums[k]-1];</span><br><span class="line">            nums[nums[k]-1] &#x3D; nums[k];</span><br><span class="line">            nums[k] &#x3D; x;</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;若不满足上述条件，检索下一个数</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line">            k++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;循环数组，找出缺数的数</span><br><span class="line">    for (k &#x3D; 0; k &lt; len; k++) &#123;</span><br><span class="line">        if (nums[k] !&#x3D; k+1)</span><br><span class="line">            return k+1;</span><br><span class="line">    &#125;</span><br><span class="line">    return k+1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/18/LeetCode-First-Missing-Positive/" data-id="ck4jbji2g0005kuud8dv2164x" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LeetCode-Bitwise-ORs-of-Subarrays" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/18/LeetCode-Bitwise-ORs-of-Subarrays/" class="article-date">
+  <time datetime="2019-11-18T13:19:00.000Z" itemprop="datePublished">2019-11-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/18/LeetCode-Bitwise-ORs-of-Subarrays/">[LeetCode] Bitwise ORs of Subarrays</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>For every (contiguous) subarray B = [A[i], A[i+1], …, A[j]] (with i &lt;= j), we take the bitwise OR of all the elements in B, obtaining a result A[i] | A[i+1] | … | A[j].</p>
+<p> Return the number of possible results. (Results that occur more than once are only counted once in the final answer.)</p>
+<p> Example 1:</p>
+<p> Input: [0]<br> Output: 1<br> Explanation:<br> There is only one possible result: 0.<br> Example 2:</p>
+<p> Input: [1,1,2]<br> Output: 3<br> Explanation:<br> The possible subarrays are [1], [1], [2], [1, 1], [1, 2], [1, 1, 2].<br> These yield the results 1, 1, 2, 1, 3, 3.<br> There are 3 unique values, so the answer is 3.<br> Example 3:</p>
+<p> Input: [1,2,4]<br> Output: 6<br> Explanation:<br> The possible results are 1, 2, 3, 4, 6, and 7.</p>
+<p> Note:</p>
+<p> 1 &lt;= A.length &lt;= 50000<br> 0 &lt;= A[i] &lt;= 10^9</p>
+<p> 解决方案1：<br> 暴力求解，两层For循环，第一层为数组开始的位置，第二层为子数组的所有正向求或运算操作。<br> 举例：A[n]<br> 第一层For秩为j，则只计算A[j]~A[n]的所有正向或运算操作<br> 第二层For秩为i，用于计算A[j],A[j]|A[j+1],A[j]|A[j+1]|A[j+2],A[j]|…|A[n]的结果<br> 时间复杂度：O(n^2)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 80 &#x2F; 83 test cases passed.  Status: Time Limit Exceeded</span><br><span class="line">&#x2F;&#x2F;但是暴力求解超时</span><br><span class="line">public int subarrayBitwiseORs(int[] A) &#123;</span><br><span class="line">  int size &#x3D; A.length;</span><br><span class="line">  HashSet reSet &#x3D; new HashSet();</span><br><span class="line">  int[] ends &#x3D; new int[size + 1];</span><br><span class="line">  for (int i &#x3D; 0; i &lt; size; i++) &#123;</span><br><span class="line">    ends[i] &#x3D; 0;</span><br><span class="line">    for (int j &#x3D; i; j &lt; size; j++) &#123;</span><br><span class="line">      ends[j + 1] &#x3D; ends[j] | A[j];</span><br><span class="line">      reSet.add(ends[j + 1]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return reSet.size();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 解决方案2（方案借鉴于@花花酱博客）：<br> ORs(A[i+1])的结果为ORs(A[i])中所有的元素与A[i+1]进行或操作的结果与ORs(A[i])取交集，并且加上A[i+1]自身。<br> 这个方案可以利用上一个数组的结果，进行新的数据计算，并且因为去除了重复的结果，可以加速或运算的次数。<br> 时间复杂度的计算@花花酱给出了证明。</p>
+<p> 举例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: [1,1,2]</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: </span><br><span class="line">The possible subarrays are [1], [1], [2], [1, 1], [1, 2], [1, 1, 2].</span><br><span class="line">These yield the results 1, 1, 2, 1, 3, 3.</span><br><span class="line">There are 3 unique values, so the answer is 3.</span><br></pre></td></tr></table></figure>
+<p> ORs[0] = [1] = {1}<br> ORs[1] = { ORs[0] | A[1], A[1] ,ORs[0] } = {1} | 1 , 1 = {1}<br> ORs[2] = { ORs[1] | A[2] ,A[2] ,ORs[1] } = {1} | 2 ,2 = {3,2,1}</p>
+<blockquote>
+<p>证明： dp[i] = {A[i], A[i] | A[i – 1], A[i] | A[i – 1] | A[i – 2], … , A[i] | A[i – 1] | … | A[0]}这个序列单调递增，通过把A[i]中的0变成1。A[i]最多有32个0。所以这个集合的大小 &lt;= 32。</p>
+<p> e.g. 举例：Worst Case 最坏情况 A = [8, 4, 2, 1, 0] A[i] = 2^(n-i)。</p>
+<p> A[5] = 0，dp[5] = {0, 0 | 1, 0 | 1 | 2, 0 | 1 | 2 | 4, 0 | 1 | 2 | 4 | 8} = {0, 1, 3, 7, 15}.</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 83 &#x2F; 83 test cases passed.</span><br><span class="line">&#x2F;&#x2F; Status: Accepted</span><br><span class="line">&#x2F;&#x2F; Runtime: 357 ms</span><br><span class="line"></span><br><span class="line">public int subarrayBitwiseORs2(int[] A) &#123;</span><br><span class="line">  HashSet&lt;Integer&gt; cur &#x3D; new HashSet();</span><br><span class="line">  HashSet&lt;Integer&gt; ans &#x3D; new HashSet();</span><br><span class="line">  for (int a : A) &#123;</span><br><span class="line">    HashSet nxt &#x3D; new HashSet&lt;Integer&gt;();</span><br><span class="line">    nxt.add(a);</span><br><span class="line">    for (int b : cur) &#123;</span><br><span class="line">      nxt.add(a | b);</span><br><span class="line">    &#125;</span><br><span class="line">    ans.addAll(nxt);</span><br><span class="line">    cur &#x3D; nxt;</span><br><span class="line">  &#125;</span><br><span class="line">  return  ans.size();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;224ms的方案，使用一个Set，提高了效率</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public int subarrayBitwiseORs(int[] A) &#123;</span><br><span class="line">        &#x2F;&#x2F; brute force solution</span><br><span class="line">        int size;</span><br><span class="line">        if (A &#x3D;&#x3D; null || (size &#x3D; A.length) &#x3D;&#x3D; 0) return 0;</span><br><span class="line">        if (size &#x3D;&#x3D; 1) return 1;</span><br><span class="line"></span><br><span class="line">        int sumAll &#x3D; 0;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; size; i++) &#123;</span><br><span class="line">            sumAll |&#x3D; A[i];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Set&lt;Integer&gt; set &#x3D; new HashSet&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        for (int i &#x3D; 0; i &lt; size; i++) &#123;</span><br><span class="line">            int sum &#x3D; 0;</span><br><span class="line">            for (int j &#x3D; i; j &lt; size; j++) &#123;</span><br><span class="line">                sum |&#x3D; A[j];</span><br><span class="line">                set.add(sum);</span><br><span class="line">                if (sum &#x3D;&#x3D; sumAll) &#123;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return set.size();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/18/LeetCode-Bitwise-ORs-of-Subarrays/" data-id="ck4jbji2e0004kuudbgi43g4w" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LeetCode-Add-Two-Numbers-II" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/18/LeetCode-Add-Two-Numbers-II/" class="article-date">
+  <time datetime="2019-11-18T13:12:00.000Z" itemprop="datePublished">2019-11-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/18/LeetCode-Add-Two-Numbers-II/">[LeetCode] Add Two Numbers II</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Add-Two-Numbers-II"><a href="#Add-Two-Numbers-II" class="headerlink" title="Add-Two-Numbers II"></a>Add-Two-Numbers II</h1><h2 id="LeetCode-Add-Two-Numbers-II"><a href="#LeetCode-Add-Two-Numbers-II" class="headerlink" title="LeetCode-Add Two Numbers II"></a>LeetCode-Add Two Numbers II</h2><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>You are given two non-empty linked lists representing two non-negative integers. The most significant digit comes first and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.</p>
+<p>You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>
+<h2 id="Follow-up"><a href="#Follow-up" class="headerlink" title="Follow up:"></a>Follow up:</h2><p>What if you cannot modify the input lists? In other words, reversing the lists is not allowed.</p>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example:"></a>Example:</h2><p>Input: (7 -&gt; 2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)<br>Output: 7 -&gt; 8 -&gt; 0 -&gt; 7</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>思路：<br>这里使用了两个栈将两个链表的值反置；然后一次按位相加即可得到和。<br>这里有几个点需要注意下：  </p>
+<ol>
+<li>相加后得到的数据是从低位开始的。需要进行反置(或者直接在返回值上做文章)  </li>
+<li>按位相加得到和后，需要注意下最后是否还需要高位进一；如果需要则需要补充一个高位。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * public class ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode next;</span><br><span class="line"> *     ListNode(int x) &#123; val &#x3D; x; &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public ListNode addTwoNumbers(ListNode l1, ListNode l2) &#123;</span><br><span class="line">        Stack&lt;Integer&gt; sta1 &#x3D; new Stack&lt;Integer&gt;();</span><br><span class="line">        Stack&lt;Integer&gt; sta2 &#x3D; new Stack&lt;Integer&gt;();</span><br><span class="line">        while (l1 !&#x3D; null) &#123;</span><br><span class="line">            sta1.push(l1.val);</span><br><span class="line">            l1 &#x3D; l1.next;</span><br><span class="line">        &#125;</span><br><span class="line">        while (l2 !&#x3D; null) &#123;</span><br><span class="line">            sta2.push(l2.val);</span><br><span class="line">            l2 &#x3D; l2.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ListNode re  &#x3D; null;</span><br><span class="line">        int x &#x3D; 0;</span><br><span class="line">        while (!sta1.isEmpty() || !sta2.isEmpty()) &#123;</span><br><span class="line">            x +&#x3D; (sta1.isEmpty() ? 0 : sta1.pop()) + (sta2.isEmpty() ? 0 : sta2.pop());</span><br><span class="line">            ListNode node &#x3D; new ListNode(x%10);</span><br><span class="line">            node.next &#x3D; re;</span><br><span class="line">            re &#x3D; node;</span><br><span class="line">            x &#x3D; x &#x2F; 10;</span><br><span class="line">        &#125;</span><br><span class="line">        if(x &#x3D;&#x3D;1)&#123;</span><br><span class="line">            ListNode node &#x3D; new ListNode(1);</span><br><span class="line">            node.next &#x3D; re;</span><br><span class="line">            re &#x3D; node;</span><br><span class="line">        &#125;</span><br><span class="line">        return re;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/18/LeetCode-Add-Two-Numbers-II/" data-id="ck4jbji2b0002kuud2lfu8a5x" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/15/hello-world/" class="article-date">
+  <time datetime="2019-11-15T06:14:00.000Z" itemprop="datePublished">2019-11-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/15/hello-world/">Hello World </a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/15/hello-world/" data-id="ck4jbji3e0011kuud9g316o7a" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/12/18/Java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/">Java-线程池</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/LintCode-%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8/">LintCode-翻转链表</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/LintCode-%E8%BF%94%E5%9B%9E%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E4%BA%A4/">LintCode-返回两个数组的交</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/LintCode-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%89%80%E6%9C%89%E8%B7%AF%E5%BE%84/">LintCode- 二叉树的所有路径</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/LIntCode-%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%B1%82%E5%92%8C/">LIntCode-二进制求和</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
