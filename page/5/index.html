@@ -64,10 +64,175 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-LintCode-判断数独是否合法" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-LeetCode-Bitwise-ORs-of-Subarrays" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/06/21/LintCode-%E5%88%A4%E6%96%AD%E6%95%B0%E7%8B%AC%E6%98%AF%E5%90%A6%E5%90%88%E6%B3%95/" class="article-date">
-  <time datetime="2019-06-21T08:00:21.507Z" itemprop="datePublished">2019-06-21</time>
+    <a href="/2019/11/18/LeetCode-Bitwise-ORs-of-Subarrays/" class="article-date">
+  <time datetime="2019-11-18T13:19:37.499Z" itemprop="datePublished">2019-11-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/18/LeetCode-Bitwise-ORs-of-Subarrays/">[LeetCode] Bitwise ORs of Subarrays</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Bitwise-ORs-of-Subarrays"><a href="#Bitwise-ORs-of-Subarrays" class="headerlink" title="Bitwise ORs of Subarrays"></a>Bitwise ORs of Subarrays</h2><p>For every (contiguous) subarray B = [A[i], A[i+1], …, A[j]] (with i &lt;= j), we take the bitwise OR of all the elements in B, obtaining a result A[i] | A[i+1] | … | A[j].</p>
+<p> Return the number of possible results. (Results that occur more than once are only counted once in the final answer.)</p>
+<p> Example 1:</p>
+<p> Input: [0]<br> Output: 1<br> Explanation:<br> There is only one possible result: 0.<br> Example 2:</p>
+<p> Input: [1,1,2]<br> Output: 3<br> Explanation:<br> The possible subarrays are [1], [1], [2], [1, 1], [1, 2], [1, 1, 2].<br> These yield the results 1, 1, 2, 1, 3, 3.<br> There are 3 unique values, so the answer is 3.<br> Example 3:</p>
+<p> Input: [1,2,4]<br> Output: 6<br> Explanation:<br> The possible results are 1, 2, 3, 4, 6, and 7.</p>
+<p> Note:</p>
+<p> 1 &lt;= A.length &lt;= 50000<br> 0 &lt;= A[i] &lt;= 10^9</p>
+<p> 解决方案1：<br> 暴力求解，两层For循环，第一层为数组开始的位置，第二层为子数组的所有正向求或运算操作。<br> 举例：A[n]<br> 第一层For秩为j，则只计算A[j]~A[n]的所有正向或运算操作<br> 第二层For秩为i，用于计算A[j],A[j]|A[j+1],A[j]|A[j+1]|A[j+2],A[j]|…|A[n]的结果<br> 时间复杂度：O(n^2)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 80 &#x2F; 83 test cases passed.  Status: Time Limit Exceeded</span><br><span class="line">&#x2F;&#x2F;但是暴力求解超时</span><br><span class="line">public int subarrayBitwiseORs(int[] A) &#123;</span><br><span class="line">  int size &#x3D; A.length;</span><br><span class="line">  HashSet reSet &#x3D; new HashSet();</span><br><span class="line">  int[] ends &#x3D; new int[size + 1];</span><br><span class="line">  for (int i &#x3D; 0; i &lt; size; i++) &#123;</span><br><span class="line">    ends[i] &#x3D; 0;</span><br><span class="line">    for (int j &#x3D; i; j &lt; size; j++) &#123;</span><br><span class="line">      ends[j + 1] &#x3D; ends[j] | A[j];</span><br><span class="line">      reSet.add(ends[j + 1]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return reSet.size();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 解决方案2（方案借鉴于@花花酱博客）：<br> ORs(A[i+1])的结果为ORs(A[i])中所有的元素与A[i+1]进行或操作的结果与ORs(A[i])取交集，并且加上A[i+1]自身。<br> 这个方案可以利用上一个数组的结果，进行新的数据计算，并且因为去除了重复的结果，可以加速或运算的次数。<br> 时间复杂度的计算@花花酱给出了证明。</p>
+<p> 举例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: [1,1,2]</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: </span><br><span class="line">The possible subarrays are [1], [1], [2], [1, 1], [1, 2], [1, 1, 2].</span><br><span class="line">These yield the results 1, 1, 2, 1, 3, 3.</span><br><span class="line">There are 3 unique values, so the answer is 3.</span><br></pre></td></tr></table></figure>
+<p> ORs[0] = [1] = {1}<br> ORs[1] = { ORs[0] | A[1], A[1] ,ORs[0] } = {1} | 1 , 1 = {1}<br> ORs[2] = { ORs[1] | A[2] ,A[2] ,ORs[1] } = {1} | 2 ,2 = {3,2,1}</p>
+<blockquote>
+<p>证明： dp[i] = {A[i], A[i] | A[i – 1], A[i] | A[i – 1] | A[i – 2], … , A[i] | A[i – 1] | … | A[0]}这个序列单调递增，通过把A[i]中的0变成1。A[i]最多有32个0。所以这个集合的大小 &lt;= 32。</p>
+<p> e.g. 举例：Worst Case 最坏情况 A = [8, 4, 2, 1, 0] A[i] = 2^(n-i)。</p>
+<p> A[5] = 0，dp[5] = {0, 0 | 1, 0 | 1 | 2, 0 | 1 | 2 | 4, 0 | 1 | 2 | 4 | 8} = {0, 1, 3, 7, 15}.</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 83 &#x2F; 83 test cases passed.</span><br><span class="line">&#x2F;&#x2F; Status: Accepted</span><br><span class="line">&#x2F;&#x2F; Runtime: 357 ms</span><br><span class="line"></span><br><span class="line">public int subarrayBitwiseORs2(int[] A) &#123;</span><br><span class="line">  HashSet&lt;Integer&gt; cur &#x3D; new HashSet();</span><br><span class="line">  HashSet&lt;Integer&gt; ans &#x3D; new HashSet();</span><br><span class="line">  for (int a : A) &#123;</span><br><span class="line">    HashSet nxt &#x3D; new HashSet&lt;Integer&gt;();</span><br><span class="line">    nxt.add(a);</span><br><span class="line">    for (int b : cur) &#123;</span><br><span class="line">      nxt.add(a | b);</span><br><span class="line">    &#125;</span><br><span class="line">    ans.addAll(nxt);</span><br><span class="line">    cur &#x3D; nxt;</span><br><span class="line">  &#125;</span><br><span class="line">  return  ans.size();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;224ms的方案，使用一个Set，提高了效率</span><br><span class="line">class Solution &#123;</span><br><span class="line">    public int subarrayBitwiseORs(int[] A) &#123;</span><br><span class="line">        &#x2F;&#x2F; brute force solution</span><br><span class="line">        int size;</span><br><span class="line">        if (A &#x3D;&#x3D; null || (size &#x3D; A.length) &#x3D;&#x3D; 0) return 0;</span><br><span class="line">        if (size &#x3D;&#x3D; 1) return 1;</span><br><span class="line"></span><br><span class="line">        int sumAll &#x3D; 0;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; size; i++) &#123;</span><br><span class="line">            sumAll |&#x3D; A[i];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Set&lt;Integer&gt; set &#x3D; new HashSet&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        for (int i &#x3D; 0; i &lt; size; i++) &#123;</span><br><span class="line">            int sum &#x3D; 0;</span><br><span class="line">            for (int j &#x3D; i; j &lt; size; j++) &#123;</span><br><span class="line">                sum |&#x3D; A[j];</span><br><span class="line">                set.add(sum);</span><br><span class="line">                if (sum &#x3D;&#x3D; sumAll) &#123;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return set.size();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/18/LeetCode-Bitwise-ORs-of-Subarrays/" data-id="ck4jii25x0005edud86wgg77h" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LeetCode-Add-Two-Numbers-II" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/18/LeetCode-Add-Two-Numbers-II/" class="article-date">
+  <time datetime="2019-11-18T13:14:32.423Z" itemprop="datePublished">2019-11-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/18/LeetCode-Add-Two-Numbers-II/">[LeetCode] Add Two Numbers II</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Add-Two-Numbers-II"><a href="#Add-Two-Numbers-II" class="headerlink" title="Add-Two-Numbers II"></a>Add-Two-Numbers II</h1><h2 id="LeetCode-Add-Two-Numbers-II"><a href="#LeetCode-Add-Two-Numbers-II" class="headerlink" title="LeetCode-Add Two Numbers II"></a>LeetCode-Add Two Numbers II</h2><h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>You are given two non-empty linked lists representing two non-negative integers. The most significant digit comes first and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.</p>
+<p>You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>
+<h2 id="Follow-up"><a href="#Follow-up" class="headerlink" title="Follow up:"></a>Follow up:</h2><p>What if you cannot modify the input lists? In other words, reversing the lists is not allowed.</p>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example:"></a>Example:</h2><p>Input: (7 -&gt; 2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)<br>Output: 7 -&gt; 8 -&gt; 0 -&gt; 7</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>思路：<br>这里使用了两个栈将两个链表的值反置；然后一次按位相加即可得到和。<br>这里有几个点需要注意下：  </p>
+<ol>
+<li>相加后得到的数据是从低位开始的。需要进行反置(或者直接在返回值上做文章)  </li>
+<li>按位相加得到和后，需要注意下最后是否还需要高位进一；如果需要则需要补充一个高位。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * public class ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode next;</span><br><span class="line"> *     ListNode(int x) &#123; val &#x3D; x; &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    public ListNode addTwoNumbers(ListNode l1, ListNode l2) &#123;</span><br><span class="line">        Stack&lt;Integer&gt; sta1 &#x3D; new Stack&lt;Integer&gt;();</span><br><span class="line">        Stack&lt;Integer&gt; sta2 &#x3D; new Stack&lt;Integer&gt;();</span><br><span class="line">        while (l1 !&#x3D; null) &#123;</span><br><span class="line">            sta1.push(l1.val);</span><br><span class="line">            l1 &#x3D; l1.next;</span><br><span class="line">        &#125;</span><br><span class="line">        while (l2 !&#x3D; null) &#123;</span><br><span class="line">            sta2.push(l2.val);</span><br><span class="line">            l2 &#x3D; l2.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ListNode re  &#x3D; null;</span><br><span class="line">        int x &#x3D; 0;</span><br><span class="line">        while (!sta1.isEmpty() || !sta2.isEmpty()) &#123;</span><br><span class="line">            x +&#x3D; (sta1.isEmpty() ? 0 : sta1.pop()) + (sta2.isEmpty() ? 0 : sta2.pop());</span><br><span class="line">            ListNode node &#x3D; new ListNode(x%10);</span><br><span class="line">            node.next &#x3D; re;</span><br><span class="line">            re &#x3D; node;</span><br><span class="line">            x &#x3D; x &#x2F; 10;</span><br><span class="line">        &#125;</span><br><span class="line">        if(x &#x3D;&#x3D;1)&#123;</span><br><span class="line">            ListNode node &#x3D; new ListNode(1);</span><br><span class="line">            node.next &#x3D; re;</span><br><span class="line">            re &#x3D; node;</span><br><span class="line">        &#125;</span><br><span class="line">        return re;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/18/LeetCode-Add-Two-Numbers-II/" data-id="ck4jii25k0000edudd02w53qb" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LeetCode-Score-After-Flipping-Matrix" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/18/LeetCode-Score-After-Flipping-Matrix/" class="article-date">
+  <time datetime="2019-11-18T13:09:18.024Z" itemprop="datePublished">2019-11-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/18/LeetCode-Score-After-Flipping-Matrix/">[LeetCode] Score After Flipping Matrix</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="LeetCode-Score-After-Flipping-Matrix"><a href="#LeetCode-Score-After-Flipping-Matrix" class="headerlink" title="LeetCode-Score After Flipping Matrix"></a>LeetCode-Score After Flipping Matrix</h1><p>We have a two dimensional matrix A where each value is 0 or 1.</p>
+<p>A move consists of choosing any row or column, and toggling each value in that row or column: changing all 0s to 1s, and all 1s to 0s.</p>
+<p>After making any number of moves, every row of this matrix is interpreted as a binary number, and the score of the matrix is the sum of these numbers.</p>
+<p>Return the highest possible score.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Example 1:</span><br><span class="line"></span><br><span class="line">Input: [[0,0,1,1],[1,0,1,0],[1,1,0,0]]</span><br><span class="line">Output: 39</span><br><span class="line">Explanation:</span><br><span class="line">Toggled to [[1,1,1,1],[1,0,0,1],[1,1,1,1]].</span><br><span class="line">0b1111 + 0b1001 + 0b1111 &#x3D; 15 + 9 + 15 &#x3D; 39</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Note:</span><br><span class="line"></span><br><span class="line">1 &lt;&#x3D; A.length &lt;&#x3D; 20</span><br><span class="line">1 &lt;&#x3D; A[0].length &lt;&#x3D; 20</span><br><span class="line">A[i][j] is 0 or 1.</span><br></pre></td></tr></table></figure>
+
+<p><strong>题目大意</strong><br>题目中给了一个数组A，这个数组中只包含0,1。现在需要整行或者整列的进行转换操作，把0变成1，把1变成0。目标是进行一波t操作之后，把A中的每行数字转化成二进制数，是最终得到的二进制数的和最大。</p>
+<p>解题方法<br>题目很烧脑，使用什么样的操作规则才能使得得到的最终数组二进制和最大。<br>1、根据二进制的特性，1000 一定大于 0111，所以首位数字一定要为1<br>2、第一列都为1时，那么行的变化就不能进行了，因为一单进行行的变化，每行的首位就会变成0<br>3、现在只需要对列进行操作就好，目标是保证每一列的1尽量多。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public int matrixScore(int[][] A) &#123;</span><br><span class="line">    int row &#x3D; A.length;</span><br><span class="line">    int col &#x3D; A[0].length;</span><br><span class="line">    int current &#x3D; 1&lt;&lt;(A[0].length-1);</span><br><span class="line">    int sum &#x3D;current * row;</span><br><span class="line">    int k;</span><br><span class="line">    for(int i &#x3D; 1; i&lt; col;i++)&#123;</span><br><span class="line">        k &#x3D; 0;</span><br><span class="line">        current &#x3D; current&gt;&gt;1;</span><br><span class="line">        for(int j &#x3D; 0;j&lt;row;j++)&#123;</span><br><span class="line">            if((A[j][0]^A[j][i]) &#x3D;&#x3D; 1)&#123;</span><br><span class="line">                k++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        k &#x3D; Math.max(k,row - k);</span><br><span class="line">        sum +&#x3D; current * k;</span><br><span class="line">    &#125;</span><br><span class="line">    return sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>技巧：<br>1、避免对数组进行赋值操作，该为通过首列的值与第二列、第三列、…第n列进行异或操作。<br>1）如果首列为0，则需要对后面进行转换操作，0^1 = 0 , 0^0=1<br>2）如果首列为1，则无需进行转换操作， 1^1 = 1 , 1^0 = 0;<br>2、统计每一列1的个数k，因为0和1可以相互转换，所以行数减k取其大值就是该列1的最大值 。k = Math.max(k,row - k);<br>3)根据二进制的转换数字求和。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/18/LeetCode-Score-After-Flipping-Matrix/" data-id="ck4jii26b000nedud394bfruc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/15/hello-world/" class="article-date">
+  <time datetime="2019-11-15T06:14:00.000Z" itemprop="datePublished">2019-11-15</time>
 </a>
     
   </div>
@@ -78,7 +243,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/21/LintCode-%E5%88%A4%E6%96%AD%E6%95%B0%E7%8B%AC%E6%98%AF%E5%90%A6%E5%90%88%E6%B3%95/">LintCode-判断数独是否合法</a>
+      <a class="article-title" href="/2019/11/15/hello-world/">Hello World </a>
     </h1>
   
 
@@ -86,25 +251,119 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>title: ‘LintCode-判断数独是否合法’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
-<ul>
-<li>算法<br>date: 2019-12-18 21:12:00</li>
-</ul>
-<h1 id="LintCode-判断数独是否合法"><a href="#LintCode-判断数独是否合法" class="headerlink" title="LintCode-判断数独是否合法"></a>LintCode-判断数独是否合法</h1><p>容易 判断数独是否合法 查看运行结果</p>
-<p>27% 通过<br>请判定一个数独是否有效。</p>
-<p>该数独可能只填充了部分数字，其中缺少的数字用 . 表示。</p>
-<p>您在真实的面试中是否遇到过这个题？ Yes<br>样例<br>下列就是一个合法数独的样例。</p>
-<p>Valid Sudoku</p>
-<p>注意<br>一个合法的数独（仅部分填充）并不一定是可解的。我们仅需使填充的空格有效即可。</p>
-<p>说明<br>什么是 数独？</p>
-<p><a href="http://sudoku.com.au/TheRules.aspx" target="_blank" rel="noopener">http://sudoku.com.au/TheRules.aspx</a><br><a href="http://baike.baidu.com/subview/961/10842669.htm" target="_blank" rel="noopener">http://baike.baidu.com/subview/961/10842669.htm</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">      * @param board: the board</span><br><span class="line">        @return: wether the Sudoku is valid</span><br><span class="line">      *&#x2F;</span><br><span class="line">    public boolean isValidSudoku(char[][] board) &#123;</span><br><span class="line">        if(board&#x3D;&#x3D;null)</span><br><span class="line">            return false;</span><br><span class="line">        for(int i&#x3D;0;i&lt;board.length;i++)&#123;</span><br><span class="line">            HashMap&lt;Character, Boolean&gt; map &#x3D; new HashMap&lt;Character, Boolean&gt;();</span><br><span class="line">            for(int j&#x3D;0;j&lt;board.length;j++)&#123;</span><br><span class="line">                if(board[i][j]!&#x3D;&#39;.&#39;)&#123;</span><br><span class="line">                    if(map.get(board[i][j])!&#x3D;null)&#123;</span><br><span class="line">                        return false;</span><br><span class="line">                    &#125;else&#123;</span><br><span class="line">                        map.put(board[i][j], true);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            map.clear();</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i&#x3D;0;i&lt;board.length;i++)&#123;</span><br><span class="line">            HashMap&lt;Character, Boolean&gt; map &#x3D; new HashMap&lt;Character, Boolean&gt;();</span><br><span class="line">            for(int j&#x3D;0;j&lt;board.length;j++)&#123;</span><br><span class="line">                if(board[j][i]!&#x3D;&#39;.&#39;)&#123;</span><br><span class="line">                    if(map.get(board[j][i])!&#x3D;null)&#123;</span><br><span class="line">                        return false;</span><br><span class="line">                    &#125;else&#123;</span><br><span class="line">                        map.put(board[j][i], true);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            map.clear();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for(int l&#x3D;0;l&lt;3;l++)&#123;   </span><br><span class="line">            for(int k&#x3D;0;k&lt;3;k++)&#123;   </span><br><span class="line">                HashMap&lt;Character, Boolean&gt; map &#x3D; new HashMap&lt;Character, Boolean&gt;();</span><br><span class="line">                for(int i&#x3D;0;i&lt;3;i++)&#123;</span><br><span class="line">                    for(int j&#x3D;0;j&lt;3;j++)&#123;</span><br><span class="line">                        if(board[j+l*3][i+3*k]!&#x3D;&#39;.&#39;)&#123;</span><br><span class="line">                            if(map.get(board[j+l*3][i+3*k])!&#x3D;null)&#123;</span><br><span class="line">                                return false;</span><br><span class="line">                            &#125;else&#123;</span><br><span class="line">                                map.put(board[j+l*3][i+3*k], true);</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/15/hello-world/" data-id="ck4jii27x002yedud5m1702ya" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LintCode-有效回文串" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/21/LintCode-%E6%9C%89%E6%95%88%E5%9B%9E%E6%96%87%E4%B8%B2/" class="article-date">
+  <time datetime="2019-06-21T08:00:21.509Z" itemprop="datePublished">2019-06-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/LintCode-%E6%9C%89%E6%95%88%E5%9B%9E%E6%96%87%E4%B8%B2/">LintCode-有效回文串</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="LintCode-有效回文串"><a href="#LintCode-有效回文串" class="headerlink" title="LintCode-有效回文串"></a>LintCode-有效回文串</h1><p>有效回文串</p>
+<p>给定一个字符串，判断其是否为一个回文串。只包含字母和数字，忽略大小写。</p>
+<p>样例<br>“A man, a plan, a canal: Panama” 是一个回文。</p>
+<p>“race a car” 不是一个回文。</p>
+<p>注意<br>你是否考虑过，字符串有可能是空字符串？这是面试过程中，面试官常常会问的问题。</p>
+<p>在这个题目中，我们将空字符串判定为有效回文。</p>
+<p>挑战<br>O(n) 时间复杂度，且不占用额外空间。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param s A string</span><br><span class="line">     * @return Whether the string is a valid palindrome</span><br><span class="line">     *&#x2F;</span><br><span class="line">  public boolean isPalindrome(String s) &#123;</span><br><span class="line">        s &#x3D; s.toLowerCase();</span><br><span class="line">        if(s.length() &lt;&#x3D; 1)&#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        int a &#x3D; -1, b &#x3D; s.length();</span><br><span class="line">        while(b - a &gt; 1)&#123;</span><br><span class="line">            while(!cheackData(s.charAt(++a)))&#123;</span><br><span class="line">                if(a&#x3D;&#x3D;s.length()-1)&#123;</span><br><span class="line">                    return true;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            while(!cheackData(s.charAt(--b)))&#123;</span><br><span class="line">                if(b &#x3D;&#x3D; 0)&#123;</span><br><span class="line">                    return true;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if(s.charAt(a) !&#x3D; s.charAt(b)) return false;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public boolean cheackData(char c)&#123;</span><br><span class="line">        if( c&lt;&#x3D;&#39;z&#39; &amp;&amp; c&gt;&#x3D;&#39;a&#39;)&#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        if( c&lt;&#x3D;&#39;9&#39; &amp;&amp; c&gt;&#x3D;&#39;0&#39;)&#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E5%88%A4%E6%96%AD%E6%95%B0%E7%8B%AC%E6%98%AF%E5%90%A6%E5%90%88%E6%B3%95/" data-id="ck4jhs6vk001coaud5vjz1yev" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E6%9C%89%E6%95%88%E5%9B%9E%E6%96%87%E4%B8%B2/" data-id="ck4jii2790027edudf2ec18rn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LintCode-生成括号" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/21/LintCode-%E7%94%9F%E6%88%90%E6%8B%AC%E5%8F%B7/" class="article-date">
+  <time datetime="2019-06-21T08:00:21.509Z" itemprop="datePublished">2019-06-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/LintCode-%E7%94%9F%E6%88%90%E6%8B%AC%E5%8F%B7/">LintCode-生成括号</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="LintCode-生成括号"><a href="#LintCode-生成括号" class="headerlink" title="LintCode-生成括号"></a>LintCode-生成括号</h1><p>生成括号</p>
+<p>给定 n 对括号，请写一个函数以将其生成新的括号组合，并返回所有组合结果。</p>
+<p>样例<br>给定 n = 3, 可生成的组合如下:</p>
+<p>“((()))”, “(()())”, “(())()”, “()(())”, “()()()”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param n n pairs</span><br><span class="line">     * @return All combinations of well-formed parentheses</span><br><span class="line">     *&#x2F;</span><br><span class="line">public ArrayList&lt;String&gt; generateParenthesis(int n) &#123;</span><br><span class="line">        ArrayList&lt;String&gt; result &#x3D; new ArrayList&lt;String&gt;();</span><br><span class="line">        String str &#x3D; new String();</span><br><span class="line">        findPaths(0, 0, n, str, result);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void findPaths(int n, int m, int sum, String str, List&lt;String&gt; result) &#123;</span><br><span class="line">        String str0 &#x3D; new String();</span><br><span class="line">        String str1 &#x3D; new String();</span><br><span class="line">        if (sum - n &gt; 0) &#123;</span><br><span class="line">            str0 &#x3D; str + &quot;(&quot;;</span><br><span class="line">            this.findPaths(n + 1, m + 1, sum, str0, result);</span><br><span class="line">        &#125;</span><br><span class="line">        if (m &gt; 0) &#123;</span><br><span class="line">            str1 &#x3D; str + &quot;)&quot;;</span><br><span class="line">            this.findPaths(n, m - 1, sum, str1, result);</span><br><span class="line">        &#125;</span><br><span class="line">        if(sum&#x3D;&#x3D;n&amp;&amp;m&#x3D;&#x3D;0) result.add(str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E7%94%9F%E6%88%90%E6%8B%AC%E5%8F%B7/" data-id="ck4jii27d002dedudgo0hco5l" class="article-share-link">Share</a>
       
       
     </footer>
@@ -136,10 +395,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>title: ‘LintCode-两个链表的和’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
-<ul>
-<li>算法<br>date: 2019-12-18 21:12:00</li>
-</ul>
+        <p>title: ‘LintCode-两个链表的和’<br>author: Arnold Ran<br>tags: []<br>categories: [算法]<br>date: 2019-12-18 21:12:00</p>
 <h1 id="LintCode-两个链表的和"><a href="#LintCode-两个链表的和" class="headerlink" title="LintCode-两个链表的和"></a>LintCode-两个链表的和</h1><h2 id="容易-两个链表的和"><a href="#容易-两个链表的和" class="headerlink" title="容易 两个链表的和"></a>容易 两个链表的和</h2><p>你有两个用链表代表的整数，其中每个节点包含一个数字。数字存储按照在原来整数中相反的顺序，使得第一个数字位于链表的开头。写出一个函数将两个整数相加，用链表形式返回和。</p>
 <p>样例 给出两个链表 <code>3-&gt;1-&gt;5-&gt;null</code> 和 <code>5-&gt;9-&gt;2-&gt;null</code> ，返回 <code>8-&gt;0-&gt;8-&gt;null</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * public class ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode next;</span><br><span class="line"> *     ListNode(int x) &#123;</span><br><span class="line"> *         val &#x3D; x;</span><br><span class="line"> *         next &#x3D; null;      </span><br><span class="line"> *     &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param l1: the first list</span><br><span class="line">     * @param l2: the second list</span><br><span class="line">     * @return: the sum list of l1 and l2 </span><br><span class="line">     *&#x2F;</span><br><span class="line">  public ListNode addLists(ListNode l1, ListNode l2) &#123;</span><br><span class="line">        ListNode l3&#x3D;new ListNode(0);</span><br><span class="line">        ListNode l &#x3D;l3;</span><br><span class="line">        boolean run&#x3D;true;</span><br><span class="line">        int flag&#x3D;0;</span><br><span class="line">        do&#123;</span><br><span class="line">            int k&#x3D;l1.val+l2.val+flag;</span><br><span class="line">            flag&#x3D;(int)k&#x2F;10;</span><br><span class="line">            k&#x3D;k%10;</span><br><span class="line">            l3&#x3D;l3.next&#x3D;new ListNode(k);</span><br><span class="line"></span><br><span class="line">            if(l1.next&#x3D;&#x3D;null&amp;&amp;l2.next&#x3D;&#x3D;null)&#123;</span><br><span class="line">                run&#x3D;false;</span><br><span class="line">                if(flag!&#x3D;0)&#123;</span><br><span class="line">                    l3.next&#x3D;new ListNode(flag);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if(l1.next!&#x3D;null)&#123;</span><br><span class="line">                l1&#x3D;l1.next;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                l1.val&#x3D;0;</span><br><span class="line">            &#125;</span><br><span class="line">            if(l2.next!&#x3D;null)&#123;</span><br><span class="line">                l2&#x3D;l2.next;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                l2.val&#x3D;0;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;while(run);</span><br><span class="line"></span><br><span class="line">        return l.next;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -149,7 +405,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E5%92%8C/" data-id="ck4jhs6ve0014oaudgs4m3voi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E5%92%8C/" data-id="ck4jii26v001ledud7ejt13xx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -165,6 +421,10 @@
   <time datetime="2019-06-21T08:00:21.506Z" itemprop="datePublished">2019-06-21</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -181,11 +441,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>title: ‘LintCode-爬楼梯’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
-<ul>
-<li>算法<br>date: 2019-12-18 21:12:00</li>
-</ul>
-<h1 id="LintCode-爬楼梯"><a href="#LintCode-爬楼梯" class="headerlink" title="LintCode-爬楼梯"></a>LintCode-爬楼梯</h1><p>爬楼梯</p>
+        <h1 id="LintCode-爬楼梯"><a href="#LintCode-爬楼梯" class="headerlink" title="LintCode-爬楼梯"></a>LintCode-爬楼梯</h1><p>爬楼梯</p>
 <p>假设你正在爬楼梯，需要n步你才能到达顶部。但每次你只能爬一步或者两步，你能有多少种不同的方法爬到楼顶部？</p>
 <p>样例<br>比如n=3，1+1+1=1+2=2+1=3，共有3中不同的方法</p>
 <p>返回 3</p>
@@ -196,7 +452,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E7%88%AC%E6%A5%BC%E6%A2%AF/" data-id="ck4jhs6vq001loaud3rddc184" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E7%88%AC%E6%A5%BC%E6%A2%AF/" data-id="ck4jii27d002fedud0fj96dqe" class="article-share-link">Share</a>
       
       
     </footer>
@@ -228,10 +484,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>title: ‘LintCode-链表划分’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
-<ul>
-<li>算法<br>date: 2019-12-18 21:12:00</li>
-</ul>
+        <p>title: ‘LintCode-链表划分’<br>author: Arnold Ran<br>tags: []<br>categories: [算法]<br>date: 2019-12-18 21:12:00</p>
 <h1 id="LintCode-链表划分"><a href="#LintCode-链表划分" class="headerlink" title="LintCode-链表划分"></a>LintCode-链表划分</h1><p>容易 链表划分 查看运行结果</p>
 <p>29% 通过<br>给定一个单链表和数值x，划分链表使得所有小于x的节点排在大于等于x的节点之前。</p>
 <p>你应该保留两部分内链表节点原有的相对顺序。</p>
@@ -244,52 +497,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E9%93%BE%E8%A1%A8%E5%88%92%E5%88%86/" data-id="ck4jhs6vt001roauddsgnahex" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LintCode- 链表倒数第n个节点" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/06/21/LintCode-%20%E9%93%BE%E8%A1%A8%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/" class="article-date">
-  <time datetime="2019-06-21T08:00:21.505Z" itemprop="datePublished">2019-06-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/21/LintCode-%20%E9%93%BE%E8%A1%A8%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/">LintCode- 链表倒数第n个节点</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>title: ‘LintCode- 链表倒数第n个节点’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
-<ul>
-<li>算法<br>date: 2019-12-18 21:12:00</li>
-</ul>
-<h1 id="LintCode-链表倒数第n个节点"><a href="#LintCode-链表倒数第n个节点" class="headerlink" title="LintCode- 链表倒数第n个节点"></a>LintCode- 链表倒数第n个节点</h1><p>链表倒数第n个节点</p>
-<p>找到单链表倒数第n个节点，保证链表中节点的最少数量为n。</p>
-<p>样例<br>给出链表 3-&gt;2-&gt;1-&gt;5-&gt;null和n = 2，返回倒数第二个节点的值1.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for ListNode.</span><br><span class="line"> * public class ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode next;</span><br><span class="line"> *     ListNode(int val) &#123;</span><br><span class="line"> *         this.val &#x3D; val;</span><br><span class="line"> *         this.next &#x3D; null;</span><br><span class="line"> *     &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F; </span><br><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param head: The first node of linked list.</span><br><span class="line">     * @param n: An integer.</span><br><span class="line">     * @return: Nth to last node of a singly linked list. </span><br><span class="line">     *&#x2F;</span><br><span class="line">    ListNode nthToLast(ListNode head, int n) &#123;</span><br><span class="line">            int count &#x3D; 0;</span><br><span class="line">            ListNode re &#x3D; head;</span><br><span class="line">            while(head !&#x3D; null)&#123;</span><br><span class="line">                count++;</span><br><span class="line">                head &#x3D; head.next;</span><br><span class="line">            &#125;</span><br><span class="line">            count &#x3D; count - n;</span><br><span class="line">            while(count-- &gt; 0)&#123;</span><br><span class="line">                re &#x3D;re.next;</span><br><span class="line">            &#125;</span><br><span class="line">            return re;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/21/LintCode-%20%E9%93%BE%E8%A1%A8%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/" data-id="ck4jhs6vg0016oaudcqo95n6r" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E9%93%BE%E8%A1%A8%E5%88%92%E5%88%86/" data-id="ck4jii27i002redud3vex8uk1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -321,10 +529,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>title: ‘LintCode-快乐数’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
-<ul>
-<li>算法<br>date: 2019-12-18 21:12:00</li>
-</ul>
+        <p>title: ‘LintCode-快乐数’<br>author: Arnold Ran<br>tags: []<br>categories: [算法]<br>date: 2019-12-18 21:12:00</p>
 <h1 id="LintCode-快乐数"><a href="#LintCode-快乐数" class="headerlink" title="LintCode-快乐数"></a>LintCode-快乐数</h1><p>快乐数<br>写一个算法来判断一个数是不是”快乐数”。</p>
 <p>一个数是不是快乐是这么定义的：对于一个正整数，每一次将该数替换为他每个位置上的数字的平方和，然后重复这个过程直到这个数变为1，或是无限循环但始终变不到1。如果可以变为1，那么这个数就是快乐数。</p>
 <p>样例<br>19 就是一个快乐数。</p>
@@ -335,193 +540,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E5%BF%AB%E4%B9%90%E6%95%B0/" data-id="ck4jhs6vo001joaud6em4hyor" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LintCode-链表插入排序" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/06/21/LintCode-%E9%93%BE%E8%A1%A8%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" class="article-date">
-  <time datetime="2019-06-21T08:00:21.505Z" itemprop="datePublished">2019-06-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/21/LintCode-%E9%93%BE%E8%A1%A8%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">LintCode-链表插入排序</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>title: ‘LintCode-链表插入排序’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
-<ul>
-<li>算法<br>date: 2019-12-18 21:12:00</li>
-</ul>
-<h1 id="LintCode-链表插入排序"><a href="#LintCode-链表插入排序" class="headerlink" title="LintCode-链表插入排序"></a>LintCode-链表插入排序</h1><h2 id="容易-链表插入排序"><a href="#容易-链表插入排序" class="headerlink" title="容易 链表插入排序"></a>容易 链表插入排序</h2><p>用插入排序对链表排序</p>
-<p>您在真实的面试中是否遇到过这个题？ Yes</p>
-<p>样例 Given <code>1-&gt;3-&gt;2-&gt;0-&gt;null</code> , return <code>0-&gt;1-&gt;2-&gt;3-&gt;null</code></p>
-<p>冒泡法遍历</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for ListNode.</span><br><span class="line"> * public class ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode next;</span><br><span class="line"> *     ListNode(int val) &#123;</span><br><span class="line"> *         this.val &#x3D; val;</span><br><span class="line"> *         this.next &#x3D; null;</span><br><span class="line"> *     &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F; </span><br><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param head: The first node of linked list.</span><br><span class="line">     * @return: The head of linked list.</span><br><span class="line">     *&#x2F;</span><br><span class="line">        public ListNode insertionSortList(ListNode head) &#123;</span><br><span class="line">        boolean flag &#x3D; true;</span><br><span class="line">        ListNode frist &#x3D; head;</span><br><span class="line">        ListNode second &#x3D; head;</span><br><span class="line">        if(head.next &#x3D;&#x3D; null || head &#x3D;&#x3D; null)&#123;</span><br><span class="line">            return head;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            frist &#x3D; head.next;</span><br><span class="line">        &#125;</span><br><span class="line">        while(flag)&#123;</span><br><span class="line">            flag &#x3D; false;</span><br><span class="line">            do&#123;</span><br><span class="line">                if(frist.val&lt;second.val)&#123;</span><br><span class="line">                    int x &#x3D;frist.val;</span><br><span class="line">                    frist.val &#x3D; second.val;</span><br><span class="line">                    second.val &#x3D; x;</span><br><span class="line">                    flag &#x3D; true;</span><br><span class="line">                &#125;            </span><br><span class="line">                frist &#x3D; frist.next;</span><br><span class="line">                second &#x3D; second.next;</span><br><span class="line">            &#125;while(frist !&#x3D; null);</span><br><span class="line">            frist &#x3D; head.next;</span><br><span class="line">            second &#x3D; head;</span><br><span class="line">        &#125;</span><br><span class="line">        return head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E9%93%BE%E8%A1%A8%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" data-id="ck4jhs6vw001toaudg3wnc0l9" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LintCode- 合并区间" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/06/21/LintCode-%20%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/" class="article-date">
-  <time datetime="2019-06-21T08:00:21.504Z" itemprop="datePublished">2019-06-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/21/LintCode-%20%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/">LintCode- 合并区间</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>title: ‘LintCode- 合并区间’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
-<ul>
-<li>算法<br>date: 2019-12-18 21:12:00</li>
-</ul>
-<h1 id="LintCode-合并区间"><a href="#LintCode-合并区间" class="headerlink" title="LintCode- 合并区间"></a>LintCode- 合并区间</h1><p>合并区间</p>
-<p>给出若干闭合区间，合并所有重叠的部分。</p>
-<p>样例</p>
-<p>给出的区间列表 =&gt; 合并后的区间列表：</p>
-<p>[ [<br>[1, 3], [1, 6],<br>[2, 6], =&gt; [8, 10],<br>[8, 10], [15, 18]<br>[15, 18] ]<br>]</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;先排序 然后根据i位置的end与i+1位置的star比较 如果有重叠 则表示可以合并 合并后的end为i与i+1位置上的最大值。</span><br><span class="line">&#x2F;**</span><br><span class="line"> * Definition of Interval:</span><br><span class="line"> * public class Interval &#123;</span><br><span class="line"> *     int start, end;</span><br><span class="line"> *     Interval(int start, int end) &#123;</span><br><span class="line"> *         this.start &#x3D; start;</span><br><span class="line"> *         this.end &#x3D; end;</span><br><span class="line"> *     &#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line"></span><br><span class="line">class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param intervals: Sorted interval list.</span><br><span class="line">     * @return: A new sorted interval list.</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public List&lt;Interval&gt; merge(List&lt;Interval&gt; intervals) &#123;</span><br><span class="line">        this.sort(intervals);</span><br><span class="line">        for (int i&#x3D;0;i&lt;intervals.size()-1;i++) &#123;</span><br><span class="line">            Interval data &#x3D; intervals.get(i);</span><br><span class="line">            if(data.end&gt;&#x3D;intervals.get(i+1).start)&#123;</span><br><span class="line">                data.end&#x3D;intervals.get(i+1).end&gt;data.end?intervals.get(i+1).end:data.end;</span><br><span class="line">                intervals.remove(i+1);</span><br><span class="line">                i--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return intervals;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void sort(List&lt;Interval&gt; intervals)&#123;</span><br><span class="line">        for (int i &#x3D; intervals.size() - 1; i &gt; 0; --i)</span><br><span class="line">        &#123;</span><br><span class="line">            for (int j &#x3D; 0; j &lt; i; ++j)</span><br><span class="line">            &#123;</span><br><span class="line">                if(intervals.get(j).start&gt;intervals.get(j+1).start)&#123;</span><br><span class="line">                    Interval old &#x3D; new Interval(intervals.get(j).start,intervals.get(j).end);</span><br><span class="line">                    intervals.get(j).end&#x3D;intervals.get(j+1).end;</span><br><span class="line">                    intervals.get(j).start&#x3D;intervals.get(j+1).start;</span><br><span class="line">                    intervals.get(j+1).end&#x3D;old.end;</span><br><span class="line">                    intervals.get(j+1).start&#x3D;old.start;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/21/LintCode-%20%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/" data-id="ck4jhs6v7000xoaud6a5e445w" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LintCode- 恢复IP地址" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/06/21/LintCode-%20%E6%81%A2%E5%A4%8DIP%E5%9C%B0%E5%9D%80/" class="article-date">
-  <time datetime="2019-06-21T08:00:21.504Z" itemprop="datePublished">2019-06-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/21/LintCode-%20%E6%81%A2%E5%A4%8DIP%E5%9C%B0%E5%9D%80/">LintCode- 恢复IP地址</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>title: ‘LintCode- 恢复IP地址’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
-<ul>
-<li>算法<br>date: 2019-12-18 21:12:00</li>
-</ul>
-<h1 id="LintCode-恢复IP地址"><a href="#LintCode-恢复IP地址" class="headerlink" title="LintCode- 恢复IP地址"></a>LintCode- 恢复IP地址</h1><p>恢复IP地址<br>给一个由数字组成的字符串。求出其可能恢复为的所有IP地址。<br>样例</p>
-<p>给出字符串 “25525511135”，所有可能的IP地址为：</p>
-<p>[<br>“255.255.11.135”,<br>“255.255.111.35”<br>]<br>（顺序无关紧要）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param s the IP string</span><br><span class="line">     * @return All possible valid IP addresses</span><br><span class="line">     *&#x2F;</span><br><span class="line">public ArrayList&lt;String&gt; restoreIpAddresses(String s) &#123;</span><br><span class="line">        ArrayList&lt;String&gt; result &#x3D; new ArrayList&lt;String&gt;();</span><br><span class="line">        String str &#x3D; new String();</span><br><span class="line">        this.findPaths(s, str, s.length(), 0, 4, result);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void findPaths(String s, String re, int n, int index, int finish,</span><br><span class="line">            ArrayList&lt;String&gt; result) &#123;</span><br><span class="line">        if (index &#x3D;&#x3D; n &amp;&amp; finish &#x3D;&#x3D; 0) &#123;</span><br><span class="line">            result.add(re);</span><br><span class="line">        &#125;</span><br><span class="line">        if ((finish &#x3D;&#x3D; 0 &amp;&amp; index &lt; n) || (index &#x3D;&#x3D; n &amp;&amp; finish &gt; 0))</span><br><span class="line">            return;</span><br><span class="line">        int a &#x3D; 0;</span><br><span class="line">        String s0 &#x3D; new String();</span><br><span class="line">        s0 &#x3D; re;</span><br><span class="line">        boolean flag &#x3D;true;</span><br><span class="line">        while (index &lt; n&amp;&amp;flag) &#123;</span><br><span class="line">            if(a&#x3D;&#x3D;0&amp;&amp;s.charAt(index)&#x3D;&#x3D;&#39;0&#39;)&#123;</span><br><span class="line">                flag&#x3D;false;</span><br><span class="line">            &#125;</span><br><span class="line">            a &#x3D; a * 10 + s.charAt(index++) - &#39;0&#39;;</span><br><span class="line">            if (a &gt;&#x3D; 0 &amp;&amp; a &lt; 256) &#123;</span><br><span class="line">                String s1 &#x3D; new String();</span><br><span class="line">                if (finish &#x3D;&#x3D; 1)</span><br><span class="line">                    s1 &#x3D; s0 + Integer.toString(a);</span><br><span class="line">                else</span><br><span class="line">                    s1 &#x3D; s0 + Integer.toString(a) + &quot;.&quot;;</span><br><span class="line"></span><br><span class="line">                this.findPaths(s, s1, n, index, finish - 1, result);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/21/LintCode-%20%E6%81%A2%E5%A4%8DIP%E5%9C%B0%E5%9D%80/" data-id="ck4jhs6v9000zoaud3gal4ya5" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LintCode-分割回文串" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/06/21/LintCode-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/" class="article-date">
-  <time datetime="2019-06-21T08:00:21.504Z" itemprop="datePublished">2019-06-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/21/LintCode-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/">LintCode-分割回文串</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>title: ‘LintCode-分割回文串’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
-<ul>
-<li>算法<br>date: 2019-12-18 21:12:00</li>
-</ul>
-<h1 id="LintCode-分割回文串"><a href="#LintCode-分割回文串" class="headerlink" title="LintCode-分割回文串"></a>LintCode-分割回文串</h1><p>分割回文串</p>
-<p>给定一个字符串s，将s分割成一些子串，使每个子串都是回文串。</p>
-<p>返回s所有可能的回文串分割方案。</p>
-<p>样例</p>
-<p>给出 s = “aab”，返回</p>
-<p>[<br>[“aa”, “b”],<br>[“a”, “a”, “b”]<br>]</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;这里运用了回溯算法 递推调用 动态规划的算法思想</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param s: A string</span><br><span class="line">     * @return: A list of lists of string</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public List&lt;List&lt;String&gt;&gt; partition(String s) &#123;</span><br><span class="line">        List&lt;List&lt;String&gt;&gt; result &#x3D; new ArrayList&lt;List&lt;String&gt;&gt;();</span><br><span class="line">        List&lt;String&gt; re &#x3D; new ArrayList&lt;String&gt;();</span><br><span class="line">        this.find(s, re, 0, result);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;用来遍历</span><br><span class="line">&#x2F;&#x2F;思路为从s[0]位置开始向后寻找可分割的位置，寻找函数为isRight（用来检测传入的字符串是否为回文）</span><br><span class="line">&#x2F;&#x2F;例如：&#123;[a],b,a,c&#125; 遍历到第一个位置时 出现回文 则递归调用find函数 并且把标记位置star指向第二个位置</span><br><span class="line">&#x2F;&#x2F;递归进入的函数如图：&#123;a,[b],a,c&#125;</span><br><span class="line">&#x2F;&#x2F;下面说下第二层循环(即j&#x3D;&#x3D;1时的情况) 此时isRight函数检测的字符串为&#123;[a,b],a,c&#125; 不是回文 所以j++</span><br><span class="line">&#x2F;&#x2F;进入第三层循环（即j&#x3D;&#x3D;2时的情况） 此时isRight函数检测的字符串为&#123;[a,b,a],c&#125;是回文 递归调用。</span><br><span class="line">    public void find(String s, List&lt;String&gt; result, int star,</span><br><span class="line">            List&lt;List&lt;String&gt;&gt; re) &#123;</span><br><span class="line">        int len &#x3D; s.length();</span><br><span class="line">        if (star &#x3D;&#x3D; len) &#123;</span><br><span class="line">            re.add(result);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int j &#x3D; star; j &lt; len; j++) &#123;</span><br><span class="line">            if (isRight(s.substring(star, j + 1))) &#123;</span><br><span class="line">                List&lt;String&gt; add &#x3D; new ArrayList&lt;String&gt;();</span><br><span class="line">                add.addAll(result);</span><br><span class="line">                add.add(s.substring(star, j + 1));</span><br><span class="line">                this.find(s, add, j + 1, re);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;检测输入字符串是否为回文</span><br><span class="line">    public boolean isRight(String s) &#123;</span><br><span class="line">        int len &#x3D; s.length();</span><br><span class="line">        for (int i &#x3D; 0; i &lt; len &#x2F; 2; i++) &#123;</span><br><span class="line">            if (s.charAt(i) !&#x3D; s.charAt(len - i - 1)) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/" data-id="ck4jhs6vh0018oaud7mpk1p1z" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E5%BF%AB%E4%B9%90%E6%95%B0/" data-id="ck4jii27a0029edud567uhxr4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -556,7 +575,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
     </div>
   </div>
 
@@ -566,7 +585,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Java/" style="font-size: 10px;">Java</a>
+      <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 10px;">多线程</a>
     </div>
   </div>
 
@@ -588,23 +607,23 @@
       <ul>
         
           <li>
-            <a href="/2019/12/18/Java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/">Java-线程池</a>
+            <a href="/2019/12/18/LintCode-%20%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/">LintCode- 删除链表中倒数第n个节点&#39;&#39;</a>
           </li>
         
           <li>
-            <a href="/2019/11/19/LintCode-%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8/">LintCode-翻转链表</a>
+            <a href="/2019/12/18/LintCode-%20%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/">LintCode- 合并区间</a>
           </li>
         
           <li>
-            <a href="/2019/11/19/LintCode-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%89%80%E6%9C%89%E8%B7%AF%E5%BE%84/">LintCode- 二叉树的所有路径</a>
+            <a href="/2019/12/18/LintCode-%20%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97/">LintCode- 最长上升连续子序列</a>
           </li>
         
           <li>
-            <a href="/2019/11/19/LIntCode-%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%B1%82%E5%92%8C/">LIntCode-二进制求和</a>
+            <a href="/2019/12/18/LintCode-%20%E6%81%A2%E5%A4%8DIP%E5%9C%B0%E5%9D%80/">LintCode- 恢复IP地址</a>
           </li>
         
           <li>
-            <a href="/2019/11/19/LintCode-%E5%8D%95%E8%AF%8D%E5%88%87%E5%88%86/">LintCode- 单词切分</a>
+            <a href="/2019/12/18/LintCode-%20%E9%93%BE%E8%A1%A8%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/">LintCode- 链表倒数第n个节点</a>
           </li>
         
       </ul>
