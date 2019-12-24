@@ -64,6 +64,53 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LintCode- 合并区间" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/18/LintCode-%20%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/" class="article-date">
+  <time datetime="2019-12-18T13:12:00.000Z" itemprop="datePublished">2019-12-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/18/LintCode-%20%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/">LintCode- 合并区间</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="LintCode-合并区间"><a href="#LintCode-合并区间" class="headerlink" title="LintCode- 合并区间"></a>LintCode- 合并区间</h1><p>合并区间</p>
+<p>给出若干闭合区间，合并所有重叠的部分。</p>
+<p>样例</p>
+<p>给出的区间列表 =&gt; 合并后的区间列表：</p>
+<p>[ [<br>[1, 3], [1, 6],<br>[2, 6], =&gt; [8, 10],<br>[8, 10], [15, 18]<br>[15, 18] ]<br>]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;先排序 然后根据i位置的end与i+1位置的star比较 如果有重叠 则表示可以合并 合并后的end为i与i+1位置上的最大值。</span><br><span class="line">&#x2F;**</span><br><span class="line"> * Definition of Interval:</span><br><span class="line"> * public class Interval &#123;</span><br><span class="line"> *     int start, end;</span><br><span class="line"> *     Interval(int start, int end) &#123;</span><br><span class="line"> *         this.start &#x3D; start;</span><br><span class="line"> *         this.end &#x3D; end;</span><br><span class="line"> *     &#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line"></span><br><span class="line">class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param intervals: Sorted interval list.</span><br><span class="line">     * @return: A new sorted interval list.</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public List&lt;Interval&gt; merge(List&lt;Interval&gt; intervals) &#123;</span><br><span class="line">        this.sort(intervals);</span><br><span class="line">        for (int i&#x3D;0;i&lt;intervals.size()-1;i++) &#123;</span><br><span class="line">            Interval data &#x3D; intervals.get(i);</span><br><span class="line">            if(data.end&gt;&#x3D;intervals.get(i+1).start)&#123;</span><br><span class="line">                data.end&#x3D;intervals.get(i+1).end&gt;data.end?intervals.get(i+1).end:data.end;</span><br><span class="line">                intervals.remove(i+1);</span><br><span class="line">                i--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return intervals;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void sort(List&lt;Interval&gt; intervals)&#123;</span><br><span class="line">        for (int i &#x3D; intervals.size() - 1; i &gt; 0; --i)</span><br><span class="line">        &#123;</span><br><span class="line">            for (int j &#x3D; 0; j &lt; i; ++j)</span><br><span class="line">            &#123;</span><br><span class="line">                if(intervals.get(j).start&gt;intervals.get(j+1).start)&#123;</span><br><span class="line">                    Interval old &#x3D; new Interval(intervals.get(j).start,intervals.get(j).end);</span><br><span class="line">                    intervals.get(j).end&#x3D;intervals.get(j+1).end;</span><br><span class="line">                    intervals.get(j).start&#x3D;intervals.get(j+1).start;</span><br><span class="line">                    intervals.get(j+1).end&#x3D;old.end;</span><br><span class="line">                    intervals.get(j+1).start&#x3D;old.start;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/18/LintCode-%20%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/" data-id="ck4jiny730018kpudh8ovhdod" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-LintCode- 删除链表中倒数第n个节点" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/12/18/LintCode-%20%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/" class="article-date">
@@ -102,54 +149,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/18/LintCode-%20%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/" data-id="ck4jii26h0011edud24hw31zr" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LintCode- 合并区间" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/18/LintCode-%20%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/" class="article-date">
-  <time datetime="2019-12-18T13:12:00.000Z" itemprop="datePublished">2019-12-18</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/18/LintCode-%20%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/">LintCode- 合并区间</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="LintCode-合并区间"><a href="#LintCode-合并区间" class="headerlink" title="LintCode- 合并区间"></a>LintCode- 合并区间</h1><p>合并区间</p>
-<p>给出若干闭合区间，合并所有重叠的部分。</p>
-<p>样例</p>
-<p>给出的区间列表 =&gt; 合并后的区间列表：</p>
-<p>[ [<br>[1, 3], [1, 6],<br>[2, 6], =&gt; [8, 10],<br>[8, 10], [15, 18]<br>[15, 18] ]<br>]</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;先排序 然后根据i位置的end与i+1位置的star比较 如果有重叠 则表示可以合并 合并后的end为i与i+1位置上的最大值。</span><br><span class="line">&#x2F;**</span><br><span class="line"> * Definition of Interval:</span><br><span class="line"> * public class Interval &#123;</span><br><span class="line"> *     int start, end;</span><br><span class="line"> *     Interval(int start, int end) &#123;</span><br><span class="line"> *         this.start &#x3D; start;</span><br><span class="line"> *         this.end &#x3D; end;</span><br><span class="line"> *     &#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line"></span><br><span class="line">class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param intervals: Sorted interval list.</span><br><span class="line">     * @return: A new sorted interval list.</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public List&lt;Interval&gt; merge(List&lt;Interval&gt; intervals) &#123;</span><br><span class="line">        this.sort(intervals);</span><br><span class="line">        for (int i&#x3D;0;i&lt;intervals.size()-1;i++) &#123;</span><br><span class="line">            Interval data &#x3D; intervals.get(i);</span><br><span class="line">            if(data.end&gt;&#x3D;intervals.get(i+1).start)&#123;</span><br><span class="line">                data.end&#x3D;intervals.get(i+1).end&gt;data.end?intervals.get(i+1).end:data.end;</span><br><span class="line">                intervals.remove(i+1);</span><br><span class="line">                i--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return intervals;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void sort(List&lt;Interval&gt; intervals)&#123;</span><br><span class="line">        for (int i &#x3D; intervals.size() - 1; i &gt; 0; --i)</span><br><span class="line">        &#123;</span><br><span class="line">            for (int j &#x3D; 0; j &lt; i; ++j)</span><br><span class="line">            &#123;</span><br><span class="line">                if(intervals.get(j).start&gt;intervals.get(j+1).start)&#123;</span><br><span class="line">                    Interval old &#x3D; new Interval(intervals.get(j).start,intervals.get(j).end);</span><br><span class="line">                    intervals.get(j).end&#x3D;intervals.get(j+1).end;</span><br><span class="line">                    intervals.get(j).start&#x3D;intervals.get(j+1).start;</span><br><span class="line">                    intervals.get(j+1).end&#x3D;old.end;</span><br><span class="line">                    intervals.get(j+1).start&#x3D;old.start;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/18/LintCode-%20%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/" data-id="ck4jii26n0019edud7kz25t5e" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/18/LintCode-%20%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/" data-id="ck4jiny74001akpud28661ba4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -196,52 +196,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/18/LintCode-%20%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97/" data-id="ck4jii26o001bedudaevka70h" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LintCode- 恢复IP地址" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/18/LintCode-%20%E6%81%A2%E5%A4%8DIP%E5%9C%B0%E5%9D%80/" class="article-date">
-  <time datetime="2019-12-18T13:12:00.000Z" itemprop="datePublished">2019-12-18</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/18/LintCode-%20%E6%81%A2%E5%A4%8DIP%E5%9C%B0%E5%9D%80/">LintCode- 恢复IP地址</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="LintCode-恢复IP地址"><a href="#LintCode-恢复IP地址" class="headerlink" title="LintCode- 恢复IP地址"></a>LintCode- 恢复IP地址</h1><p>恢复IP地址<br>给一个由数字组成的字符串。求出其可能恢复为的所有IP地址。<br>样例</p>
-<p>给出字符串 “25525511135”，所有可能的IP地址为：</p>
-<p>[<br>“255.255.11.135”,<br>“255.255.111.35”<br>]<br>（顺序无关紧要）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param s the IP string</span><br><span class="line">     * @return All possible valid IP addresses</span><br><span class="line">     *&#x2F;</span><br><span class="line">public ArrayList&lt;String&gt; restoreIpAddresses(String s) &#123;</span><br><span class="line">        ArrayList&lt;String&gt; result &#x3D; new ArrayList&lt;String&gt;();</span><br><span class="line">        String str &#x3D; new String();</span><br><span class="line">        this.findPaths(s, str, s.length(), 0, 4, result);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void findPaths(String s, String re, int n, int index, int finish,</span><br><span class="line">            ArrayList&lt;String&gt; result) &#123;</span><br><span class="line">        if (index &#x3D;&#x3D; n &amp;&amp; finish &#x3D;&#x3D; 0) &#123;</span><br><span class="line">            result.add(re);</span><br><span class="line">        &#125;</span><br><span class="line">        if ((finish &#x3D;&#x3D; 0 &amp;&amp; index &lt; n) || (index &#x3D;&#x3D; n &amp;&amp; finish &gt; 0))</span><br><span class="line">            return;</span><br><span class="line">        int a &#x3D; 0;</span><br><span class="line">        String s0 &#x3D; new String();</span><br><span class="line">        s0 &#x3D; re;</span><br><span class="line">        boolean flag &#x3D;true;</span><br><span class="line">        while (index &lt; n&amp;&amp;flag) &#123;</span><br><span class="line">            if(a&#x3D;&#x3D;0&amp;&amp;s.charAt(index)&#x3D;&#x3D;&#39;0&#39;)&#123;</span><br><span class="line">                flag&#x3D;false;</span><br><span class="line">            &#125;</span><br><span class="line">            a &#x3D; a * 10 + s.charAt(index++) - &#39;0&#39;;</span><br><span class="line">            if (a &gt;&#x3D; 0 &amp;&amp; a &lt; 256) &#123;</span><br><span class="line">                String s1 &#x3D; new String();</span><br><span class="line">                if (finish &#x3D;&#x3D; 1)</span><br><span class="line">                    s1 &#x3D; s0 + Integer.toString(a);</span><br><span class="line">                else</span><br><span class="line">                    s1 &#x3D; s0 + Integer.toString(a) + &quot;.&quot;;</span><br><span class="line"></span><br><span class="line">                this.findPaths(s, s1, n, index, finish - 1, result);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/18/LintCode-%20%E6%81%A2%E5%A4%8DIP%E5%9C%B0%E5%9D%80/" data-id="ck4jii26q001dedud36hpd9gn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/18/LintCode-%20%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97/" data-id="ck4jiny75001ckpud0evl70gu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -286,7 +241,101 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/18/LintCode-%20%E9%93%BE%E8%A1%A8%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/" data-id="ck4jii26r001fedud8fpibpiy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/18/LintCode-%20%E9%93%BE%E8%A1%A8%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/" data-id="ck4jiny78001ekpudhpid1pco" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LintCode- 恢复IP地址" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/18/LintCode-%20%E6%81%A2%E5%A4%8DIP%E5%9C%B0%E5%9D%80/" class="article-date">
+  <time datetime="2019-12-18T13:12:00.000Z" itemprop="datePublished">2019-12-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/18/LintCode-%20%E6%81%A2%E5%A4%8DIP%E5%9C%B0%E5%9D%80/">LintCode- 恢复IP地址</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="LintCode-恢复IP地址"><a href="#LintCode-恢复IP地址" class="headerlink" title="LintCode- 恢复IP地址"></a>LintCode- 恢复IP地址</h1><p>恢复IP地址<br>给一个由数字组成的字符串。求出其可能恢复为的所有IP地址。<br>样例</p>
+<p>给出字符串 “25525511135”，所有可能的IP地址为：</p>
+<p>[<br>“255.255.11.135”,<br>“255.255.111.35”<br>]<br>（顺序无关紧要）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param s the IP string</span><br><span class="line">     * @return All possible valid IP addresses</span><br><span class="line">     *&#x2F;</span><br><span class="line">public ArrayList&lt;String&gt; restoreIpAddresses(String s) &#123;</span><br><span class="line">        ArrayList&lt;String&gt; result &#x3D; new ArrayList&lt;String&gt;();</span><br><span class="line">        String str &#x3D; new String();</span><br><span class="line">        this.findPaths(s, str, s.length(), 0, 4, result);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void findPaths(String s, String re, int n, int index, int finish,</span><br><span class="line">            ArrayList&lt;String&gt; result) &#123;</span><br><span class="line">        if (index &#x3D;&#x3D; n &amp;&amp; finish &#x3D;&#x3D; 0) &#123;</span><br><span class="line">            result.add(re);</span><br><span class="line">        &#125;</span><br><span class="line">        if ((finish &#x3D;&#x3D; 0 &amp;&amp; index &lt; n) || (index &#x3D;&#x3D; n &amp;&amp; finish &gt; 0))</span><br><span class="line">            return;</span><br><span class="line">        int a &#x3D; 0;</span><br><span class="line">        String s0 &#x3D; new String();</span><br><span class="line">        s0 &#x3D; re;</span><br><span class="line">        boolean flag &#x3D;true;</span><br><span class="line">        while (index &lt; n&amp;&amp;flag) &#123;</span><br><span class="line">            if(a&#x3D;&#x3D;0&amp;&amp;s.charAt(index)&#x3D;&#x3D;&#39;0&#39;)&#123;</span><br><span class="line">                flag&#x3D;false;</span><br><span class="line">            &#125;</span><br><span class="line">            a &#x3D; a * 10 + s.charAt(index++) - &#39;0&#39;;</span><br><span class="line">            if (a &gt;&#x3D; 0 &amp;&amp; a &lt; 256) &#123;</span><br><span class="line">                String s1 &#x3D; new String();</span><br><span class="line">                if (finish &#x3D;&#x3D; 1)</span><br><span class="line">                    s1 &#x3D; s0 + Integer.toString(a);</span><br><span class="line">                else</span><br><span class="line">                    s1 &#x3D; s0 + Integer.toString(a) + &quot;.&quot;;</span><br><span class="line"></span><br><span class="line">                this.findPaths(s, s1, n, index, finish - 1, result);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/18/LintCode-%20%E6%81%A2%E5%A4%8DIP%E5%9C%B0%E5%9D%80/" data-id="ck4jiny79001gkpud2ah3bj28" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LintCode-Median of Two Sorted Arrays" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/18/LintCode-Median%20of%20Two%20Sorted%20Arrays/" class="article-date">
+  <time datetime="2019-12-18T13:12:00.000Z" itemprop="datePublished">2019-12-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/18/LintCode-Median%20of%20Two%20Sorted%20Arrays/">LintCode-Median of Two Sorted Arrays</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  <strong>Median of Two Sorted Arrays</strong></p>
+<p> There are two sorted arrays nums1 and nums2 of size m and n respectively.</p>
+<p> Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).</p>
+<p> Example 1:<br> nums1 = [1, 3]<br> nums2 = [2]</p>
+<p> The median is 2.0<br> Example 2:<br> nums1 = [1, 2]<br> nums2 = [3, 4]</p>
+<p> The median is (2 + 3)/2 = 2.5</p>
+<p> <strong>思路：</strong><br> 用两个指针<em>A、</em>B指向两个数组，因为两个数组已经排序，所以<em>A、</em>B指针所对应的数据的排序就是合并后数据的排序，根据两个数组的长度即可确定中位数的位置X。当指针<em>A、</em>B移动位置的合为X时，该数就是中位数。<br> 时间复杂度O(n),空间复杂度:O(1).</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Created by sunny.su on 2017&#x2F;2&#x2F;28.</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class MedianOfTwoSortedArrays &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        int[] nums1 &#x3D; &#123;&#125;;</span><br><span class="line">        int[] nums2 &#x3D; &#123;2,3&#125;;</span><br><span class="line">        System.out.println(findMedianSortedArrays(nums1, nums2));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static double findMedianSortedArrays(int[] nums1, int[] nums2) &#123;</span><br><span class="line">        double re &#x3D; 0;</span><br><span class="line">        int total &#x3D; nums1.length + nums2.length, x &#x3D; nums1.length, y &#x3D; nums2.length;</span><br><span class="line">        if (total &#x3D;&#x3D; 2) &#123;</span><br><span class="line">            if (x &gt; 0 &amp;&amp; y &gt; 0) &#123;</span><br><span class="line">                return (nums1[--x] + nums2[--y]) &#x2F; 2.0;</span><br><span class="line">            &#125;</span><br><span class="line">            return x &gt; 0 ? (nums1[--x] + nums1[--x]) &#x2F; 2.0 : (nums2[--y] + nums2[--y]) &#x2F; 2.0;</span><br><span class="line">        &#125;</span><br><span class="line">        if (total &#x3D;&#x3D; 1) &#123;</span><br><span class="line">            return x &gt; 0 ? nums1[--x] : nums2[--y];</span><br><span class="line">        &#125;</span><br><span class="line">        while (x + y &gt; Math.ceil(total &#x2F; 2)) &#123;</span><br><span class="line">            if (x &#x3D;&#x3D; 0) re &#x3D; nums2[--y];</span><br><span class="line">            if (y &#x3D;&#x3D; 0) re &#x3D; nums1[--x];</span><br><span class="line">            if (x &gt; 0 &amp;&amp; y &gt; 0) re &#x3D; nums1[x - 1] &gt; nums2[y - 1] ? nums1[--x] : nums2[--y];</span><br><span class="line">        &#125;</span><br><span class="line">        if (total % 2 &#x3D;&#x3D; 0) &#123;</span><br><span class="line">            if (x &#x3D;&#x3D; 0) re +&#x3D; nums2[--y];</span><br><span class="line">            if (y &#x3D;&#x3D; 0) re +&#x3D; nums1[--x];</span><br><span class="line">            if (x &gt; 0 &amp;&amp; y &gt; 0) re +&#x3D; nums1[x - 1] &gt; nums2[y - 1] ? nums1[--x] : nums2[--y];</span><br><span class="line">            re &#x3D; re &#x2F; 2;</span><br><span class="line">        &#125;</span><br><span class="line">        return re;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/18/LintCode-Median%20of%20Two%20Sorted%20Arrays/" data-id="ck4jiny7b001kkpud29alau6k" class="article-share-link">Share</a>
       
       
     </footer>
@@ -336,56 +385,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/18/LintCode-x%E7%9A%84%E5%B9%B3%E6%96%B9%E6%A0%B9/" data-id="ck4jii26s001hedudaj9ydtxy" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LintCode-Median of Two Sorted Arrays" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/18/LintCode-Median%20of%20Two%20Sorted%20Arrays/" class="article-date">
-  <time datetime="2019-12-18T13:12:00.000Z" itemprop="datePublished">2019-12-18</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/18/LintCode-Median%20of%20Two%20Sorted%20Arrays/">LintCode-Median of Two Sorted Arrays</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>  <strong>Median of Two Sorted Arrays</strong></p>
-<p> There are two sorted arrays nums1 and nums2 of size m and n respectively.</p>
-<p> Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).</p>
-<p> Example 1:<br> nums1 = [1, 3]<br> nums2 = [2]</p>
-<p> The median is 2.0<br> Example 2:<br> nums1 = [1, 2]<br> nums2 = [3, 4]</p>
-<p> The median is (2 + 3)/2 = 2.5</p>
-<p> <strong>思路：</strong><br> 用两个指针<em>A、</em>B指向两个数组，因为两个数组已经排序，所以<em>A、</em>B指针所对应的数据的排序就是合并后数据的排序，根据两个数组的长度即可确定中位数的位置X。当指针<em>A、</em>B移动位置的合为X时，该数就是中位数。<br> 时间复杂度O(n),空间复杂度:O(1).</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Created by sunny.su on 2017&#x2F;2&#x2F;28.</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class MedianOfTwoSortedArrays &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        int[] nums1 &#x3D; &#123;&#125;;</span><br><span class="line">        int[] nums2 &#x3D; &#123;2,3&#125;;</span><br><span class="line">        System.out.println(findMedianSortedArrays(nums1, nums2));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static double findMedianSortedArrays(int[] nums1, int[] nums2) &#123;</span><br><span class="line">        double re &#x3D; 0;</span><br><span class="line">        int total &#x3D; nums1.length + nums2.length, x &#x3D; nums1.length, y &#x3D; nums2.length;</span><br><span class="line">        if (total &#x3D;&#x3D; 2) &#123;</span><br><span class="line">            if (x &gt; 0 &amp;&amp; y &gt; 0) &#123;</span><br><span class="line">                return (nums1[--x] + nums2[--y]) &#x2F; 2.0;</span><br><span class="line">            &#125;</span><br><span class="line">            return x &gt; 0 ? (nums1[--x] + nums1[--x]) &#x2F; 2.0 : (nums2[--y] + nums2[--y]) &#x2F; 2.0;</span><br><span class="line">        &#125;</span><br><span class="line">        if (total &#x3D;&#x3D; 1) &#123;</span><br><span class="line">            return x &gt; 0 ? nums1[--x] : nums2[--y];</span><br><span class="line">        &#125;</span><br><span class="line">        while (x + y &gt; Math.ceil(total &#x2F; 2)) &#123;</span><br><span class="line">            if (x &#x3D;&#x3D; 0) re &#x3D; nums2[--y];</span><br><span class="line">            if (y &#x3D;&#x3D; 0) re &#x3D; nums1[--x];</span><br><span class="line">            if (x &gt; 0 &amp;&amp; y &gt; 0) re &#x3D; nums1[x - 1] &gt; nums2[y - 1] ? nums1[--x] : nums2[--y];</span><br><span class="line">        &#125;</span><br><span class="line">        if (total % 2 &#x3D;&#x3D; 0) &#123;</span><br><span class="line">            if (x &#x3D;&#x3D; 0) re +&#x3D; nums2[--y];</span><br><span class="line">            if (y &#x3D;&#x3D; 0) re +&#x3D; nums1[--x];</span><br><span class="line">            if (x &gt; 0 &amp;&amp; y &gt; 0) re +&#x3D; nums1[x - 1] &gt; nums2[y - 1] ? nums1[--x] : nums2[--y];</span><br><span class="line">            re &#x3D; re &#x2F; 2;</span><br><span class="line">        &#125;</span><br><span class="line">        return re;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/18/LintCode-Median%20of%20Two%20Sorted%20Arrays/" data-id="ck4jii26t001jedud9h3y4gwq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/18/LintCode-x%E7%9A%84%E5%B9%B3%E6%96%B9%E6%A0%B9/" data-id="ck4jiny7c001mkpud6hvn2v3n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -439,7 +439,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/18/LintCode-%E4%B8%AD%E4%BD%8D%E6%95%B0/" data-id="ck4jii26w001nedudcgae8fl2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/18/LintCode-%E4%B8%AD%E4%BD%8D%E6%95%B0/" data-id="ck4jiny7d001okpud9tvrav7f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -485,7 +485,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/18/LintCode-%E4%B8%BB%E5%85%83%E7%B4%A0/" data-id="ck4jii26x001pedud26br39nd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/18/LintCode-%E4%B8%BB%E5%85%83%E7%B4%A0/" data-id="ck4jiny7e001qkpud4gom344m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -495,9 +495,9 @@
 
 
   
-    <article id="post-LintCode-分割回文串" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-LintCode-删除排序数组中的重复数字 II" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/18/LintCode-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/" class="article-date">
+    <a href="/2019/12/18/LintCode-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E6%95%B0%E5%AD%97%20II/" class="article-date">
   <time datetime="2019-12-18T13:12:00.000Z" itemprop="datePublished">2019-12-18</time>
 </a>
     
@@ -513,7 +513,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/18/LintCode-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/">LintCode-分割回文串</a>
+      <a class="article-title" href="/2019/12/18/LintCode-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E6%95%B0%E5%AD%97%20II/">LintCode-删除排序数组中的重复数字 II</a>
     </h1>
   
 
@@ -521,19 +521,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="LintCode-分割回文串"><a href="#LintCode-分割回文串" class="headerlink" title="LintCode-分割回文串"></a>LintCode-分割回文串</h1><p>分割回文串</p>
-<p>给定一个字符串s，将s分割成一些子串，使每个子串都是回文串。</p>
-<p>返回s所有可能的回文串分割方案。</p>
-<p>样例</p>
-<p>给出 s = “aab”，返回</p>
-<p>[<br>[“aa”, “b”],<br>[“a”, “a”, “b”]<br>]</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;这里运用了回溯算法 递推调用 动态规划的算法思想</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param s: A string</span><br><span class="line">     * @return: A list of lists of string</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public List&lt;List&lt;String&gt;&gt; partition(String s) &#123;</span><br><span class="line">        List&lt;List&lt;String&gt;&gt; result &#x3D; new ArrayList&lt;List&lt;String&gt;&gt;();</span><br><span class="line">        List&lt;String&gt; re &#x3D; new ArrayList&lt;String&gt;();</span><br><span class="line">        this.find(s, re, 0, result);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;用来遍历</span><br><span class="line">&#x2F;&#x2F;思路为从s[0]位置开始向后寻找可分割的位置，寻找函数为isRight（用来检测传入的字符串是否为回文）</span><br><span class="line">&#x2F;&#x2F;例如：&#123;[a],b,a,c&#125; 遍历到第一个位置时 出现回文 则递归调用find函数 并且把标记位置star指向第二个位置</span><br><span class="line">&#x2F;&#x2F;递归进入的函数如图：&#123;a,[b],a,c&#125;</span><br><span class="line">&#x2F;&#x2F;下面说下第二层循环(即j&#x3D;&#x3D;1时的情况) 此时isRight函数检测的字符串为&#123;[a,b],a,c&#125; 不是回文 所以j++</span><br><span class="line">&#x2F;&#x2F;进入第三层循环（即j&#x3D;&#x3D;2时的情况） 此时isRight函数检测的字符串为&#123;[a,b,a],c&#125;是回文 递归调用。</span><br><span class="line">    public void find(String s, List&lt;String&gt; result, int star,</span><br><span class="line">            List&lt;List&lt;String&gt;&gt; re) &#123;</span><br><span class="line">        int len &#x3D; s.length();</span><br><span class="line">        if (star &#x3D;&#x3D; len) &#123;</span><br><span class="line">            re.add(result);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int j &#x3D; star; j &lt; len; j++) &#123;</span><br><span class="line">            if (isRight(s.substring(star, j + 1))) &#123;</span><br><span class="line">                List&lt;String&gt; add &#x3D; new ArrayList&lt;String&gt;();</span><br><span class="line">                add.addAll(result);</span><br><span class="line">                add.add(s.substring(star, j + 1));</span><br><span class="line">                this.find(s, add, j + 1, re);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;检测输入字符串是否为回文</span><br><span class="line">    public boolean isRight(String s) &#123;</span><br><span class="line">        int len &#x3D; s.length();</span><br><span class="line">        for (int i &#x3D; 0; i &lt; len &#x2F; 2; i++) &#123;</span><br><span class="line">            if (s.charAt(i) !&#x3D; s.charAt(len - i - 1)) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="LintCode-删除排序数组中的重复数字-II"><a href="#LintCode-删除排序数组中的重复数字-II" class="headerlink" title="LintCode-删除排序数组中的重复数字 II"></a>LintCode-删除排序数组中的重复数字 II</h1><h2 id="容易-删除排序数组中的重复数字-II-查看运行结果"><a href="#容易-删除排序数组中的重复数字-II-查看运行结果" class="headerlink" title="容易 删除排序数组中的重复数字 II 查看运行结果"></a>容易 删除排序数组中的重复数字 II 查看运行结果</h2><p>30% 通过</p>
+<p>跟进“删除重复数字”：</p>
+<p>如果可以允许出现两次重复将如何处理？</p>
+<p>您在真实的面试中是否遇到过这个题？ Yes</p>
+<p>样例 给出数组A =[1,1,1,2,2,3]，你的函数应该返回长度5，此时A=[1,1,2,2,3]。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param A: a array of integers</span><br><span class="line">     * @return : return an integer</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public int removeDuplicates(int[] nums) &#123;</span><br><span class="line">        HashMap&lt;Integer , Integer&gt; map &#x3D; new HashMap&lt;Integer , Integer&gt;(); </span><br><span class="line"></span><br><span class="line">        int n&#x3D;0;</span><br><span class="line">        for(int i&#x3D;0;i&lt;nums.length;i++)&#123;</span><br><span class="line">            if(map.get(nums[i])&#x3D;&#x3D;null)&#123;</span><br><span class="line">                    map.put(nums[i], 1);</span><br><span class="line">                    nums[n++]&#x3D;nums[i];</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                if(map.get(nums[i])&lt;2)&#123;</span><br><span class="line">                    map.put(nums[i], map.get(nums[i])+1);</span><br><span class="line">                    nums[n++]&#x3D;nums[i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/18/LintCode-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/" data-id="ck4jii26x001redud91loc2zz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/18/LintCode-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E6%95%B0%E5%AD%97%20II/" data-id="ck4jiny7e001skpud96t52sic" class="article-share-link">Share</a>
       
       
     </footer>
@@ -600,11 +599,11 @@
       <ul>
         
           <li>
-            <a href="/2019/12/18/LintCode-%20%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/">LintCode- 删除链表中倒数第n个节点&#39;&#39;</a>
+            <a href="/2019/12/18/LintCode-%20%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/">LintCode- 合并区间</a>
           </li>
         
           <li>
-            <a href="/2019/12/18/LintCode-%20%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/">LintCode- 合并区间</a>
+            <a href="/2019/12/18/LintCode-%20%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/">LintCode- 删除链表中倒数第n个节点&#39;&#39;</a>
           </li>
         
           <li>
@@ -612,11 +611,11 @@
           </li>
         
           <li>
-            <a href="/2019/12/18/LintCode-%20%E6%81%A2%E5%A4%8DIP%E5%9C%B0%E5%9D%80/">LintCode- 恢复IP地址</a>
+            <a href="/2019/12/18/LintCode-%20%E9%93%BE%E8%A1%A8%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/">LintCode- 链表倒数第n个节点</a>
           </li>
         
           <li>
-            <a href="/2019/12/18/LintCode-%20%E9%93%BE%E8%A1%A8%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/">LintCode- 链表倒数第n个节点</a>
+            <a href="/2019/12/18/LintCode-%20%E6%81%A2%E5%A4%8DIP%E5%9C%B0%E5%9D%80/">LintCode- 恢复IP地址</a>
           </li>
         
       </ul>

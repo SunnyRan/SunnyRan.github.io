@@ -64,9 +64,9 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-LintCode-删除排序数组中的重复数字 II" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-LintCode-分割回文串" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/18/LintCode-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E6%95%B0%E5%AD%97%20II/" class="article-date">
+    <a href="/2019/12/18/LintCode-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/" class="article-date">
   <time datetime="2019-12-18T13:12:00.000Z" itemprop="datePublished">2019-12-18</time>
 </a>
     
@@ -82,7 +82,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/18/LintCode-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E6%95%B0%E5%AD%97%20II/">LintCode-删除排序数组中的重复数字 II</a>
+      <a class="article-title" href="/2019/12/18/LintCode-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/">LintCode-分割回文串</a>
     </h1>
   
 
@@ -90,18 +90,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="LintCode-删除排序数组中的重复数字-II"><a href="#LintCode-删除排序数组中的重复数字-II" class="headerlink" title="LintCode-删除排序数组中的重复数字 II"></a>LintCode-删除排序数组中的重复数字 II</h1><h2 id="容易-删除排序数组中的重复数字-II-查看运行结果"><a href="#容易-删除排序数组中的重复数字-II-查看运行结果" class="headerlink" title="容易 删除排序数组中的重复数字 II 查看运行结果"></a>容易 删除排序数组中的重复数字 II 查看运行结果</h2><p>30% 通过</p>
-<p>跟进“删除重复数字”：</p>
-<p>如果可以允许出现两次重复将如何处理？</p>
-<p>您在真实的面试中是否遇到过这个题？ Yes</p>
-<p>样例 给出数组A =[1,1,1,2,2,3]，你的函数应该返回长度5，此时A=[1,1,2,2,3]。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param A: a array of integers</span><br><span class="line">     * @return : return an integer</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public int removeDuplicates(int[] nums) &#123;</span><br><span class="line">        HashMap&lt;Integer , Integer&gt; map &#x3D; new HashMap&lt;Integer , Integer&gt;(); </span><br><span class="line"></span><br><span class="line">        int n&#x3D;0;</span><br><span class="line">        for(int i&#x3D;0;i&lt;nums.length;i++)&#123;</span><br><span class="line">            if(map.get(nums[i])&#x3D;&#x3D;null)&#123;</span><br><span class="line">                    map.put(nums[i], 1);</span><br><span class="line">                    nums[n++]&#x3D;nums[i];</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                if(map.get(nums[i])&lt;2)&#123;</span><br><span class="line">                    map.put(nums[i], map.get(nums[i])+1);</span><br><span class="line">                    nums[n++]&#x3D;nums[i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="LintCode-分割回文串"><a href="#LintCode-分割回文串" class="headerlink" title="LintCode-分割回文串"></a>LintCode-分割回文串</h1><p>分割回文串</p>
+<p>给定一个字符串s，将s分割成一些子串，使每个子串都是回文串。</p>
+<p>返回s所有可能的回文串分割方案。</p>
+<p>样例</p>
+<p>给出 s = “aab”，返回</p>
+<p>[<br>[“aa”, “b”],<br>[“a”, “a”, “b”]<br>]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;这里运用了回溯算法 递推调用 动态规划的算法思想</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param s: A string</span><br><span class="line">     * @return: A list of lists of string</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public List&lt;List&lt;String&gt;&gt; partition(String s) &#123;</span><br><span class="line">        List&lt;List&lt;String&gt;&gt; result &#x3D; new ArrayList&lt;List&lt;String&gt;&gt;();</span><br><span class="line">        List&lt;String&gt; re &#x3D; new ArrayList&lt;String&gt;();</span><br><span class="line">        this.find(s, re, 0, result);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;用来遍历</span><br><span class="line">&#x2F;&#x2F;思路为从s[0]位置开始向后寻找可分割的位置，寻找函数为isRight（用来检测传入的字符串是否为回文）</span><br><span class="line">&#x2F;&#x2F;例如：&#123;[a],b,a,c&#125; 遍历到第一个位置时 出现回文 则递归调用find函数 并且把标记位置star指向第二个位置</span><br><span class="line">&#x2F;&#x2F;递归进入的函数如图：&#123;a,[b],a,c&#125;</span><br><span class="line">&#x2F;&#x2F;下面说下第二层循环(即j&#x3D;&#x3D;1时的情况) 此时isRight函数检测的字符串为&#123;[a,b],a,c&#125; 不是回文 所以j++</span><br><span class="line">&#x2F;&#x2F;进入第三层循环（即j&#x3D;&#x3D;2时的情况） 此时isRight函数检测的字符串为&#123;[a,b,a],c&#125;是回文 递归调用。</span><br><span class="line">    public void find(String s, List&lt;String&gt; result, int star,</span><br><span class="line">            List&lt;List&lt;String&gt;&gt; re) &#123;</span><br><span class="line">        int len &#x3D; s.length();</span><br><span class="line">        if (star &#x3D;&#x3D; len) &#123;</span><br><span class="line">            re.add(result);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int j &#x3D; star; j &lt; len; j++) &#123;</span><br><span class="line">            if (isRight(s.substring(star, j + 1))) &#123;</span><br><span class="line">                List&lt;String&gt; add &#x3D; new ArrayList&lt;String&gt;();</span><br><span class="line">                add.addAll(result);</span><br><span class="line">                add.add(s.substring(star, j + 1));</span><br><span class="line">                this.find(s, add, j + 1, re);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;检测输入字符串是否为回文</span><br><span class="line">    public boolean isRight(String s) &#123;</span><br><span class="line">        int len &#x3D; s.length();</span><br><span class="line">        for (int i &#x3D; 0; i &lt; len &#x2F; 2; i++) &#123;</span><br><span class="line">            if (s.charAt(i) !&#x3D; s.charAt(len - i - 1)) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/18/LintCode-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E6%95%B0%E5%AD%97%20II/" data-id="ck4jii26y001teduda5949cou" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/18/LintCode-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/" data-id="ck4jiny7g001wkpudht9d3cm4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -147,7 +148,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/18/LintCode-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/" data-id="ck4jii275001xedud465dajfa" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/18/LintCode-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/" data-id="ck4jiny7h001ykpudbvlc9864" class="article-share-link">Share</a>
       
       
     </footer>
@@ -191,7 +192,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/18/LintCode-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0/" data-id="ck4jii276001zeduddp4ee1mp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/18/LintCode-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0/" data-id="ck4jiny7h0020kpud1vgd64ra" class="article-share-link">Share</a>
       
       
     </footer>
@@ -241,7 +242,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/18/LintCode-%E5%88%A4%E6%96%AD%E6%95%B0%E7%8B%AC%E6%98%AF%E5%90%A6%E5%90%88%E6%B3%95/" data-id="ck4jii2780023edud3lpneb0n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/18/LintCode-%E5%88%A4%E6%96%AD%E6%95%B0%E7%8B%AC%E6%98%AF%E5%90%A6%E5%90%88%E6%B3%95/" data-id="ck4jiny7j0024kpud1am6fe7u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -295,7 +296,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/18/LintCode-%E6%9C%80%E5%A4%A7%E9%97%B4%E8%B7%9D/" data-id="ck4jii27e002hedudep669fj9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/18/LintCode-%E6%9C%80%E5%A4%A7%E9%97%B4%E8%B7%9D/" data-id="ck4jiny7n002ekpudf6pccsrq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -337,10 +338,8 @@
 <li>提高响应速度 ,每次请求到来时，由于线程的创建已经完成，故可以直接执行任务，因此提高了响应速度。</li>
 <li>提高线程的可管理性 ,线程是一种稀缺资源，若不加以限制，不仅会占用大量资源，而且会影响系统的稳定性。 因此，线程池可以对线程的创建与停止、线程数量等等因素加以控制，使得线程在一种可控的范围内运行，不仅能保证系统稳定运行，而且方便性能调优。</li>
 </ul>
-<img src="/images/Java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/image-20191218152631643.png" alt="image-20191218152631643" style="zoom:80%;" />
-
 <p><img src="/images/pasted-10.png" alt="upload successful"></p>
-<p><img src="/images/Java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/image-20191218155715154.png" alt="image-20191218155715154"></p>
+<p><img src="/images/pasted-9.png" alt="upload successful"></p>
 <h3 id="Executor框架中的所有类可以分成三类"><a href="#Executor框架中的所有类可以分成三类" class="headerlink" title="Executor框架中的所有类可以分成三类"></a>Executor框架中的所有类可以分成三类</h3><ul>
 <li><p><strong>任务</strong></p>
 <p>任务有两种类型：Runnable和Callable。</p>
@@ -540,7 +539,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/18/Java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/" data-id="ck4jii25s0001edud9m1j9kt9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/18/Java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/" data-id="ck4jiny650000kpudbrtvedy9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
@@ -588,7 +587,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/19/LintCode-%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8/" data-id="ck4jii27g002ledudd1as50dn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/19/LintCode-%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8/" data-id="ck4jiny7s002okpud6xsz2h5c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -634,7 +633,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/19/LintCode-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%89%80%E6%9C%89%E8%B7%AF%E5%BE%84/" data-id="ck4jii26z001vedud2s0rgk3w" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/19/LintCode-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%89%80%E6%9C%89%E8%B7%AF%E5%BE%84/" data-id="ck4jiny7f001ukpud9vig2xqy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -750,7 +749,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/19/LIntCode-%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%B1%82%E5%92%8C/" data-id="ck4jii25v0003edud0jgd0pji" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/19/LIntCode-%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%B1%82%E5%92%8C/" data-id="ck4jiny6h0005kpud3mpc82mq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -797,7 +796,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/19/LintCode-%E5%8D%95%E8%AF%8D%E5%88%87%E5%88%86/" data-id="ck4jii2770021eduddm176ygu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/19/LintCode-%E5%8D%95%E8%AF%8D%E5%88%87%E5%88%86/" data-id="ck4jiny7i0022kpud9h955b2f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -864,11 +863,11 @@
       <ul>
         
           <li>
-            <a href="/2019/12/18/LintCode-%20%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/">LintCode- 删除链表中倒数第n个节点&#39;&#39;</a>
+            <a href="/2019/12/18/LintCode-%20%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/">LintCode- 合并区间</a>
           </li>
         
           <li>
-            <a href="/2019/12/18/LintCode-%20%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/">LintCode- 合并区间</a>
+            <a href="/2019/12/18/LintCode-%20%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/">LintCode- 删除链表中倒数第n个节点&#39;&#39;</a>
           </li>
         
           <li>
@@ -876,11 +875,11 @@
           </li>
         
           <li>
-            <a href="/2019/12/18/LintCode-%20%E6%81%A2%E5%A4%8DIP%E5%9C%B0%E5%9D%80/">LintCode- 恢复IP地址</a>
+            <a href="/2019/12/18/LintCode-%20%E9%93%BE%E8%A1%A8%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/">LintCode- 链表倒数第n个节点</a>
           </li>
         
           <li>
-            <a href="/2019/12/18/LintCode-%20%E9%93%BE%E8%A1%A8%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/">LintCode- 链表倒数第n个节点</a>
+            <a href="/2019/12/18/LintCode-%20%E6%81%A2%E5%A4%8DIP%E5%9C%B0%E5%9D%80/">LintCode- 恢复IP地址</a>
           </li>
         
       </ul>
