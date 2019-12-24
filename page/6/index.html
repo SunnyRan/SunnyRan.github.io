@@ -64,53 +64,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-LintCode-矩阵的之字型遍历" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/06/21/LintCode-%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B9%8B%E5%AD%97%E5%9E%8B%E9%81%8D%E5%8E%86/" class="article-date">
-  <time datetime="2019-06-21T08:00:21.504Z" itemprop="datePublished">2019-06-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/21/LintCode-%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B9%8B%E5%AD%97%E5%9E%8B%E9%81%8D%E5%8E%86/">LintCode-矩阵的之字型遍历</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>title: ‘’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
-<ul>
-<li>算法<br>date: 2019-12-18 21:12:00</li>
-</ul>
-<h1 id="LintCode-矩阵的之字型遍历"><a href="#LintCode-矩阵的之字型遍历" class="headerlink" title="LintCode-矩阵的之字型遍历"></a>LintCode-矩阵的之字型遍历</h1><h2 id="容易-矩阵的之字型遍历"><a href="#容易-矩阵的之字型遍历" class="headerlink" title="容易 矩阵的之字型遍历"></a>容易 矩阵的之字型遍历</h2><p>给你一个包含 m x n 个元素的矩阵 (m 行, n 列), 求该矩阵的之字型遍历。</p>
-<p>对于如下矩阵：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  [1, 2,  3,  4],</span><br><span class="line">  [5, 6,  7,  8],</span><br><span class="line">  [9,10, 11, 12]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<p>返回 <code>[1, 2, 5, 9, 6, 3, 4, 7, 10, 11, 8, 12]</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param matrix: a matrix of integers</span><br><span class="line">     * @return: an array of integers</span><br><span class="line">     *&#x2F; </span><br><span class="line">    public int[] printZMatrix(int[][] matrix) &#123;</span><br><span class="line">        if(matrix &#x3D;&#x3D; null)&#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        int m &#x3D; matrix[0].length;</span><br><span class="line">        int n &#x3D; matrix.length;</span><br><span class="line">        int i &#x3D; 0;</span><br><span class="line">        int count &#x3D; n*m;</span><br><span class="line">        int [] re &#x3D; new int [count];</span><br><span class="line">        int a&#x3D;0,b&#x3D;0;</span><br><span class="line">        re[i++] &#x3D; matrix[a][b];</span><br><span class="line">        if(n &#x3D;&#x3D; 1)&#123;</span><br><span class="line">            return matrix[0];</span><br><span class="line">        &#125;</span><br><span class="line">        if(m &#x3D;&#x3D; 1)&#123;</span><br><span class="line">            int [] ree &#x3D; new int [n];</span><br><span class="line">            for(int k &#x3D;0; k&lt;n;k++)&#123;</span><br><span class="line">                ree[k] &#x3D; matrix[k][0];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        while(i &lt;count)&#123;</span><br><span class="line">            &#x2F;&#x2F;斜向上遍历</span><br><span class="line">            while(a &gt; 0 &amp;&amp; b+1 &lt; m)&#123;</span><br><span class="line">                re[i++] &#x3D; matrix[--a][++b];</span><br><span class="line">            &#125;</span><br><span class="line">            &#x2F;&#x2F;斜向上结束，试着往右或者下移动</span><br><span class="line">            if(b+1 &lt; m)&#123;</span><br><span class="line">                re[i++] &#x3D; matrix[a][++b];</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                if(a+1 &lt;n)&#123;</span><br><span class="line">                    re[i++] &#x3D; matrix[++a][b];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            &#x2F;&#x2F;斜向下遍历</span><br><span class="line">            while(a+1 &lt; n &amp;&amp; b &gt; 0)&#123;</span><br><span class="line">                re[i++] &#x3D; matrix[++a][--b];</span><br><span class="line">            &#125;</span><br><span class="line">            &#x2F;&#x2F;斜向下遍历结束，试着往下或者往右移动</span><br><span class="line">            if(a+1 &lt; n)&#123;</span><br><span class="line">                re[i++] &#x3D; matrix[++a][b];</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                if(b + 1 &lt;m)&#123;</span><br><span class="line">                    re[i++] &#x3D; matrix[a][++b];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        return re;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B9%8B%E5%AD%97%E5%9E%8B%E9%81%8D%E5%8E%86/" data-id="ck4jhl0lj001ggwudaf9y0fpb" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-LintCode-翻转字符串" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/06/21/LintCode-%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/" class="article-date">
@@ -147,7 +100,54 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/" data-id="ck4jhl0lk001igwuddoa5fsnw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/" data-id="ck4jhs6vr001noaud7yju1oxr" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LintCode-矩阵的之字型遍历" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/21/LintCode-%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B9%8B%E5%AD%97%E5%9E%8B%E9%81%8D%E5%8E%86/" class="article-date">
+  <time datetime="2019-06-21T08:00:21.504Z" itemprop="datePublished">2019-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/LintCode-%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B9%8B%E5%AD%97%E5%9E%8B%E9%81%8D%E5%8E%86/">LintCode-矩阵的之字型遍历</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: ‘LintCode-矩阵的之字型遍历’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
+<ul>
+<li>算法<br>date: 2019-12-18 21:12:00</li>
+</ul>
+<h1 id="LintCode-矩阵的之字型遍历"><a href="#LintCode-矩阵的之字型遍历" class="headerlink" title="LintCode-矩阵的之字型遍历"></a>LintCode-矩阵的之字型遍历</h1><h2 id="容易-矩阵的之字型遍历"><a href="#容易-矩阵的之字型遍历" class="headerlink" title="容易 矩阵的之字型遍历"></a>容易 矩阵的之字型遍历</h2><p>给你一个包含 m x n 个元素的矩阵 (m 行, n 列), 求该矩阵的之字型遍历。</p>
+<p>对于如下矩阵：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  [1, 2,  3,  4],</span><br><span class="line">  [5, 6,  7,  8],</span><br><span class="line">  [9,10, 11, 12]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>返回 <code>[1, 2, 5, 9, 6, 3, 4, 7, 10, 11, 8, 12]</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param matrix: a matrix of integers</span><br><span class="line">     * @return: an array of integers</span><br><span class="line">     *&#x2F; </span><br><span class="line">    public int[] printZMatrix(int[][] matrix) &#123;</span><br><span class="line">        if(matrix &#x3D;&#x3D; null)&#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        int m &#x3D; matrix[0].length;</span><br><span class="line">        int n &#x3D; matrix.length;</span><br><span class="line">        int i &#x3D; 0;</span><br><span class="line">        int count &#x3D; n*m;</span><br><span class="line">        int [] re &#x3D; new int [count];</span><br><span class="line">        int a&#x3D;0,b&#x3D;0;</span><br><span class="line">        re[i++] &#x3D; matrix[a][b];</span><br><span class="line">        if(n &#x3D;&#x3D; 1)&#123;</span><br><span class="line">            return matrix[0];</span><br><span class="line">        &#125;</span><br><span class="line">        if(m &#x3D;&#x3D; 1)&#123;</span><br><span class="line">            int [] ree &#x3D; new int [n];</span><br><span class="line">            for(int k &#x3D;0; k&lt;n;k++)&#123;</span><br><span class="line">                ree[k] &#x3D; matrix[k][0];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        while(i &lt;count)&#123;</span><br><span class="line">            &#x2F;&#x2F;斜向上遍历</span><br><span class="line">            while(a &gt; 0 &amp;&amp; b+1 &lt; m)&#123;</span><br><span class="line">                re[i++] &#x3D; matrix[--a][++b];</span><br><span class="line">            &#125;</span><br><span class="line">            &#x2F;&#x2F;斜向上结束，试着往右或者下移动</span><br><span class="line">            if(b+1 &lt; m)&#123;</span><br><span class="line">                re[i++] &#x3D; matrix[a][++b];</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                if(a+1 &lt;n)&#123;</span><br><span class="line">                    re[i++] &#x3D; matrix[++a][b];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            &#x2F;&#x2F;斜向下遍历</span><br><span class="line">            while(a+1 &lt; n &amp;&amp; b &gt; 0)&#123;</span><br><span class="line">                re[i++] &#x3D; matrix[++a][--b];</span><br><span class="line">            &#125;</span><br><span class="line">            &#x2F;&#x2F;斜向下遍历结束，试着往下或者往右移动</span><br><span class="line">            if(a+1 &lt; n)&#123;</span><br><span class="line">                re[i++] &#x3D; matrix[++a][b];</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                if(b + 1 &lt;m)&#123;</span><br><span class="line">                    re[i++] &#x3D; matrix[a][++b];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        return re;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E7%9F%A9%E9%98%B5%E7%9A%84%E4%B9%8B%E5%AD%97%E5%9E%8B%E9%81%8D%E5%8E%86/" data-id="ck4jhs6vt001qoaud0odv2hhq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -192,7 +192,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E8%BF%94%E5%9B%9E%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E4%BA%A4/" data-id="ck4jhl0lm001lgwud7ov44j99" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E8%BF%94%E5%9B%9E%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E4%BA%A4/" data-id="ck4jhs6vs001poaud9ch4998d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -241,7 +241,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/21/LintCode-Median%20of%20Two%20Sorted%20Arrays/" data-id="ck4jhl0ky000ygwudf4jwa3lg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-Median%20of%20Two%20Sorted%20Arrays/" data-id="ck4jhs6vc0012oaudhrp5ejp2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -266,16 +266,30 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li></ul>
     </div>
   </div>
 
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Java/" style="font-size: 10px;">Java</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
