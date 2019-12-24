@@ -64,53 +64,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-LeetCode-Odd-Even-Linked-List" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/11/19/LeetCode-Odd-Even-Linked-List/" class="article-date">
-  <time datetime="2019-11-19T13:16:00.000Z" itemprop="datePublished">2019-11-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/19/LeetCode-Odd-Even-Linked-List/">[LeetCode] Odd Even Linked List</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Given a singly linked list, group all odd nodes together followed by the even nodes. Please note here we are talking about the node number and not the value in the nodes.</p>
-<p>You should try to do it in place. The program should run in O(1) space complexity and O(nodes) time complexity.</p>
-<h3 id="Example"><a href="#Example" class="headerlink" title="Example:"></a>Example:</h3><p>Given 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL,<br>return 1-&gt;3-&gt;5-&gt;2-&gt;4-&gt;NULL.</p>
-<h3 id="Note"><a href="#Note" class="headerlink" title="Note:"></a>Note:</h3><p>The relative order inside both the even and odd groups should remain as it was in the input.<br>The first node is considered odd, the second node even and so on …</p>
-<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>这道题给了我们一个链表，让我们分开奇偶节点，所有奇节点在前，偶节点在后。我们可以使用两个链表来做，prevOdd指向奇节点，prevEven指向偶节点<br>1.让prevOdd.next指向prevEven后面的那个奇节点。<br>2.prevOdd指向他的下一个节点。<br>3.让prevEven.next指向prevOdd后面的那个偶节点<br>4.prevEven指向他的下一个节点。<br>以上循环执行。</p>
-<p>Final 奇节点prevOdd.next指向偶节点prevEven的根节点evenHead<br>参见代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    public ListNode oddEvenList(ListNode head) &#123;</span><br><span class="line">        if(head &#x3D;&#x3D; null)</span><br><span class="line">            return head;</span><br><span class="line">        ListNode oddHead &#x3D; head,evenHead &#x3D;head.next;</span><br><span class="line">        ListNode prevOdd &#x3D; oddHead,prevEven &#x3D; evenHead;</span><br><span class="line"></span><br><span class="line">        while(prevOdd.next !&#x3D; null &amp;&amp; prevEven.next !&#x3D; null)&#123;</span><br><span class="line">            prevOdd.next &#x3D; prevEven.next;</span><br><span class="line">            prevOdd &#x3D; prevOdd.next;</span><br><span class="line"></span><br><span class="line">            prevEven.next &#x3D; prevOdd.next;</span><br><span class="line">            prevEven &#x3D; prevEven.next;</span><br><span class="line">        &#125;</span><br><span class="line">        prevOdd.next &#x3D; evenHead;</span><br><span class="line"></span><br><span class="line">        return oddHead;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>一开始理解题目错误<br>以为是让把链表的奇数偶数排序。<br>这里给出错误理解下的正确代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public ListNode oddEvenList(ListNode head) &#123;</span><br><span class="line">    ListNode head0 &#x3D; new ListNode(0),head00 &#x3D; head0;</span><br><span class="line">    ListNode head1 &#x3D; new ListNode(0),head11 &#x3D; head1;</span><br><span class="line">    int k &#x3D; head &#x3D;&#x3D;null? 1: head.val%2;&#x2F;&#x2F; 判断第一个数奇偶</span><br><span class="line">    while (head !&#x3D;null)</span><br><span class="line">    &#123;</span><br><span class="line">        if(head.val%2 &#x3D;&#x3D; k)&#x2F;&#x2F;奇数</span><br><span class="line">        &#123;</span><br><span class="line">            head1.next &#x3D; head;</span><br><span class="line">            head1 &#x3D; head1.next;</span><br><span class="line">        &#125;</span><br><span class="line">        else &#x2F;&#x2F;偶数</span><br><span class="line">        &#123;</span><br><span class="line">            head0.next &#x3D; head;</span><br><span class="line">            head0 &#x3D; head0.next;</span><br><span class="line">        &#125;</span><br><span class="line">        head &#x3D; head.next;</span><br><span class="line">    &#125;</span><br><span class="line">    head0.next &#x3D; null; &#x2F;&#x2F;很重要的一个语句 ！！！ 去除可能出现环链  测试数据 1-&gt;2-&gt;3;</span><br><span class="line">    head1.next &#x3D; head00.next;</span><br><span class="line">    return  head11.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/19/LeetCode-Odd-Even-Linked-List/" data-id="ck4jbji2s000gkuud8ayf5bcp" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-LeetCode-Score-After-Flipping-Matrix" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/11/19/LeetCode-Score-After-Flipping-Matrix/" class="article-date">
@@ -152,7 +105,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/19/LeetCode-Score-After-Flipping-Matrix/" data-id="ck4jbji2t000hkuud1skq8g90" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/19/LeetCode-Score-After-Flipping-Matrix/" data-id="ck4jhl0ki000igwud02uz8njc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -206,7 +159,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/19/LeetCode-Number-of-1-Bits/" data-id="ck4jbji2q000ekuudgnl55ubm" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/19/LeetCode-Number-of-1-Bits/" data-id="ck4jhl0kd000dgwudgcua009w" class="article-share-link">Share</a>
       
       
     </footer>
@@ -262,7 +215,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/18/LeetCode-LeetCode-Jump-Game-II/" data-id="ck4jbji2l0009kuudcp51fm9s" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/18/LeetCode-LeetCode-Jump-Game-II/" data-id="ck4jhl0ka000bgwud8s83928u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -313,7 +266,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/18/LeetCode-Missing-Number/" data-id="ck4jbji2o000ckuudehisbge1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/18/LeetCode-Missing-Number/" data-id="ck4jhl0kc000cgwud4oh2aqgx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -355,7 +308,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/18/LeetCode-Invert-a-binary-tree/" data-id="ck4jbji2k0008kuudbmxoa2r1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/18/LeetCode-Invert-a-binary-tree/" data-id="ck4jhl0k80007gwudbzbr1trx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -402,7 +355,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/18/LeetCode-First-Missing-Positive/" data-id="ck4jbji2g0005kuud8dv2164x" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/18/LeetCode-First-Missing-Positive/" data-id="ck4jhl0k70006gwudh235gzr4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -461,7 +414,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/18/LeetCode-Bitwise-ORs-of-Subarrays/" data-id="ck4jbji2e0004kuudbgi43g4w" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/18/LeetCode-Bitwise-ORs-of-Subarrays/" data-id="ck4jhl0k50005gwudb79i1zuh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -512,7 +465,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/18/LeetCode-Add-Two-Numbers-II/" data-id="ck4jbji2b0002kuud2lfu8a5x" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/18/LeetCode-Add-Two-Numbers-II/" data-id="ck4jhl0k40004gwudak3r90wc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -561,7 +514,57 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/15/hello-world/" data-id="ck4jbji3e0011kuud9g316o7a" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/15/hello-world/" data-id="ck4jhl0lp001ogwud6yci5lni" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LintCode-x的平方根" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/21/LintCode-x%E7%9A%84%E5%B9%B3%E6%96%B9%E6%A0%B9/" class="article-date">
+  <time datetime="2019-06-21T08:00:21.511Z" itemprop="datePublished">2019-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/LintCode-x%E7%9A%84%E5%B9%B3%E6%96%B9%E6%A0%B9/">LintCode-x的平方根</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: ‘LintCode-x的平方根’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
+<ul>
+<li>算法<br>date: 2019-12-18 21:12:00</li>
+</ul>
+<h1 id="LintCode-x的平方根"><a href="#LintCode-x的平方根" class="headerlink" title="LintCode-x的平方根"></a>LintCode-x的平方根</h1><p>x的平方根</p>
+<p>实现 int sqrt(int x) 函数，计算并返回 x 的平方根。</p>
+<p>样例<br>sqrt(3) = 1</p>
+<p>sqrt(4) = 2</p>
+<p>sqrt(5) = 2</p>
+<p>sqrt(10) = 3</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">二分法。 我们知道假使y表示x的平方根的值，那么可以确定0&lt;&#x3D;y&lt;x 的， 所以我们可以设一个min&#x3D;0,max&#x3D;x,然后每次用二分的方法求得mid&#x3D;(min+max)&#x2F;2，然后只要比较mid^2跟x比较，如果mid^2&lt;x，那么max&#x3D;mid继续二分，反之mid^2&gt;x ,那么min&#x3D;mid继续二分。直到找到一个mid使得它的平方最接近x就好。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param x: An integer</span><br><span class="line">     * @return: The sqrt of x</span><br><span class="line">     *&#x2F;</span><br><span class="line">      public static int sqrt(int x) &#123;</span><br><span class="line">            long a&#x3D;0,b&#x3D;x,c&#x3D;b&#x2F;2;</span><br><span class="line">            while(b-a&gt;1)&#123;</span><br><span class="line">                if(c*c&lt;x)&#123;</span><br><span class="line">                    a&#x3D;c;</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    b&#x3D;c;</span><br><span class="line">                &#125;</span><br><span class="line">                c&#x3D;(b+a)&#x2F;2;</span><br><span class="line">            &#125;</span><br><span class="line">            return (int) (b*b&gt;x?a:b);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-x%E7%9A%84%E5%B9%B3%E6%96%B9%E6%A0%B9/" data-id="ck4jhl0l00010gwud62n14bkg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -575,7 +578,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -601,7 +604,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li></ul>
     </div>
   </div>
 
@@ -622,15 +625,15 @@
           </li>
         
           <li>
-            <a href="/2019/11/19/LintCode-%E8%BF%94%E5%9B%9E%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E4%BA%A4/">LintCode-返回两个数组的交</a>
-          </li>
-        
-          <li>
             <a href="/2019/11/19/LintCode-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%89%80%E6%9C%89%E8%B7%AF%E5%BE%84/">LintCode- 二叉树的所有路径</a>
           </li>
         
           <li>
             <a href="/2019/11/19/LIntCode-%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%B1%82%E5%92%8C/">LIntCode-二进制求和</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/LintCode-%E5%8D%95%E8%AF%8D%E5%88%87%E5%88%86/">LintCode- 单词切分</a>
           </li>
         
       </ul>

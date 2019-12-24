@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/5/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-LintCode-判断数独是否合法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/21/LintCode-%E5%88%A4%E6%96%AD%E6%95%B0%E7%8B%AC%E6%98%AF%E5%90%A6%E5%90%88%E6%B3%95/" class="article-date">
+  <time datetime="2019-06-21T08:00:21.507Z" itemprop="datePublished">2019-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/LintCode-%E5%88%A4%E6%96%AD%E6%95%B0%E7%8B%AC%E6%98%AF%E5%90%A6%E5%90%88%E6%B3%95/">LintCode-判断数独是否合法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: ‘LintCode-判断数独是否合法’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
+<ul>
+<li>算法<br>date: 2019-12-18 21:12:00</li>
+</ul>
+<h1 id="LintCode-判断数独是否合法"><a href="#LintCode-判断数独是否合法" class="headerlink" title="LintCode-判断数独是否合法"></a>LintCode-判断数独是否合法</h1><p>容易 判断数独是否合法 查看运行结果</p>
+<p>27% 通过<br>请判定一个数独是否有效。</p>
+<p>该数独可能只填充了部分数字，其中缺少的数字用 . 表示。</p>
+<p>您在真实的面试中是否遇到过这个题？ Yes<br>样例<br>下列就是一个合法数独的样例。</p>
+<p>Valid Sudoku</p>
+<p>注意<br>一个合法的数独（仅部分填充）并不一定是可解的。我们仅需使填充的空格有效即可。</p>
+<p>说明<br>什么是 数独？</p>
+<p><a href="http://sudoku.com.au/TheRules.aspx" target="_blank" rel="noopener">http://sudoku.com.au/TheRules.aspx</a><br><a href="http://baike.baidu.com/subview/961/10842669.htm" target="_blank" rel="noopener">http://baike.baidu.com/subview/961/10842669.htm</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">      * @param board: the board</span><br><span class="line">        @return: wether the Sudoku is valid</span><br><span class="line">      *&#x2F;</span><br><span class="line">    public boolean isValidSudoku(char[][] board) &#123;</span><br><span class="line">        if(board&#x3D;&#x3D;null)</span><br><span class="line">            return false;</span><br><span class="line">        for(int i&#x3D;0;i&lt;board.length;i++)&#123;</span><br><span class="line">            HashMap&lt;Character, Boolean&gt; map &#x3D; new HashMap&lt;Character, Boolean&gt;();</span><br><span class="line">            for(int j&#x3D;0;j&lt;board.length;j++)&#123;</span><br><span class="line">                if(board[i][j]!&#x3D;&#39;.&#39;)&#123;</span><br><span class="line">                    if(map.get(board[i][j])!&#x3D;null)&#123;</span><br><span class="line">                        return false;</span><br><span class="line">                    &#125;else&#123;</span><br><span class="line">                        map.put(board[i][j], true);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            map.clear();</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i&#x3D;0;i&lt;board.length;i++)&#123;</span><br><span class="line">            HashMap&lt;Character, Boolean&gt; map &#x3D; new HashMap&lt;Character, Boolean&gt;();</span><br><span class="line">            for(int j&#x3D;0;j&lt;board.length;j++)&#123;</span><br><span class="line">                if(board[j][i]!&#x3D;&#39;.&#39;)&#123;</span><br><span class="line">                    if(map.get(board[j][i])!&#x3D;null)&#123;</span><br><span class="line">                        return false;</span><br><span class="line">                    &#125;else&#123;</span><br><span class="line">                        map.put(board[j][i], true);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            map.clear();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for(int l&#x3D;0;l&lt;3;l++)&#123;   </span><br><span class="line">            for(int k&#x3D;0;k&lt;3;k++)&#123;   </span><br><span class="line">                HashMap&lt;Character, Boolean&gt; map &#x3D; new HashMap&lt;Character, Boolean&gt;();</span><br><span class="line">                for(int i&#x3D;0;i&lt;3;i++)&#123;</span><br><span class="line">                    for(int j&#x3D;0;j&lt;3;j++)&#123;</span><br><span class="line">                        if(board[j+l*3][i+3*k]!&#x3D;&#39;.&#39;)&#123;</span><br><span class="line">                            if(map.get(board[j+l*3][i+3*k])!&#x3D;null)&#123;</span><br><span class="line">                                return false;</span><br><span class="line">                            &#125;else&#123;</span><br><span class="line">                                map.put(board[j+l*3][i+3*k], true);</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E5%88%A4%E6%96%AD%E6%95%B0%E7%8B%AC%E6%98%AF%E5%90%A6%E5%90%88%E6%B3%95/" data-id="ck4jhl0la0018gwud1dmu0dok" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LintCode-两个链表的和" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/21/LintCode-%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E5%92%8C/" class="article-date">
+  <time datetime="2019-06-21T08:00:21.506Z" itemprop="datePublished">2019-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/LintCode-%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E5%92%8C/">LintCode-两个链表的和</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: ‘LintCode-两个链表的和’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
+<ul>
+<li>算法<br>date: 2019-12-18 21:12:00</li>
+</ul>
+<h1 id="LintCode-两个链表的和"><a href="#LintCode-两个链表的和" class="headerlink" title="LintCode-两个链表的和"></a>LintCode-两个链表的和</h1><h2 id="容易-两个链表的和"><a href="#容易-两个链表的和" class="headerlink" title="容易 两个链表的和"></a>容易 两个链表的和</h2><p>你有两个用链表代表的整数，其中每个节点包含一个数字。数字存储按照在原来整数中相反的顺序，使得第一个数字位于链表的开头。写出一个函数将两个整数相加，用链表形式返回和。</p>
+<p>样例 给出两个链表 <code>3-&gt;1-&gt;5-&gt;null</code> 和 <code>5-&gt;9-&gt;2-&gt;null</code> ，返回 <code>8-&gt;0-&gt;8-&gt;null</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * public class ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode next;</span><br><span class="line"> *     ListNode(int x) &#123;</span><br><span class="line"> *         val &#x3D; x;</span><br><span class="line"> *         next &#x3D; null;      </span><br><span class="line"> *     &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param l1: the first list</span><br><span class="line">     * @param l2: the second list</span><br><span class="line">     * @return: the sum list of l1 and l2 </span><br><span class="line">     *&#x2F;</span><br><span class="line">  public ListNode addLists(ListNode l1, ListNode l2) &#123;</span><br><span class="line">        ListNode l3&#x3D;new ListNode(0);</span><br><span class="line">        ListNode l &#x3D;l3;</span><br><span class="line">        boolean run&#x3D;true;</span><br><span class="line">        int flag&#x3D;0;</span><br><span class="line">        do&#123;</span><br><span class="line">            int k&#x3D;l1.val+l2.val+flag;</span><br><span class="line">            flag&#x3D;(int)k&#x2F;10;</span><br><span class="line">            k&#x3D;k%10;</span><br><span class="line">            l3&#x3D;l3.next&#x3D;new ListNode(k);</span><br><span class="line"></span><br><span class="line">            if(l1.next&#x3D;&#x3D;null&amp;&amp;l2.next&#x3D;&#x3D;null)&#123;</span><br><span class="line">                run&#x3D;false;</span><br><span class="line">                if(flag!&#x3D;0)&#123;</span><br><span class="line">                    l3.next&#x3D;new ListNode(flag);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if(l1.next!&#x3D;null)&#123;</span><br><span class="line">                l1&#x3D;l1.next;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                l1.val&#x3D;0;</span><br><span class="line">            &#125;</span><br><span class="line">            if(l2.next!&#x3D;null)&#123;</span><br><span class="line">                l2&#x3D;l2.next;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                l2.val&#x3D;0;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;while(run);</span><br><span class="line"></span><br><span class="line">        return l.next;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一个很简单的遍历。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E5%92%8C/" data-id="ck4jhl0kz000zgwudh7xv1ns7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LintCode-爬楼梯" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/21/LintCode-%E7%88%AC%E6%A5%BC%E6%A2%AF/" class="article-date">
+  <time datetime="2019-06-21T08:00:21.506Z" itemprop="datePublished">2019-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/LintCode-%E7%88%AC%E6%A5%BC%E6%A2%AF/">LintCode-爬楼梯</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: ‘’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
+<ul>
+<li>算法<br>date: 2019-12-18 21:12:00</li>
+</ul>
+<h1 id="LintCode-爬楼梯"><a href="#LintCode-爬楼梯" class="headerlink" title="LintCode-爬楼梯"></a>LintCode-爬楼梯</h1><p>爬楼梯</p>
+<p>假设你正在爬楼梯，需要n步你才能到达顶部。但每次你只能爬一步或者两步，你能有多少种不同的方法爬到楼顶部？</p>
+<p>样例<br>比如n=3，1+1+1=1+2=2+1=3，共有3中不同的方法</p>
+<p>返回 3</p>
+<p>登上第1级：1种<br>登上第2级：2种<br>登上第3级：1+2=3种（前一步要么从第1级迈上来,要么从第2级迈上来）<br>登上第4级：2+3=5种（前一步要么从第2级迈上来,要么从第3级迈上来）<br>登上第5级：3+5=8种<br>登上第6级：5+8=13种<br>登上第7级：8+13=21种<br>登上第8级：13+21=34种<br>登上第9级：21+34=55种<br>登上第10级：34+55=89种．</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;递归版本</span><br><span class="line">public static int climbStairs(int n) &#123;</span><br><span class="line">        int re &#x3D; 0;</span><br><span class="line">        if(n &#x3D;&#x3D; 0 || n &#x3D;&#x3D; 1)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            re &#x3D; climbStairs(n-1)+climbStairs(n-2);</span><br><span class="line">        &#125;</span><br><span class="line">        return re;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;非递归版本</span><br><span class="line">    public static int climbStairs(int n)&#123;</span><br><span class="line">        int a &#x3D; 1, b &#x3D; 1, re &#x3D; 0;</span><br><span class="line">        if(n &#x3D;&#x3D; 1 || n &#x3D;&#x3D;0)&#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">        while(--n &gt; 0)&#123;</span><br><span class="line">            re &#x3D; a+b;</span><br><span class="line">            b &#x3D; a;</span><br><span class="line">            a &#x3D; re ;        </span><br><span class="line">        &#125;</span><br><span class="line">        return re;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E7%88%AC%E6%A5%BC%E6%A2%AF/" data-id="ck4jhl0li001egwud0keiguea" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LintCode-链表划分" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/21/LintCode-%E9%93%BE%E8%A1%A8%E5%88%92%E5%88%86/" class="article-date">
+  <time datetime="2019-06-21T08:00:21.506Z" itemprop="datePublished">2019-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/LintCode-%E9%93%BE%E8%A1%A8%E5%88%92%E5%88%86/">LintCode-链表划分</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: ‘LintCode-链表划分’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
+<ul>
+<li>算法<br>date: 2019-12-18 21:12:00</li>
+</ul>
+<h1 id="LintCode-链表划分"><a href="#LintCode-链表划分" class="headerlink" title="LintCode-链表划分"></a>LintCode-链表划分</h1><p>容易 链表划分 查看运行结果</p>
+<p>29% 通过<br>给定一个单链表和数值x，划分链表使得所有小于x的节点排在大于等于x的节点之前。</p>
+<p>你应该保留两部分内链表节点原有的相对顺序。</p>
+<p>您在真实的面试中是否遇到过这个题？ Yes<br>样例<br>给定链表 1-&gt;4-&gt;3-&gt;2-&gt;5-&gt;2-&gt;null，并且 x=3</p>
+<p>返回 1-&gt;2-&gt;2-&gt;4-&gt;3-&gt;5-&gt;null</p>
+<p>这里对题目理解有点问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line">案例一：</span><br><span class="line">输入</span><br><span class="line">1-&gt;4-&gt;3-&gt;2-&gt;5-&gt;2-&gt;null, 3</span><br><span class="line">输出</span><br><span class="line">1-&gt;4-&gt;2-&gt;2-&gt;3-&gt;5-&gt;null</span><br><span class="line">期望答案</span><br><span class="line">1-&gt;2-&gt;2-&gt;4-&gt;3-&gt;5-&gt;null</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">案列二</span><br><span class="line">输入</span><br><span class="line">1-&gt;2-&gt;0-&gt;3-&gt;1-&gt;2-&gt;1-&gt;0-&gt;2-&gt;2-&gt;2-&gt;1-&gt;0-&gt;2-&gt;null, 2</span><br><span class="line">输出</span><br><span class="line">0-&gt;0-&gt;0-&gt;1-&gt;1-&gt;1-&gt;1-&gt;2-&gt;3-&gt;2-&gt;2-&gt;2-&gt;2-&gt;2-&gt;null</span><br><span class="line">期望答案</span><br><span class="line">1-&gt;0-&gt;1-&gt;1-&gt;0-&gt;1-&gt;0-&gt;2-&gt;3-&gt;2-&gt;2-&gt;2-&gt;2-&gt;2-&gt;null</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;&#x2F;&#x2F;不理解他划分好到底需不需要排序，能正确理解的朋友请留言指教。</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * Definition for ListNode.</span><br><span class="line"> * public class ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode next;</span><br><span class="line"> *     ListNode(int val) &#123;</span><br><span class="line"> *         this.val &#x3D; val;</span><br><span class="line"> *         this.next &#x3D; null;</span><br><span class="line"> *     &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F; </span><br><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param head: The first node of linked list.</span><br><span class="line">     * @param x: an integer</span><br><span class="line">     * @return: a ListNode </span><br><span class="line">     *&#x2F;</span><br><span class="line">    public ListNode partition(ListNode head, int x) &#123;</span><br><span class="line">         if(head &#x3D;&#x3D; null)&#123;</span><br><span class="line">             return null;</span><br><span class="line">         &#125;</span><br><span class="line">         ArrayList&lt;Integer&gt; a &#x3D; new ArrayList&lt;Integer&gt;();</span><br><span class="line">         ArrayList&lt;Integer&gt; b &#x3D; new ArrayList&lt;Integer&gt;();</span><br><span class="line">         boolean find &#x3D;false;</span><br><span class="line">        while(head !&#x3D; null)&#123;    </span><br><span class="line">            if(head.val &#x3D;&#x3D; x &amp;&amp; !find)&#123;</span><br><span class="line">                find &#x3D;true;</span><br><span class="line">                head &#x3D; head.next;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                if(find)&#123;</span><br><span class="line">                    if(head.val &lt; x)&#123;</span><br><span class="line">                        a.add(head.val);</span><br><span class="line">                    &#125;else&#123;</span><br><span class="line">                        b.add(head.val);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    a.add(head.val);</span><br><span class="line">                &#125;</span><br><span class="line">                head &#x3D; head.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode re &#x3D; new ListNode(0);</span><br><span class="line">        ListNode ree &#x3D; re;</span><br><span class="line">        for(int n : a)&#123;</span><br><span class="line">            re.next &#x3D; new ListNode(n);</span><br><span class="line">            re &#x3D; re.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#x2F;&#x2F;&#x2F;&#x2F;    insertionSortList(ree);</span><br><span class="line">        if(find)&#123;</span><br><span class="line">            re.next &#x3D; new ListNode(x);</span><br><span class="line">            re &#x3D; re.next;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int n : b)&#123;</span><br><span class="line">            re.next &#x3D; new ListNode(n);</span><br><span class="line">            re &#x3D; re.next;</span><br><span class="line">        &#125;</span><br><span class="line">        return ree.next;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">    public static ListNode insertionSortList(ListNode head) &#123;</span><br><span class="line">        boolean flag &#x3D; true;</span><br><span class="line">        ListNode frist &#x3D; head;</span><br><span class="line">        ListNode second &#x3D; head;</span><br><span class="line">        if(head &#x3D;&#x3D; null || head.next &#x3D;&#x3D; null)&#123;</span><br><span class="line">            return head;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            frist &#x3D; head.next;</span><br><span class="line">        &#125;</span><br><span class="line">        while(flag)&#123;</span><br><span class="line">            flag &#x3D; false;</span><br><span class="line">            do&#123;</span><br><span class="line">                if(frist.val&lt;second.val)&#123;</span><br><span class="line">                    int x &#x3D;frist.val;</span><br><span class="line">                    frist.val &#x3D; second.val;</span><br><span class="line">                    second.val &#x3D; x;</span><br><span class="line">                    flag &#x3D; true;</span><br><span class="line">                &#125;           </span><br><span class="line">                frist &#x3D; frist.next;</span><br><span class="line">                second &#x3D; second.next;</span><br><span class="line">            &#125;while(frist !&#x3D; null);</span><br><span class="line">            frist &#x3D; head.next;</span><br><span class="line">            second &#x3D; head;</span><br><span class="line">        &#125;</span><br><span class="line">        return head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E9%93%BE%E8%A1%A8%E5%88%92%E5%88%86/" data-id="ck4jhl0ln001ngwud981pfmps" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LintCode- 链表倒数第n个节点" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/21/LintCode-%20%E9%93%BE%E8%A1%A8%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/" class="article-date">
+  <time datetime="2019-06-21T08:00:21.505Z" itemprop="datePublished">2019-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/LintCode-%20%E9%93%BE%E8%A1%A8%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/">LintCode- 链表倒数第n个节点</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: ‘LintCode- 链表倒数第n个节点’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
+<ul>
+<li>算法<br>date: 2019-12-18 21:12:00</li>
+</ul>
+<h1 id="LintCode-链表倒数第n个节点"><a href="#LintCode-链表倒数第n个节点" class="headerlink" title="LintCode- 链表倒数第n个节点"></a>LintCode- 链表倒数第n个节点</h1><p>链表倒数第n个节点</p>
+<p>找到单链表倒数第n个节点，保证链表中节点的最少数量为n。</p>
+<p>样例<br>给出链表 3-&gt;2-&gt;1-&gt;5-&gt;null和n = 2，返回倒数第二个节点的值1.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for ListNode.</span><br><span class="line"> * public class ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode next;</span><br><span class="line"> *     ListNode(int val) &#123;</span><br><span class="line"> *         this.val &#x3D; val;</span><br><span class="line"> *         this.next &#x3D; null;</span><br><span class="line"> *     &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F; </span><br><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param head: The first node of linked list.</span><br><span class="line">     * @param n: An integer.</span><br><span class="line">     * @return: Nth to last node of a singly linked list. </span><br><span class="line">     *&#x2F;</span><br><span class="line">    ListNode nthToLast(ListNode head, int n) &#123;</span><br><span class="line">            int count &#x3D; 0;</span><br><span class="line">            ListNode re &#x3D; head;</span><br><span class="line">            while(head !&#x3D; null)&#123;</span><br><span class="line">                count++;</span><br><span class="line">                head &#x3D; head.next;</span><br><span class="line">            &#125;</span><br><span class="line">            count &#x3D; count - n;</span><br><span class="line">            while(count-- &gt; 0)&#123;</span><br><span class="line">                re &#x3D;re.next;</span><br><span class="line">            &#125;</span><br><span class="line">            return re;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%20%E9%93%BE%E8%A1%A8%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/" data-id="ck4jhl0kx000xgwudfuh17kip" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LintCode-快乐数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/21/LintCode-%E5%BF%AB%E4%B9%90%E6%95%B0/" class="article-date">
+  <time datetime="2019-06-21T08:00:21.505Z" itemprop="datePublished">2019-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/LintCode-%E5%BF%AB%E4%B9%90%E6%95%B0/">LintCode-快乐数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: ‘’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
+<ul>
+<li>算法<br>date: 2019-12-18 21:12:00</li>
+</ul>
+<h1 id="LintCode-快乐数"><a href="#LintCode-快乐数" class="headerlink" title="LintCode-快乐数"></a>LintCode-快乐数</h1><p>快乐数<br>写一个算法来判断一个数是不是”快乐数”。</p>
+<p>一个数是不是快乐是这么定义的：对于一个正整数，每一次将该数替换为他每个位置上的数字的平方和，然后重复这个过程直到这个数变为1，或是无限循环但始终变不到1。如果可以变为1，那么这个数就是快乐数。</p>
+<p>样例<br>19 就是一个快乐数。</p>
+<p>1^2 + 9^2 = 82<br>8^2 + 2^2 = 68<br>6^2 + 8^2 = 100<br>1^2 + 0^2 + 0^2 = 1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param n an integer</span><br><span class="line">     * @return true if this is a happy number or false</span><br><span class="line">     *&#x2F;</span><br><span class="line">  public boolean isHappy(int n) &#123;</span><br><span class="line">        boolean flag &#x3D; false;</span><br><span class="line">        long count &#x3D; n;</span><br><span class="line">        int limit &#x3D;0;</span><br><span class="line">        while(count!&#x3D;1&amp;&amp;limit&lt;1000)</span><br><span class="line">        &#123;</span><br><span class="line">            count&#x3D;this.calculate(count);</span><br><span class="line">            if(count &#x3D;&#x3D;n) break;</span><br><span class="line">            limit++;</span><br><span class="line">        &#125;</span><br><span class="line">        if(count&#x3D;&#x3D;1) flag&#x3D;true;</span><br><span class="line">        return flag;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public long calculate(long count) &#123;</span><br><span class="line">        long total &#x3D; 0;</span><br><span class="line">        long a &#x3D; 0;</span><br><span class="line">        while (count !&#x3D; 0) &#123;</span><br><span class="line">            a &#x3D; count % 10;</span><br><span class="line">            count &#x3D; count &#x2F; 10;</span><br><span class="line">            total &#x3D; total + a * a;</span><br><span class="line">        &#125;</span><br><span class="line">        return total;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E5%BF%AB%E4%B9%90%E6%95%B0/" data-id="ck4jhl0lg001bgwudge9i6i9l" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LintCode-链表插入排序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/21/LintCode-%E9%93%BE%E8%A1%A8%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" class="article-date">
+  <time datetime="2019-06-21T08:00:21.505Z" itemprop="datePublished">2019-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/LintCode-%E9%93%BE%E8%A1%A8%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">LintCode-链表插入排序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: ‘’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
+<ul>
+<li>算法<br>date: 2019-12-18 21:12:00</li>
+</ul>
+<h1 id="LintCode-链表插入排序"><a href="#LintCode-链表插入排序" class="headerlink" title="LintCode-链表插入排序"></a>LintCode-链表插入排序</h1><h2 id="容易-链表插入排序"><a href="#容易-链表插入排序" class="headerlink" title="容易 链表插入排序"></a>容易 链表插入排序</h2><p>用插入排序对链表排序</p>
+<p>您在真实的面试中是否遇到过这个题？ Yes</p>
+<p>样例 Given <code>1-&gt;3-&gt;2-&gt;0-&gt;null</code> , return <code>0-&gt;1-&gt;2-&gt;3-&gt;null</code></p>
+<p>冒泡法遍历</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for ListNode.</span><br><span class="line"> * public class ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode next;</span><br><span class="line"> *     ListNode(int val) &#123;</span><br><span class="line"> *         this.val &#x3D; val;</span><br><span class="line"> *         this.next &#x3D; null;</span><br><span class="line"> *     &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F; </span><br><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param head: The first node of linked list.</span><br><span class="line">     * @return: The head of linked list.</span><br><span class="line">     *&#x2F;</span><br><span class="line">        public ListNode insertionSortList(ListNode head) &#123;</span><br><span class="line">        boolean flag &#x3D; true;</span><br><span class="line">        ListNode frist &#x3D; head;</span><br><span class="line">        ListNode second &#x3D; head;</span><br><span class="line">        if(head.next &#x3D;&#x3D; null || head &#x3D;&#x3D; null)&#123;</span><br><span class="line">            return head;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            frist &#x3D; head.next;</span><br><span class="line">        &#125;</span><br><span class="line">        while(flag)&#123;</span><br><span class="line">            flag &#x3D; false;</span><br><span class="line">            do&#123;</span><br><span class="line">                if(frist.val&lt;second.val)&#123;</span><br><span class="line">                    int x &#x3D;frist.val;</span><br><span class="line">                    frist.val &#x3D; second.val;</span><br><span class="line">                    second.val &#x3D; x;</span><br><span class="line">                    flag &#x3D; true;</span><br><span class="line">                &#125;            </span><br><span class="line">                frist &#x3D; frist.next;</span><br><span class="line">                second &#x3D; second.next;</span><br><span class="line">            &#125;while(frist !&#x3D; null);</span><br><span class="line">            frist &#x3D; head.next;</span><br><span class="line">            second &#x3D; head;</span><br><span class="line">        &#125;</span><br><span class="line">        return head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E9%93%BE%E8%A1%A8%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" data-id="ck4jhl0lm001mgwud5erp4tjl" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LintCode- 合并区间" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/21/LintCode-%20%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/" class="article-date">
+  <time datetime="2019-06-21T08:00:21.504Z" itemprop="datePublished">2019-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/LintCode-%20%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/">LintCode- 合并区间</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: ‘’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
+<ul>
+<li>算法<br>date: 2019-12-18 21:12:00</li>
+</ul>
+<h1 id="LintCode-合并区间"><a href="#LintCode-合并区间" class="headerlink" title="LintCode- 合并区间"></a>LintCode- 合并区间</h1><p>合并区间</p>
+<p>给出若干闭合区间，合并所有重叠的部分。</p>
+<p>样例</p>
+<p>给出的区间列表 =&gt; 合并后的区间列表：</p>
+<p>[ [<br>[1, 3], [1, 6],<br>[2, 6], =&gt; [8, 10],<br>[8, 10], [15, 18]<br>[15, 18] ]<br>]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;先排序 然后根据i位置的end与i+1位置的star比较 如果有重叠 则表示可以合并 合并后的end为i与i+1位置上的最大值。</span><br><span class="line">&#x2F;**</span><br><span class="line"> * Definition of Interval:</span><br><span class="line"> * public class Interval &#123;</span><br><span class="line"> *     int start, end;</span><br><span class="line"> *     Interval(int start, int end) &#123;</span><br><span class="line"> *         this.start &#x3D; start;</span><br><span class="line"> *         this.end &#x3D; end;</span><br><span class="line"> *     &#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line"></span><br><span class="line">class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param intervals: Sorted interval list.</span><br><span class="line">     * @return: A new sorted interval list.</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public List&lt;Interval&gt; merge(List&lt;Interval&gt; intervals) &#123;</span><br><span class="line">        this.sort(intervals);</span><br><span class="line">        for (int i&#x3D;0;i&lt;intervals.size()-1;i++) &#123;</span><br><span class="line">            Interval data &#x3D; intervals.get(i);</span><br><span class="line">            if(data.end&gt;&#x3D;intervals.get(i+1).start)&#123;</span><br><span class="line">                data.end&#x3D;intervals.get(i+1).end&gt;data.end?intervals.get(i+1).end:data.end;</span><br><span class="line">                intervals.remove(i+1);</span><br><span class="line">                i--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return intervals;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void sort(List&lt;Interval&gt; intervals)&#123;</span><br><span class="line">        for (int i &#x3D; intervals.size() - 1; i &gt; 0; --i)</span><br><span class="line">        &#123;</span><br><span class="line">            for (int j &#x3D; 0; j &lt; i; ++j)</span><br><span class="line">            &#123;</span><br><span class="line">                if(intervals.get(j).start&gt;intervals.get(j+1).start)&#123;</span><br><span class="line">                    Interval old &#x3D; new Interval(intervals.get(j).start,intervals.get(j).end);</span><br><span class="line">                    intervals.get(j).end&#x3D;intervals.get(j+1).end;</span><br><span class="line">                    intervals.get(j).start&#x3D;intervals.get(j+1).start;</span><br><span class="line">                    intervals.get(j+1).end&#x3D;old.end;</span><br><span class="line">                    intervals.get(j+1).start&#x3D;old.start;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%20%E5%90%88%E5%B9%B6%E5%8C%BA%E9%97%B4/" data-id="ck4jhl0kt000ugwudg0j3dxc6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LintCode- 恢复IP地址" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/21/LintCode-%20%E6%81%A2%E5%A4%8DIP%E5%9C%B0%E5%9D%80/" class="article-date">
+  <time datetime="2019-06-21T08:00:21.504Z" itemprop="datePublished">2019-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/LintCode-%20%E6%81%A2%E5%A4%8DIP%E5%9C%B0%E5%9D%80/">LintCode- 恢复IP地址</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: ‘LintCode- 恢复IP地址’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
+<ul>
+<li>算法<br>date: 2019-12-18 21:12:00</li>
+</ul>
+<h1 id="LintCode-恢复IP地址"><a href="#LintCode-恢复IP地址" class="headerlink" title="LintCode- 恢复IP地址"></a>LintCode- 恢复IP地址</h1><p>恢复IP地址<br>给一个由数字组成的字符串。求出其可能恢复为的所有IP地址。<br>样例</p>
+<p>给出字符串 “25525511135”，所有可能的IP地址为：</p>
+<p>[<br>“255.255.11.135”,<br>“255.255.111.35”<br>]<br>（顺序无关紧要）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param s the IP string</span><br><span class="line">     * @return All possible valid IP addresses</span><br><span class="line">     *&#x2F;</span><br><span class="line">public ArrayList&lt;String&gt; restoreIpAddresses(String s) &#123;</span><br><span class="line">        ArrayList&lt;String&gt; result &#x3D; new ArrayList&lt;String&gt;();</span><br><span class="line">        String str &#x3D; new String();</span><br><span class="line">        this.findPaths(s, str, s.length(), 0, 4, result);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void findPaths(String s, String re, int n, int index, int finish,</span><br><span class="line">            ArrayList&lt;String&gt; result) &#123;</span><br><span class="line">        if (index &#x3D;&#x3D; n &amp;&amp; finish &#x3D;&#x3D; 0) &#123;</span><br><span class="line">            result.add(re);</span><br><span class="line">        &#125;</span><br><span class="line">        if ((finish &#x3D;&#x3D; 0 &amp;&amp; index &lt; n) || (index &#x3D;&#x3D; n &amp;&amp; finish &gt; 0))</span><br><span class="line">            return;</span><br><span class="line">        int a &#x3D; 0;</span><br><span class="line">        String s0 &#x3D; new String();</span><br><span class="line">        s0 &#x3D; re;</span><br><span class="line">        boolean flag &#x3D;true;</span><br><span class="line">        while (index &lt; n&amp;&amp;flag) &#123;</span><br><span class="line">            if(a&#x3D;&#x3D;0&amp;&amp;s.charAt(index)&#x3D;&#x3D;&#39;0&#39;)&#123;</span><br><span class="line">                flag&#x3D;false;</span><br><span class="line">            &#125;</span><br><span class="line">            a &#x3D; a * 10 + s.charAt(index++) - &#39;0&#39;;</span><br><span class="line">            if (a &gt;&#x3D; 0 &amp;&amp; a &lt; 256) &#123;</span><br><span class="line">                String s1 &#x3D; new String();</span><br><span class="line">                if (finish &#x3D;&#x3D; 1)</span><br><span class="line">                    s1 &#x3D; s0 + Integer.toString(a);</span><br><span class="line">                else</span><br><span class="line">                    s1 &#x3D; s0 + Integer.toString(a) + &quot;.&quot;;</span><br><span class="line"></span><br><span class="line">                this.findPaths(s, s1, n, index, finish - 1, result);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%20%E6%81%A2%E5%A4%8DIP%E5%9C%B0%E5%9D%80/" data-id="ck4jhl0kv000vgwud6jgkdu9x" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LintCode-分割回文串" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/21/LintCode-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/" class="article-date">
+  <time datetime="2019-06-21T08:00:21.504Z" itemprop="datePublished">2019-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/LintCode-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/">LintCode-分割回文串</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: ‘LintCode-分割回文串’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
+<ul>
+<li>算法<br>date: 2019-12-18 21:12:00</li>
+</ul>
+<h1 id="LintCode-分割回文串"><a href="#LintCode-分割回文串" class="headerlink" title="LintCode-分割回文串"></a>LintCode-分割回文串</h1><p>分割回文串</p>
+<p>给定一个字符串s，将s分割成一些子串，使每个子串都是回文串。</p>
+<p>返回s所有可能的回文串分割方案。</p>
+<p>样例</p>
+<p>给出 s = “aab”，返回</p>
+<p>[<br>[“aa”, “b”],<br>[“a”, “a”, “b”]<br>]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;这里运用了回溯算法 递推调用 动态规划的算法思想</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param s: A string</span><br><span class="line">     * @return: A list of lists of string</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public List&lt;List&lt;String&gt;&gt; partition(String s) &#123;</span><br><span class="line">        List&lt;List&lt;String&gt;&gt; result &#x3D; new ArrayList&lt;List&lt;String&gt;&gt;();</span><br><span class="line">        List&lt;String&gt; re &#x3D; new ArrayList&lt;String&gt;();</span><br><span class="line">        this.find(s, re, 0, result);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;用来遍历</span><br><span class="line">&#x2F;&#x2F;思路为从s[0]位置开始向后寻找可分割的位置，寻找函数为isRight（用来检测传入的字符串是否为回文）</span><br><span class="line">&#x2F;&#x2F;例如：&#123;[a],b,a,c&#125; 遍历到第一个位置时 出现回文 则递归调用find函数 并且把标记位置star指向第二个位置</span><br><span class="line">&#x2F;&#x2F;递归进入的函数如图：&#123;a,[b],a,c&#125;</span><br><span class="line">&#x2F;&#x2F;下面说下第二层循环(即j&#x3D;&#x3D;1时的情况) 此时isRight函数检测的字符串为&#123;[a,b],a,c&#125; 不是回文 所以j++</span><br><span class="line">&#x2F;&#x2F;进入第三层循环（即j&#x3D;&#x3D;2时的情况） 此时isRight函数检测的字符串为&#123;[a,b,a],c&#125;是回文 递归调用。</span><br><span class="line">    public void find(String s, List&lt;String&gt; result, int star,</span><br><span class="line">            List&lt;List&lt;String&gt;&gt; re) &#123;</span><br><span class="line">        int len &#x3D; s.length();</span><br><span class="line">        if (star &#x3D;&#x3D; len) &#123;</span><br><span class="line">            re.add(result);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int j &#x3D; star; j &lt; len; j++) &#123;</span><br><span class="line">            if (isRight(s.substring(star, j + 1))) &#123;</span><br><span class="line">                List&lt;String&gt; add &#x3D; new ArrayList&lt;String&gt;();</span><br><span class="line">                add.addAll(result);</span><br><span class="line">                add.add(s.substring(star, j + 1));</span><br><span class="line">                this.find(s, add, j + 1, re);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;检测输入字符串是否为回文</span><br><span class="line">    public boolean isRight(String s) &#123;</span><br><span class="line">        int len &#x3D; s.length();</span><br><span class="line">        for (int i &#x3D; 0; i &lt; len &#x2F; 2; i++) &#123;</span><br><span class="line">            if (s.charAt(i) !&#x3D; s.charAt(len - i - 1)) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2/" data-id="ck4jhl0l80016gwudbcm94zt8" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/12/18/Java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/">Java-线程池</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/LintCode-%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8/">LintCode-翻转链表</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/LintCode-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%89%80%E6%9C%89%E8%B7%AF%E5%BE%84/">LintCode- 二叉树的所有路径</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/LIntCode-%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%B1%82%E5%92%8C/">LIntCode-二进制求和</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/LintCode-%E5%8D%95%E8%AF%8D%E5%88%87%E5%88%86/">LintCode- 单词切分</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

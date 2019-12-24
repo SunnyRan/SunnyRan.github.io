@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/4/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-LintCode- 最长上升连续子序列" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/21/LintCode-%20%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97/" class="article-date">
+  <time datetime="2019-06-21T08:00:21.510Z" itemprop="datePublished">2019-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/LintCode-%20%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97/">LintCode- 最长上升连续子序列</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: ‘LintCode- 最长上升连续子序列’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
+<ul>
+<li>算法<br>date: 2019-12-18 21:12:00</li>
+</ul>
+<h1 id="LintCode-最长上升连续子序列"><a href="#LintCode-最长上升连续子序列" class="headerlink" title="LintCode- 最长上升连续子序列"></a>LintCode- 最长上升连续子序列</h1><p>最长上升连续子序列</p>
+<p>给定一个整数数组（下标从 0 到 n-1， n 表示整个数组的规模），请找出该数组中的最长上升连续子序列。（最长上升连续子序列可以定义为从右到左或从左到右的序列。）</p>
+<p>样例<br>给定 [5, 4, 2, 1, 3], 其最长上升连续子序列（LICS）为 [5, 4, 2, 1], 返回 4.</p>
+<p>给定 [5, 1, 2, 3, 4], 其最长上升连续子序列（LICS）为 [1, 2, 3, 4], 返回 4.</p>
+<p>注意<br>time</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param A an array of Integer</span><br><span class="line">     * @return  an integer</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public int longestIncreasingContinuousSubsequence(int[] A) &#123;</span><br><span class="line">           int max &#x3D; 1,count &#x3D; 1;</span><br><span class="line">           if(A.length &lt;&#x3D;0)&#123;</span><br><span class="line">               return A.length;</span><br><span class="line">           &#125;</span><br><span class="line">           &#x2F;&#x2F;正向遍历</span><br><span class="line">           for(int i &#x3D; 1; i&lt;A.length; )&#123;</span><br><span class="line">               while(i&lt;A.length &amp;&amp; A[i]&gt;A[i-1] )&#123;</span><br><span class="line">                   i++;</span><br><span class="line">                   count++;</span><br><span class="line">               &#125;if(count &gt; max)&#123;</span><br><span class="line">                   max &#x3D; count;</span><br><span class="line">               &#125;</span><br><span class="line">               count &#x3D; 1;</span><br><span class="line">               i++;</span><br><span class="line">           &#125;</span><br><span class="line">           &#x2F;&#x2F;反向遍历</span><br><span class="line">           for(int i &#x3D; A.length - 1 ; i &gt;&#x3D; 0; )&#123;</span><br><span class="line">               while(i &gt; 0 &amp;&amp; A[i]&lt;A[i-1]  )&#123;</span><br><span class="line">                   i--;</span><br><span class="line">                   count++;</span><br><span class="line">               &#125;if(count &gt; max)&#123;</span><br><span class="line">                   max &#x3D; count;</span><br><span class="line">               &#125;</span><br><span class="line">               count &#x3D; 1;</span><br><span class="line">               i--;</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">           return max;</span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%20%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E8%BF%9E%E7%BB%AD%E5%AD%90%E5%BA%8F%E5%88%97/" data-id="ck4jhl0kw000wgwud04ayg6wi" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LintCode-主元素" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/21/LintCode-%E4%B8%BB%E5%85%83%E7%B4%A0/" class="article-date">
+  <time datetime="2019-06-21T08:00:21.510Z" itemprop="datePublished">2019-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/LintCode-%E4%B8%BB%E5%85%83%E7%B4%A0/">LintCode-主元素</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: ‘LintCode-主元素’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
+<ul>
+<li>算法<br>date: 2019-12-18 21:12:00</li>
+</ul>
+<h1 id="LintCode-主元素"><a href="#LintCode-主元素" class="headerlink" title="LintCode-主元素"></a>LintCode-主元素</h1><p>容易 主元素</p>
+<p>给定一个整型数组，找出主元素，它在数组中的出现次数严格大于数组元素个数的二分之一。</p>
+<p>样例<br>给出数组[1,1,1,1,2,2,2]，返回 1</p>
+<p>挑战<br>要求时间复杂度为O(n)，空间复杂度为O(1)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param nums: a list of integers</span><br><span class="line">     * @return: find a  majority number</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public int majorityNumber(ArrayList&lt;Integer&gt; nums) &#123;</span><br><span class="line">            int n&#x3D;0,k&#x3D;1;</span><br><span class="line">            n&#x3D;nums.get(0);</span><br><span class="line">            for(int i&#x3D;1;i&lt;nums.size();i++)&#123;</span><br><span class="line">                if(nums.get(i)&#x3D;&#x3D;n)&#123;</span><br><span class="line">                    k++;</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    if(k&gt;1)&#123;</span><br><span class="line">                        k--;</span><br><span class="line">                    &#125;else&#123;</span><br><span class="line">                        n&#x3D;nums.get(++i);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return n;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E4%B8%BB%E5%85%83%E7%B4%A0/" data-id="ck4jhl0l20011gwud5918bzq7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LintCode-最大间距" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/21/LintCode-%E6%9C%80%E5%A4%A7%E9%97%B4%E8%B7%9D/" class="article-date">
+  <time datetime="2019-06-21T08:00:21.510Z" itemprop="datePublished">2019-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/LintCode-%E6%9C%80%E5%A4%A7%E9%97%B4%E8%B7%9D/">LintCode-最大间距</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: ‘LintCode-最大间距’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
+<ul>
+<li>算法<br>date: 2019-12-18 21:12:00</li>
+</ul>
+<h1 id="LintCode-最大间距"><a href="#LintCode-最大间距" class="headerlink" title="LintCode-最大间距"></a>LintCode-最大间距</h1><p>最大间距</p>
+<p>给定一个未经排序的数组，请找出其排序表中连续两个要素的最大间距。</p>
+<p>如果数组中的要素少于 2 个，请返回 0.</p>
+<p>可以假定数组中的所有要素都是非负整数，且最大不超过 32 位整数。</p>
+<p>样例</p>
+<p>给定数组 [1, 9, 2, 5]，其排序表为 [1, 2, 5, 9]，其最大的间距是在 5 和 9 之间，= 4.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;第一次用的冒泡法排序后 出现超时。</span><br><span class="line">class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param nums: an array of integers</span><br><span class="line">     * @return: the maximum difference</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public int maximumGap(int[] nums) &#123;</span><br><span class="line">        this.sort(nums);</span><br><span class="line">        int max &#x3D; 0;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; nums.length - 1; i++) &#123;</span><br><span class="line">            if (nums[i] - nums[i+1] &gt;&#x3D; max) &#123;</span><br><span class="line">                max &#x3D; nums[i] - nums[i+1];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return max;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void sort(int[] nums) &#123;</span><br><span class="line">        for (int i &#x3D; 1; i &lt; nums.length; i++) &#123;</span><br><span class="line">            boolean flag &#x3D; false;</span><br><span class="line">            for(int k &#x3D;0;k&lt;nums.length-i;k++)&#123;          </span><br><span class="line">                if (nums[k + 1] &gt; nums[k]) &#123;</span><br><span class="line">                    int a &#x3D; nums[k];</span><br><span class="line">                    nums[k] &#x3D; nums[k + 1];</span><br><span class="line">                    nums[k + 1] &#x3D; a;</span><br><span class="line">                    flag &#x3D; true;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if (!flag)  </span><br><span class="line">                return ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>===========================================================================</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;第二次使用快排后，出现内存溢出</span><br><span class="line">class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param nums: an array of integers</span><br><span class="line">     * @return: the maximum difference</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public int maximumGap(int[] nums) &#123;</span><br><span class="line">        this.quickSort(nums, 0, nums.length - 1);</span><br><span class="line">        int max &#x3D; 0;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; nums.length - 1; i++) &#123;</span><br><span class="line">            if (nums[i + 1] - nums[i] &gt;&#x3D; max) &#123;</span><br><span class="line">                max &#x3D; nums[i + 1] - nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return max;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void quickSort(int[] nums, int left, int right) &#123;</span><br><span class="line">        int first &#x3D; nums[left];</span><br><span class="line">        int i &#x3D; left;</span><br><span class="line">        int j &#x3D; right;</span><br><span class="line">        if (left &#x3D;&#x3D; right)</span><br><span class="line">            return;</span><br><span class="line">        while (left &lt; right) &#123;</span><br><span class="line">            if (nums[left] &gt; first) &#123;</span><br><span class="line">                this.change(nums, left, right);</span><br><span class="line">                right--;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                left++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (nums[left] &lt;&#x3D; first) &#123;</span><br><span class="line">            this.change(nums, i, left);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            this.change(nums, i, --left);</span><br><span class="line">        &#125;</span><br><span class="line">        if (left - 1 &gt; i)</span><br><span class="line">            this.quickSort(nums, i, left - 1);</span><br><span class="line">        if (left + 1 &lt; j)</span><br><span class="line">            this.quickSort(nums, left + 1, j);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void change(int[] nums, int left, int right) &#123;</span><br><span class="line">        int a &#x3D; nums[right];</span><br><span class="line">        nums[right] &#x3D; nums[left];</span><br><span class="line">        nums[left] &#x3D; a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>===========================================================================</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;第三次改为希尔排序后 成功AC</span><br><span class="line">class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param nums: an array of integers</span><br><span class="line">     * @return: the maximum difference</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public int maximumGap(int[] nums) &#123;</span><br><span class="line">        this.shellSort(nums);</span><br><span class="line">        int max &#x3D; 0;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; nums.length - 1; i++) &#123;</span><br><span class="line">            if (nums[i + 1] - nums[i] &gt;&#x3D; max) &#123;</span><br><span class="line">                max &#x3D; nums[i + 1] - nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return max;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void shellSort(int[] array)</span><br><span class="line">    &#123;</span><br><span class="line">        int increment &#x3D; array.length;</span><br><span class="line">        do</span><br><span class="line">        &#123;</span><br><span class="line">            increment &#x3D; increment &#x2F; 2;  &#x2F;&#x2F; 增量序列</span><br><span class="line">            for (int i &#x3D; increment; i &lt; array.length; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                if (array[i] &lt; array[i - increment])</span><br><span class="line">                &#123;</span><br><span class="line">                    int guard &#x3D; array[i];</span><br><span class="line">                    int j;</span><br><span class="line">                    for (j &#x3D; i - increment; (j &gt;&#x3D; 0) &amp;&amp; (guard &lt; array[j]); j -&#x3D; increment)     &#x2F;&#x2F;记录后移，查找插入位置</span><br><span class="line">                    &#123;</span><br><span class="line">                        array[j + increment] &#x3D; array[j];</span><br><span class="line">                    &#125;</span><br><span class="line">                    array[j + increment] &#x3D; guard;  &#x2F;&#x2F; 插入</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; while (increment &gt; 1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E6%9C%80%E5%A4%A7%E9%97%B4%E8%B7%9D/" data-id="ck4jhl0lg001cgwud1vq20oub" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LintCode-中位数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/21/LintCode-%E4%B8%AD%E4%BD%8D%E6%95%B0/" class="article-date">
+  <time datetime="2019-06-21T08:00:21.509Z" itemprop="datePublished">2019-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/LintCode-%E4%B8%AD%E4%BD%8D%E6%95%B0/">LintCode-中位数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: ‘LintCode-中位数’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
+<ul>
+<li>算法<br>date: 2019-12-18 21:12:00</li>
+</ul>
+<h1 id="LintCode-中位数"><a href="#LintCode-中位数" class="headerlink" title="LintCode-中位数"></a>LintCode-中位数</h1><p>中位数</p>
+<p>给定一个未排序的整数数组，找到其中位数。</p>
+<p>中位数是排序后数组的中间值，如果数组的个数是偶数个，则返回排序后数组的第N/2个数。</p>
+<p>给出数组[4, 5, 1, 2, 3]， 返回 3</p>
+<p>给出数组[7, 9, 4, 5]，返回 5</p>
+<p>挑战<br>时间复杂度为O(n)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param nums: A list of integers.</span><br><span class="line">     * @return: An integer denotes the middle number of the array.</span><br><span class="line">     *&#x2F;</span><br><span class="line">     public static int median(int[] nums) &#123;</span><br><span class="line">        int left&#x3D;0,right&#x3D;nums.length-1,key&#x3D;right&#x2F;2,k&#x3D;0;</span><br><span class="line">        while(key!&#x3D;k)&#123;</span><br><span class="line">            k&#x3D;sort(nums,left,right);</span><br><span class="line">            if(k&gt;key)&#123;</span><br><span class="line">                right&#x3D;k-1;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                left&#x3D;k+1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return nums[key]; </span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static int sort(int arr[],int low,int high)&#123;</span><br><span class="line">        int l&#x3D;low;</span><br><span class="line">        int h&#x3D;high;</span><br><span class="line">        int povit&#x3D;arr[low];</span><br><span class="line">        while(l&lt;h)&#123;</span><br><span class="line">            while(l&lt;h&amp;&amp;arr[h]&gt;&#x3D;povit)</span><br><span class="line">                h--;</span><br><span class="line">            if(l&lt;h)&#123;</span><br><span class="line">                swap(arr,l,h);</span><br><span class="line">                l++;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            while(l&lt;h&amp;&amp;arr[l]&lt;&#x3D;povit)</span><br><span class="line">                l++;</span><br><span class="line">            if(l&lt;h)&#123;</span><br><span class="line">                swap(arr,l,h);</span><br><span class="line">                h--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return h;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void swap(int [] nums ,int a,int b)&#123;</span><br><span class="line">        int k&#x3D;nums[a];</span><br><span class="line">        nums[a]&#x3D;nums[b];</span><br><span class="line">        nums[b]&#x3D;k;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>主要利用快排递归划分的思想，可以在期望复杂度为O(n)的条件下求第k大数。快排的期望复杂度为O(nlogn)，因为快排会递归处理划分的两边，而求第k大数则只需要处理划分的一边，其期望复杂度将是O(n)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">快排</span><br></pre></td></tr></table></figure>
+
+<p>设要排序的数组是A[0]……A[N-1]，首先任意选取一个数据（通常选用数组的第一个数）作为关键数据，然后将所有比它小的数都放到它前面，所有比它大的数都放到它后面，这个过程称为一趟快速排序。值得注意的是，快速排序不是一种稳定的排序算法，也就是说，多个相同的值的相对位置也许会在算法结束时产生变动。<br>一趟快速排序的算法是：<br>1）设置两个变量i、j，排序开始的时候：i=0，j=N-1；<br>2）以第一个数组元素作为关键数据，赋值给key，即key=A[0]；<br>3）从j开始向前搜索，即由后开始向前搜索(j–)，找到第一个小于key的值A[j]，将A[j]和A[i]互换；<br>4）从i开始向后搜索，即由前开始向后搜索(i++)，找到第一个大于key的A[i]，将A[i]和A[j]互换；<br>5）重复第3、4步，直到i=j； (3,4步中，没找到符合条件的值，即3中A[j]不小于key,4中A[i]不大于key的时候改变j、i的值，使得j=j-1，i=i+1，直至找到为止。找到符合条件的值，进行交换的时候i， j指针位置不变。另外，i==j这一过程一定正好是i+或j-完成的时候，此时令循环结束）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><span class="line">class　Quick</span><br><span class="line">&#123;</span><br><span class="line">　public　void　sort(int　arr[],int　low,int　high)</span><br><span class="line">　&#123;</span><br><span class="line">　int　l&#x3D;low;</span><br><span class="line">　int　h&#x3D;high;</span><br><span class="line">　int　povit&#x3D;arr[low];</span><br><span class="line"></span><br><span class="line">　while(l&lt;h)</span><br><span class="line">　&#123;</span><br><span class="line">　while(l&lt;h&amp;&amp;arr[h]&gt;&#x3D;povit)</span><br><span class="line">　h--;</span><br><span class="line">　if(l&lt;h)&#123;</span><br><span class="line">　int　temp&#x3D;arr[h];</span><br><span class="line">　arr[h]&#x3D;arr[l];</span><br><span class="line">　arr[l]&#x3D;temp;</span><br><span class="line">　l++;</span><br><span class="line">　&#125;</span><br><span class="line"></span><br><span class="line">　while(l&lt;h&amp;&amp;arr[l]&lt;&#x3D;povit)</span><br><span class="line">　l++;</span><br><span class="line"></span><br><span class="line">　if(l&lt;h)&#123;</span><br><span class="line">　int　temp&#x3D;arr[h];</span><br><span class="line">　arr[h]&#x3D;arr[l];</span><br><span class="line">　arr[l]&#x3D;temp;</span><br><span class="line">　h--;</span><br><span class="line">　&#125;</span><br><span class="line">　&#125;</span><br><span class="line">　print(arr);</span><br><span class="line">　System.out.print(&quot;l&#x3D;&quot;+(l+1)+&quot;h&#x3D;&quot;+(h+1)+&quot;povit&#x3D;&quot;+povit+&quot;\n&quot;);</span><br><span class="line">　if(l&gt;low)sort(arr,low,l-1);</span><br><span class="line">　if(h&lt;high)sort(arr,l+1,high);</span><br><span class="line">　&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;*&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;方式二&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;*&#x2F;</span><br><span class="line">更高效点的代码：</span><br><span class="line">public&lt;TextendsComparable&lt;?superT&gt;&gt;</span><br><span class="line">T[]quickSort(T[]targetArr,intstart,intend)</span><br><span class="line">&#123;</span><br><span class="line">inti&#x3D;start+1,j&#x3D;end;</span><br><span class="line">Tkey&#x3D;targetArr[start];</span><br><span class="line">SortUtil&lt;T&gt;sUtil&#x3D;newSortUtil&lt;T&gt;();</span><br><span class="line"></span><br><span class="line">if(start&gt;&#x3D;end)return(targetArr);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;*从i++和j--两个方向搜索不满足条件的值并交换</span><br><span class="line">*</span><br><span class="line">*条件为：i++方向小于key，j--方向大于key</span><br><span class="line">*&#x2F;</span><br><span class="line">while(true)</span><br><span class="line">&#123;</span><br><span class="line">while(targetArr[j].compareTo(key)&gt;0)j--;</span><br><span class="line">while(targetArr[i].compareTo(key)&lt;0&amp;&amp;i&lt;j)i++;</span><br><span class="line">if(i&gt;&#x3D;j)break;</span><br><span class="line">sUtil.swap(targetArr,i,j);</span><br><span class="line">if(targetArr[i]&#x3D;&#x3D;key)</span><br><span class="line">&#123;</span><br><span class="line">j--;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">i++;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;*关键数据放到‘中间’*&#x2F;</span><br><span class="line">sUtil.swap(targetArr,start,j);</span><br><span class="line"></span><br><span class="line">if(start&lt;i-1)</span><br><span class="line">&#123;</span><br><span class="line">this.quickSort(targetArr,start,i-1);</span><br><span class="line">&#125;</span><br><span class="line">if(j+1&lt;end)</span><br><span class="line">&#123;</span><br><span class="line">this.quickSort(targetArr,j+1,end);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">returntargetArr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;*&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;方式三：减少交换次数，提高效率&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;*&#x2F;</span><br><span class="line">private&lt;TextendsComparable&lt;?superT&gt;&gt;</span><br><span class="line">voidquickSort(T[]targetArr,intstart,intend)</span><br><span class="line">&#123;</span><br><span class="line">inti&#x3D;start,j&#x3D;end;</span><br><span class="line">Tkey&#x3D;targetArr[start];</span><br><span class="line"></span><br><span class="line">while(i&lt;j)</span><br><span class="line">&#123;</span><br><span class="line">&#x2F;*按j--方向遍历目标数组，直到比key小的值为止*&#x2F;</span><br><span class="line">while(j&gt;i&amp;&amp;targetArr[j].compareTo(key)&gt;&#x3D;0)</span><br><span class="line">&#123;</span><br><span class="line">j--;</span><br><span class="line">&#125;</span><br><span class="line">if(i&lt;j)</span><br><span class="line">&#123;</span><br><span class="line">&#x2F;*targetArr[i]已经保存在key中，可将后面的数填入*&#x2F;</span><br><span class="line">targetArr[i]&#x3D;targetArr[j];</span><br><span class="line">i++;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;*按i++方向遍历目标数组，直到比key大的值为止*&#x2F;</span><br><span class="line">while(i&lt;j&amp;&amp;targetArr[i].compareTo(key)&lt;&#x3D;0)</span><br><span class="line">&#x2F;*此处一定要小于等于零，假设数组之内有一亿个1，0交替出现的话，而key的值又恰巧是1的话，那么这个小于等于的作用就会使下面的if语句少执行一亿次。*&#x2F;</span><br><span class="line">&#123;</span><br><span class="line">i++;</span><br><span class="line">&#125;</span><br><span class="line">if(i&lt;j)</span><br><span class="line">&#123;</span><br><span class="line">&#x2F;*targetArr[j]已保存在targetArr[i]中，可将前面的值填入*&#x2F;</span><br><span class="line">targetArr[j]&#x3D;targetArr[i];</span><br><span class="line">j--;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;*此时i&#x3D;&#x3D;j*&#x2F;</span><br><span class="line">targetArr[i]&#x3D;key;</span><br><span class="line"></span><br><span class="line">&#x2F;*递归调用，把key前面的完成排序*&#x2F;</span><br><span class="line">this.quickSort(targetArr,start,i-1);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;*递归调用，把key后面的完成排序*&#x2F;</span><br><span class="line">this.quickSort(targetArr,j+1,end);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E4%B8%AD%E4%BD%8D%E6%95%B0/" data-id="ck4jhl0l40012gwudh1spbqm2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LintCode-有效回文串" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/21/LintCode-%E6%9C%89%E6%95%88%E5%9B%9E%E6%96%87%E4%B8%B2/" class="article-date">
+  <time datetime="2019-06-21T08:00:21.509Z" itemprop="datePublished">2019-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/LintCode-%E6%9C%89%E6%95%88%E5%9B%9E%E6%96%87%E4%B8%B2/">LintCode-有效回文串</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: ‘LintCode-有效回文串’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
+<ul>
+<li>算法<br>date: 2019-12-18 21:12:00</li>
+</ul>
+<h1 id="LintCode-有效回文串"><a href="#LintCode-有效回文串" class="headerlink" title="LintCode-有效回文串"></a>LintCode-有效回文串</h1><p>有效回文串</p>
+<p>给定一个字符串，判断其是否为一个回文串。只包含字母和数字，忽略大小写。</p>
+<p>样例<br>“A man, a plan, a canal: Panama” 是一个回文。</p>
+<p>“race a car” 不是一个回文。</p>
+<p>注意<br>你是否考虑过，字符串有可能是空字符串？这是面试过程中，面试官常常会问的问题。</p>
+<p>在这个题目中，我们将空字符串判定为有效回文。</p>
+<p>挑战<br>O(n) 时间复杂度，且不占用额外空间。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param s A string</span><br><span class="line">     * @return Whether the string is a valid palindrome</span><br><span class="line">     *&#x2F;</span><br><span class="line">  public boolean isPalindrome(String s) &#123;</span><br><span class="line">        s &#x3D; s.toLowerCase();</span><br><span class="line">        if(s.length() &lt;&#x3D; 1)&#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        int a &#x3D; -1, b &#x3D; s.length();</span><br><span class="line">        while(b - a &gt; 1)&#123;</span><br><span class="line">            while(!cheackData(s.charAt(++a)))&#123;</span><br><span class="line">                if(a&#x3D;&#x3D;s.length()-1)&#123;</span><br><span class="line">                    return true;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            while(!cheackData(s.charAt(--b)))&#123;</span><br><span class="line">                if(b &#x3D;&#x3D; 0)&#123;</span><br><span class="line">                    return true;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if(s.charAt(a) !&#x3D; s.charAt(b)) return false;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public boolean cheackData(char c)&#123;</span><br><span class="line">        if( c&lt;&#x3D;&#39;z&#39; &amp;&amp; c&gt;&#x3D;&#39;a&#39;)&#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        if( c&lt;&#x3D;&#39;9&#39; &amp;&amp; c&gt;&#x3D;&#39;0&#39;)&#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E6%9C%89%E6%95%88%E5%9B%9E%E6%96%87%E4%B8%B2/" data-id="ck4jhl0lh001dgwud04u35lsw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LintCode-生成括号" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/21/LintCode-%E7%94%9F%E6%88%90%E6%8B%AC%E5%8F%B7/" class="article-date">
+  <time datetime="2019-06-21T08:00:21.509Z" itemprop="datePublished">2019-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/LintCode-%E7%94%9F%E6%88%90%E6%8B%AC%E5%8F%B7/">LintCode-生成括号</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: ‘LintCode-生成括号’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
+<ul>
+<li>算法<br>date: 2019-12-18 21:12:00</li>
+</ul>
+<h1 id="LintCode-生成括号"><a href="#LintCode-生成括号" class="headerlink" title="LintCode-生成括号"></a>LintCode-生成括号</h1><p>生成括号</p>
+<p>给定 n 对括号，请写一个函数以将其生成新的括号组合，并返回所有组合结果。</p>
+<p>样例<br>给定 n = 3, 可生成的组合如下:</p>
+<p>“((()))”, “(()())”, “(())()”, “()(())”, “()()()”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param n n pairs</span><br><span class="line">     * @return All combinations of well-formed parentheses</span><br><span class="line">     *&#x2F;</span><br><span class="line">public ArrayList&lt;String&gt; generateParenthesis(int n) &#123;</span><br><span class="line">        ArrayList&lt;String&gt; result &#x3D; new ArrayList&lt;String&gt;();</span><br><span class="line">        String str &#x3D; new String();</span><br><span class="line">        findPaths(0, 0, n, str, result);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void findPaths(int n, int m, int sum, String str, List&lt;String&gt; result) &#123;</span><br><span class="line">        String str0 &#x3D; new String();</span><br><span class="line">        String str1 &#x3D; new String();</span><br><span class="line">        if (sum - n &gt; 0) &#123;</span><br><span class="line">            str0 &#x3D; str + &quot;(&quot;;</span><br><span class="line">            this.findPaths(n + 1, m + 1, sum, str0, result);</span><br><span class="line">        &#125;</span><br><span class="line">        if (m &gt; 0) &#123;</span><br><span class="line">            str1 &#x3D; str + &quot;)&quot;;</span><br><span class="line">            this.findPaths(n, m - 1, sum, str1, result);</span><br><span class="line">        &#125;</span><br><span class="line">        if(sum&#x3D;&#x3D;n&amp;&amp;m&#x3D;&#x3D;0) result.add(str);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E7%94%9F%E6%88%90%E6%8B%AC%E5%8F%B7/" data-id="ck4jhl0lj001hgwud02ou37he" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LintCode-删除排序数组中的重复数字 II" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/21/LintCode-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E6%95%B0%E5%AD%97%20II/" class="article-date">
+  <time datetime="2019-06-21T08:00:21.508Z" itemprop="datePublished">2019-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/LintCode-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E6%95%B0%E5%AD%97%20II/">LintCode-删除排序数组中的重复数字 II</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: ‘LintCode-删除排序数组中的重复数字 II’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
+<ul>
+<li>算法<br>date: 2019-12-18 21:12:00</li>
+</ul>
+<h1 id="LintCode-删除排序数组中的重复数字-II"><a href="#LintCode-删除排序数组中的重复数字-II" class="headerlink" title="LintCode-删除排序数组中的重复数字 II"></a>LintCode-删除排序数组中的重复数字 II</h1><h2 id="容易-删除排序数组中的重复数字-II-查看运行结果"><a href="#容易-删除排序数组中的重复数字-II-查看运行结果" class="headerlink" title="容易 删除排序数组中的重复数字 II 查看运行结果"></a>容易 删除排序数组中的重复数字 II 查看运行结果</h2><p>30% 通过</p>
+<p>跟进“删除重复数字”：</p>
+<p>如果可以允许出现两次重复将如何处理？</p>
+<p>您在真实的面试中是否遇到过这个题？ Yes</p>
+<p>样例 给出数组A =[1,1,1,2,2,3]，你的函数应该返回长度5，此时A=[1,1,2,2,3]。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param A: a array of integers</span><br><span class="line">     * @return : return an integer</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public int removeDuplicates(int[] nums) &#123;</span><br><span class="line">        HashMap&lt;Integer , Integer&gt; map &#x3D; new HashMap&lt;Integer , Integer&gt;(); </span><br><span class="line"></span><br><span class="line">        int n&#x3D;0;</span><br><span class="line">        for(int i&#x3D;0;i&lt;nums.length;i++)&#123;</span><br><span class="line">            if(map.get(nums[i])&#x3D;&#x3D;null)&#123;</span><br><span class="line">                    map.put(nums[i], 1);</span><br><span class="line">                    nums[n++]&#x3D;nums[i];</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                if(map.get(nums[i])&lt;2)&#123;</span><br><span class="line">                    map.put(nums[i], map.get(nums[i])+1);</span><br><span class="line">                    nums[n++]&#x3D;nums[i];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E6%95%B0%E5%AD%97%20II/" data-id="ck4jhl0l70014gwud62q5g1qs" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LintCode-删除排序链表中的重复元素" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/21/LintCode-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/" class="article-date">
+  <time datetime="2019-06-21T08:00:21.508Z" itemprop="datePublished">2019-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/LintCode-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/">LintCode-删除排序链表中的重复元素</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: ‘’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
+<ul>
+<li>算法<br>date: 2019-12-18 21:12:00</li>
+</ul>
+<h1 id="LintCode-删除排序链表中的重复元素"><a href="#LintCode-删除排序链表中的重复元素" class="headerlink" title="LintCode-删除排序链表中的重复元素"></a>LintCode-删除排序链表中的重复元素</h1><p>容易 删除排序链表中的重复元素 查看运行结果</p>
+<p>38% 通过<br>给定一个排序链表，删除所有重复的元素每个元素只留下一个。</p>
+<p>您在真实的面试中是否遇到过这个题？ Yes<br>样例<br>给出1-&gt;1-&gt;2-&gt;null，返回 1-&gt;2-&gt;null</p>
+<p>给出1-&gt;1-&gt;2-&gt;3-&gt;3-&gt;null，返回 1-&gt;2-&gt;3-&gt;null</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for ListNode</span><br><span class="line"> * public class ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode next;</span><br><span class="line"> *     ListNode(int x) &#123;</span><br><span class="line"> *         val &#x3D; x;</span><br><span class="line"> *         next &#x3D; null;</span><br><span class="line"> *     &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param ListNode head is the head of the linked list</span><br><span class="line">     * @return: ListNode head of linked list</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static ListNode deleteDuplicates(ListNode head) &#123; </span><br><span class="line">        Set&lt;Integer&gt; s &#x3D; new HashSet&lt;Integer&gt;();</span><br><span class="line">        ListNode oldHead &#x3D; head;</span><br><span class="line">        if(head&#x3D;&#x3D;null)&#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        s.add(head.val);</span><br><span class="line">        do&#123;</span><br><span class="line">            if(!s.contains(head.next.val))&#123;</span><br><span class="line">                s.add(head.next.val);</span><br><span class="line">                head&#x3D;head.next;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                head.next&#x3D;head.next.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;while(head.next!&#x3D;null);</span><br><span class="line">        return oldHead;</span><br><span class="line"></span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E5%88%A0%E9%99%A4%E6%8E%92%E5%BA%8F%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0/" data-id="ck4jhl0l80015gwud65s3b61e" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LintCode-删除链表中的元素" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/21/LintCode-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0/" class="article-date">
+  <time datetime="2019-06-21T08:00:21.508Z" itemprop="datePublished">2019-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/LintCode-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0/">LintCode-删除链表中的元素</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: ‘LintCode-删除链表中的元素’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
+<ul>
+<li>算法<br>date: 2019-12-18 21:12:00</li>
+</ul>
+<h1 id="LintCode-删除链表中的元素"><a href="#LintCode-删除链表中的元素" class="headerlink" title="LintCode-删除链表中的元素"></a>LintCode-删除链表中的元素</h1><p>删除链表中的元素<br>删除链表中等于给定值val的所有节点。</p>
+<p>样例<br>给出链表 1-&gt;2-&gt;3-&gt;3-&gt;4-&gt;5-&gt;3, 和 val = 3, 你需要返回删除3之后的链表：1-&gt;2-&gt;4-&gt;5。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * public class ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode next;</span><br><span class="line"> *     ListNode(int x) &#123; val &#x3D; x; &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param head a ListNode</span><br><span class="line">     * @param val an integer</span><br><span class="line">     * @return a ListNode</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public ListNode removeElements(ListNode head, int val) &#123;</span><br><span class="line">        ListNode result &#x3D; head;</span><br><span class="line">        if(head&#x3D;&#x3D;null) return null;</span><br><span class="line">        while (head.next!&#x3D;null)</span><br><span class="line">        &#123;</span><br><span class="line">            if(head.next.val &#x3D;&#x3D; val)</span><br><span class="line">            &#123;</span><br><span class="line">                if(head.next.next!&#x3D;null)</span><br><span class="line">                    head.next&#x3D;head.next.next;</span><br><span class="line">                else </span><br><span class="line">                &#123;</span><br><span class="line">                  head.next&#x3D;null;</span><br><span class="line">                  break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            else</span><br><span class="line">            &#123;</span><br><span class="line">                head&#x3D;head.next;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        if(result.val&#x3D;&#x3D;val) return result.next;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0/" data-id="ck4jhl0l90017gwud7sjl45zb" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-LintCode- 删除链表中倒数第n个节点" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/21/LintCode-%20%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/" class="article-date">
+  <time datetime="2019-06-21T08:00:21.507Z" itemprop="datePublished">2019-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/21/LintCode-%20%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/">LintCode- 删除链表中倒数第n个节点</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: LintCode- 删除链表中倒数第n个节点’’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
+<ul>
+<li>算法<br>date: 2019-12-18 21:12:00</li>
+</ul>
+<h1 id="LintCode-删除链表中倒数第n个节点"><a href="#LintCode-删除链表中倒数第n个节点" class="headerlink" title="LintCode- 删除链表中倒数第n个节点"></a>LintCode- 删除链表中倒数第n个节点</h1><p>容易 删除链表中倒数第n个节点 查看运行结果</p>
+<p>28% 通过<br>给定一个链表，删除链表中倒数第n个节点，返回链表的头节点。</p>
+<p>您在真实的面试中是否遇到过这个题？ Yes<br>样例<br>给出链表1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;null和 n = 2.</p>
+<p>删除倒数第二个节点之后，这个链表将变成1-&gt;2-&gt;3-&gt;5-&gt;null.</p>
+<p>注意<br>链表中的节点个数大于等于n</p>
+<p>挑战<br>O(n)时间复杂度</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for ListNode.</span><br><span class="line"> * public class ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode next;</span><br><span class="line"> *     ListNode(int val) &#123;</span><br><span class="line"> *         this.val &#x3D; val;</span><br><span class="line"> *         this.next &#x3D; null;</span><br><span class="line"> *     &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F; </span><br><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param head: The first node of linked list.</span><br><span class="line">     * @param n: An integer.</span><br><span class="line">     * @return: The head of linked list.</span><br><span class="line">     *&#x2F;</span><br><span class="line">    ListNode removeNthFromEnd(ListNode head, int n) &#123;</span><br><span class="line">        if(head.next&#x3D;&#x3D;null||head&#x3D;&#x3D;null)&#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode reHead &#x3D; head,returnHead &#x3D; head;</span><br><span class="line">        for(int i&#x3D;0;i&lt;n;i++)&#123;</span><br><span class="line">            head&#x3D;head.next;</span><br><span class="line">        &#125;</span><br><span class="line">        if(head&#x3D;&#x3D;null)&#123;</span><br><span class="line">            return returnHead.next;</span><br><span class="line">        &#125;</span><br><span class="line">        while(head.next!&#x3D;null)&#123;</span><br><span class="line">            head&#x3D;head.next;</span><br><span class="line">            reHead&#x3D;reHead.next;</span><br><span class="line">        &#125;</span><br><span class="line">        reHead.next&#x3D;reHead.next.next;</span><br><span class="line">        return returnHead;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%20%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/" data-id="ck4jhl0ks000tgwud4db6ctru" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/12/18/Java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/">Java-线程池</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/LintCode-%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8/">LintCode-翻转链表</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/LintCode-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%89%80%E6%9C%89%E8%B7%AF%E5%BE%84/">LintCode- 二叉树的所有路径</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/LIntCode-%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%B1%82%E5%92%8C/">LIntCode-二进制求和</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/LintCode-%E5%8D%95%E8%AF%8D%E5%88%87%E5%88%86/">LintCode- 单词切分</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

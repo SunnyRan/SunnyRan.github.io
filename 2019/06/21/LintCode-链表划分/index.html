@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>LintCode-链表划分 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="title: ‘LintCode-链表划分’author: Arnold Rantags: []categories:  算法date: 2019-12-18 21:12:00  LintCode-链表划分容易 链表划分 查看运行结果 29% 通过给定一个单链表和数值x，划分链表使得所有小于x的节点排在大于等于x的节点之前。 你应该保留两部分内链表节点原有的相对顺序。 您在真实的面试中是否遇到过这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LintCode-链表划分">
+<meta property="og:url" content="http://yoursite.com/2019/06/21/LintCode-%E9%93%BE%E8%A1%A8%E5%88%92%E5%88%86/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="title: ‘LintCode-链表划分’author: Arnold Rantags: []categories:  算法date: 2019-12-18 21:12:00  LintCode-链表划分容易 链表划分 查看运行结果 29% 通过给定一个单链表和数值x，划分链表使得所有小于x的节点排在大于等于x的节点之前。 你应该保留两部分内链表节点原有的相对顺序。 您在真实的面试中是否遇到过这">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-06-21T08:00:21.506Z">
+<meta property="article:modified_time" content="2019-12-24T06:21:14.693Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-LintCode-链表划分" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/21/LintCode-%E9%93%BE%E8%A1%A8%E5%88%92%E5%88%86/" class="article-date">
+  <time datetime="2019-06-21T08:00:21.506Z" itemprop="datePublished">2019-06-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      LintCode-链表划分
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: ‘LintCode-链表划分’<br>author: Arnold Ran<br>tags: []<br>categories:</p>
+<ul>
+<li>算法<br>date: 2019-12-18 21:12:00</li>
+</ul>
+<h1 id="LintCode-链表划分"><a href="#LintCode-链表划分" class="headerlink" title="LintCode-链表划分"></a>LintCode-链表划分</h1><p>容易 链表划分 查看运行结果</p>
+<p>29% 通过<br>给定一个单链表和数值x，划分链表使得所有小于x的节点排在大于等于x的节点之前。</p>
+<p>你应该保留两部分内链表节点原有的相对顺序。</p>
+<p>您在真实的面试中是否遇到过这个题？ Yes<br>样例<br>给定链表 1-&gt;4-&gt;3-&gt;2-&gt;5-&gt;2-&gt;null，并且 x=3</p>
+<p>返回 1-&gt;2-&gt;2-&gt;4-&gt;3-&gt;5-&gt;null</p>
+<p>这里对题目理解有点问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line">案例一：</span><br><span class="line">输入</span><br><span class="line">1-&gt;4-&gt;3-&gt;2-&gt;5-&gt;2-&gt;null, 3</span><br><span class="line">输出</span><br><span class="line">1-&gt;4-&gt;2-&gt;2-&gt;3-&gt;5-&gt;null</span><br><span class="line">期望答案</span><br><span class="line">1-&gt;2-&gt;2-&gt;4-&gt;3-&gt;5-&gt;null</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">案列二</span><br><span class="line">输入</span><br><span class="line">1-&gt;2-&gt;0-&gt;3-&gt;1-&gt;2-&gt;1-&gt;0-&gt;2-&gt;2-&gt;2-&gt;1-&gt;0-&gt;2-&gt;null, 2</span><br><span class="line">输出</span><br><span class="line">0-&gt;0-&gt;0-&gt;1-&gt;1-&gt;1-&gt;1-&gt;2-&gt;3-&gt;2-&gt;2-&gt;2-&gt;2-&gt;2-&gt;null</span><br><span class="line">期望答案</span><br><span class="line">1-&gt;0-&gt;1-&gt;1-&gt;0-&gt;1-&gt;0-&gt;2-&gt;3-&gt;2-&gt;2-&gt;2-&gt;2-&gt;2-&gt;null</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;&#x2F;&#x2F;不理解他划分好到底需不需要排序，能正确理解的朋友请留言指教。</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * Definition for ListNode.</span><br><span class="line"> * public class ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode next;</span><br><span class="line"> *     ListNode(int val) &#123;</span><br><span class="line"> *         this.val &#x3D; val;</span><br><span class="line"> *         this.next &#x3D; null;</span><br><span class="line"> *     &#125;</span><br><span class="line"> * &#125;</span><br><span class="line"> *&#x2F; </span><br><span class="line">public class Solution &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @param head: The first node of linked list.</span><br><span class="line">     * @param x: an integer</span><br><span class="line">     * @return: a ListNode </span><br><span class="line">     *&#x2F;</span><br><span class="line">    public ListNode partition(ListNode head, int x) &#123;</span><br><span class="line">         if(head &#x3D;&#x3D; null)&#123;</span><br><span class="line">             return null;</span><br><span class="line">         &#125;</span><br><span class="line">         ArrayList&lt;Integer&gt; a &#x3D; new ArrayList&lt;Integer&gt;();</span><br><span class="line">         ArrayList&lt;Integer&gt; b &#x3D; new ArrayList&lt;Integer&gt;();</span><br><span class="line">         boolean find &#x3D;false;</span><br><span class="line">        while(head !&#x3D; null)&#123;    </span><br><span class="line">            if(head.val &#x3D;&#x3D; x &amp;&amp; !find)&#123;</span><br><span class="line">                find &#x3D;true;</span><br><span class="line">                head &#x3D; head.next;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                if(find)&#123;</span><br><span class="line">                    if(head.val &lt; x)&#123;</span><br><span class="line">                        a.add(head.val);</span><br><span class="line">                    &#125;else&#123;</span><br><span class="line">                        b.add(head.val);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    a.add(head.val);</span><br><span class="line">                &#125;</span><br><span class="line">                head &#x3D; head.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode re &#x3D; new ListNode(0);</span><br><span class="line">        ListNode ree &#x3D; re;</span><br><span class="line">        for(int n : a)&#123;</span><br><span class="line">            re.next &#x3D; new ListNode(n);</span><br><span class="line">            re &#x3D; re.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#x2F;&#x2F;&#x2F;&#x2F;    insertionSortList(ree);</span><br><span class="line">        if(find)&#123;</span><br><span class="line">            re.next &#x3D; new ListNode(x);</span><br><span class="line">            re &#x3D; re.next;</span><br><span class="line">        &#125;</span><br><span class="line">        for(int n : b)&#123;</span><br><span class="line">            re.next &#x3D; new ListNode(n);</span><br><span class="line">            re &#x3D; re.next;</span><br><span class="line">        &#125;</span><br><span class="line">        return ree.next;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">    public static ListNode insertionSortList(ListNode head) &#123;</span><br><span class="line">        boolean flag &#x3D; true;</span><br><span class="line">        ListNode frist &#x3D; head;</span><br><span class="line">        ListNode second &#x3D; head;</span><br><span class="line">        if(head &#x3D;&#x3D; null || head.next &#x3D;&#x3D; null)&#123;</span><br><span class="line">            return head;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            frist &#x3D; head.next;</span><br><span class="line">        &#125;</span><br><span class="line">        while(flag)&#123;</span><br><span class="line">            flag &#x3D; false;</span><br><span class="line">            do&#123;</span><br><span class="line">                if(frist.val&lt;second.val)&#123;</span><br><span class="line">                    int x &#x3D;frist.val;</span><br><span class="line">                    frist.val &#x3D; second.val;</span><br><span class="line">                    second.val &#x3D; x;</span><br><span class="line">                    flag &#x3D; true;</span><br><span class="line">                &#125;           </span><br><span class="line">                frist &#x3D; frist.next;</span><br><span class="line">                second &#x3D; second.next;</span><br><span class="line">            &#125;while(frist !&#x3D; null);</span><br><span class="line">            frist &#x3D; head.next;</span><br><span class="line">            second &#x3D; head;</span><br><span class="line">        &#125;</span><br><span class="line">        return head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/21/LintCode-%E9%93%BE%E8%A1%A8%E5%88%92%E5%88%86/" data-id="ck4jhl0ln001ngwud981pfmps" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/06/21/LintCode-%E7%88%AC%E6%A5%BC%E6%A2%AF/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          LintCode-爬楼梯
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/06/21/LintCode-%20%E9%93%BE%E8%A1%A8%E5%80%92%E6%95%B0%E7%AC%ACn%E4%B8%AA%E8%8A%82%E7%82%B9/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">LintCode- 链表倒数第n个节点</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/12/18/Java-%E7%BA%BF%E7%A8%8B%E6%B1%A0/">Java-线程池</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/LintCode-%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8/">LintCode-翻转链表</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/LintCode-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%89%80%E6%9C%89%E8%B7%AF%E5%BE%84/">LintCode- 二叉树的所有路径</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/LIntCode-%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%B1%82%E5%92%8C/">LIntCode-二进制求和</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/LintCode-%E5%8D%95%E8%AF%8D%E5%88%87%E5%88%86/">LintCode- 单词切分</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
